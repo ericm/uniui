@@ -4,4 +4,5 @@
   --main-border-colour: #16a085;
   --main-bg-colour: #1abc9c;
   --main-text-colour: #fff;
+  --main-shadow: 9px 4px 23px -5px rgba(0, 0, 0, 0.56);
 }
