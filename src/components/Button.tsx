@@ -1,9 +1,10 @@
 import * as React from "react";
 import { Base } from "./base";
+import * as style from "./styles/Button.css";
 
 export interface ButtonConfig extends Base {}
 export default function(props: ButtonConfig): JSX.Element {
-    const [clicked, setClicked] = React.useState(false);
+  const [clicked, setClicked] = React.useState(false);
 
-    return <button>{props.children}</button>;
+  return <div className={style["root"]}></div>;
 }
