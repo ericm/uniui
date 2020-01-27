@@ -6,10 +6,10 @@ root = true
 end_of_line = lf
 insert_final_newline = true
 
-[*.{js,ts}]
+[*.{js,ts,tsx}]
 charset = utf-8
 indent_style = space
-indent_size = 4
+indent_size = 2
 
 # Indentation override for all JS under lib directory
 [lib/**.js]

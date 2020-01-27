@@ -6,5 +6,5 @@ export interface ButtonConfig extends Base {}
 export default function(props: ButtonConfig): JSX.Element {
   const [clicked, setClicked] = React.useState(false);
 
-  return <div className={style["root"]}></div>;
+  return <div className={style.root}>{props.children}</div>;
 }

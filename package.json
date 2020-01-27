@@ -2,9 +2,10 @@
   "name": "uniui",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "build": "parcel build src/index.ts",
+    "start": "parcel demo/index.html",
+    "build": "parcel build src/index.ts -d lib",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
