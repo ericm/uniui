@@ -8,11 +8,12 @@ export interface ButtonConfig extends Base {
 
 export default function Button(props: ButtonConfig): JSX.Element {
   const [ripple, setRipple] = React.useState(style.ripple);
-  const [coords, setCoords] = React.useState({top: 0, left: 0})
+  const [coords, setCoords] = React.useState({ top: 0, left: 0 });
 
   const onClick = (e: React.MouseEvent) => {
     let [x, y] = [e.pageX, e.pageY];
 
+    setCoords({ top: y, left: x });
     setRipple(`${style.ripple} ${style.rippleAnimation}`);
     setTimeout(() => setRipple(style.ripple), 500);
 
@@ -20,9 +21,9 @@ export default function Button(props: ButtonConfig): JSX.Element {
   };
 
   return (
-    <button style={{top:}} onClick={props.onClick} className={style.root}>
+    <button onClick={onClick} className={style.root}>
       <div className={style.button}>{props.children}</div>
-      <div className={ripple}></div>
+      <div style={coords} className={ripple}></div>
     </button>
   );
 }
