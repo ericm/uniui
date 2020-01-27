@@ -57,7 +57,7 @@
 .ripple {
   width: 1px;
   height: 1px;
-  border-radius: 50%;
+  border-radius: 100%;
   transform: scale(0);
   opacity: 1;
   position: absolute;
