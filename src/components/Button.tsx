@@ -10,8 +10,8 @@ export default function Button(props: ButtonConfig): JSX.Element {
   const [clicked, setClicked] = React.useState(false);
 
   return (
-    <div onClick={props.onClick} className={style.root}>
+    <button onClick={props.onClick} className={style.root}>
       <div className={style.button}>{props.children}</div>
-    </div>
+    </button>
   );
 }
