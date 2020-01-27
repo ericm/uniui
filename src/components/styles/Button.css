@@ -7,6 +7,8 @@
   outline: 0;
   padding: 0;
   border: 0;
+  background-color: transparent;
+  overflow: hidden;
 }
 .root::-moz-focus-inner {
   border: 0;
@@ -15,22 +17,22 @@
   outline: 0;
 }
 
-.button {
-  border-right: var(--border-size) solid var(--main-border-colour);
-  border-bottom: var(--border-size) solid var(--main-border-colour);
-  background-color: var(--main-bg-colour);
-  border-radius: var(--border-radius);
-  color: var(--main-sub-text-colour);
-}
-
 .button,
 .flatButton {
   margin: 0;
   cursor: pointer;
   outline: 0;
-  transition: all 150ms ease-in-out;
   width: min-content;
   padding: 5px 10px;
+  border-radius: var(--border-radius);
+}
+
+.button {
+  border-right: var(--border-size) solid var(--main-border-colour);
+  border-bottom: var(--border-size) solid var(--main-border-colour);
+  background-color: var(--main-bg-colour);
+  color: var(--main-sub-text-colour);
+  transition: all 150ms ease-in-out;
 }
 
 .button:active {
@@ -41,8 +43,18 @@
   outline: 0;
 }
 
+.flatButton {
+  border: var(--border-size) solid var(--main-border-colour);
+  color: var(--main-border-colour);
+  background-color: transparent;
+  transition: all 250ms ease-out;
+}
+
+.flatButton:active {
+  border-color: transparent;
+}
+
 .ripple {
-  background-color: var(--main-button-ripple);
   width: 1px;
   height: 1px;
   border-radius: 50%;
@@ -52,6 +64,13 @@
   z-index: 5;
   cursor: pointer;
 }
+.button ~ .ripple {
+  background-color: var(--main-button-ripple);
+}
+.flatButton ~ .ripple {
+  background-color: var(--main-button-dark-ripple);
+}
+
 .rippleAnimation {
   animation: rippleKeys 0.5s linear;
 }
