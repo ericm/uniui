@@ -19,14 +19,18 @@
   border-right: var(--border-size) solid var(--main-border-colour);
   border-bottom: var(--border-size) solid var(--main-border-colour);
   background-color: var(--main-bg-colour);
-  width: min-content;
-  padding: 5px 10px;
   border-radius: var(--border-radius);
-  color: var(--main-text-colour);
+  color: var(--main-sub-text-colour);
+}
+
+.button,
+.flatButton {
   margin: 0;
   cursor: pointer;
   outline: 0;
   transition: all 150ms ease-in-out;
+  width: min-content;
+  padding: 5px 10px;
 }
 
 .button:active {

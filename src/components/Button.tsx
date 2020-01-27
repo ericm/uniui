@@ -4,12 +4,14 @@ import * as style from "./styles/Button.css";
 
 export interface ButtonConfig extends Base {
   onClick?: React.EventHandler<React.MouseEvent>;
+  type?: "standard" | "flat";
 }
 
 export default function Button(props: ButtonConfig): JSX.Element {
-  const [ripple, setRipple] = React.useState(style.ripple);
-  const [coords, setCoords] = React.useState({ top: 0, left: 0 });
-  const ref = React.useRef<HTMLButtonElement>();
+  const [ripple, setRipple] = React.useState(style.ripple),
+    [coords, setCoords] = React.useState({ top: 0, left: 0 }),
+    ref = React.useRef<HTMLButtonElement>();
+  const buttonStyle = props.type === "flat" ? style.flatButton : style.button;
 
   const onClick = (e: React.MouseEvent) => {
     let [x, y] = [
@@ -28,7 +30,7 @@ export default function Button(props: ButtonConfig): JSX.Element {
   return (
     <button ref={ref} onClick={onClick} className={style.root}>
       <div style={coords} className={ripple}></div>
-      <div className={style.button}>{props.children}</div>
+      <div className={buttonStyle}>{props.children}</div>
     </button>
   );
 }
