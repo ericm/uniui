@@ -39,24 +39,24 @@
 }
 
 .button {
-  border-right: var(--border-size) solid var(--main-border-colour);
-  border-bottom: var(--border-size) solid var(--main-border-colour);
-  background-color: var(--main-bg-colour);
-  color: var(--main-sub-text-colour);
+  border-right: var(--border-size) solid var(--borderColour);
+  border-bottom: var(--border-size) solid var(--borderColour);
+  background-color: var(--secondaryBackgroundColour);
+  color: var(--secondaryTextColour);
   transition: all 150ms ease-in-out;
 }
 
 .button:active {
-  border-right: 0 solid var(--main-border-colour);
-  border-bottom: 0 solid var(--main-border-colour);
+  border-right: 0 solid var(--borderColour);
+  border-bottom: 0 solid var(--borderColour);
   margin-left: var(--border-size);
   margin-top: var(--border-size);
   outline: 0;
 }
 
 .flatButton {
-  border: var(--border-size) solid var(--main-border-colour);
-  color: var(--main-border-colour);
+  border: var(--border-size) solid var(--borderColour);
+  color: var(--borderColour);
   background-color: transparent;
   transition: all 80ms ease-out;
 }
@@ -67,7 +67,7 @@
 }
 
 .borderlessButton {
-  color: var(--main-border-colour);
+  color: var(--borderColour);
   background-color: transparent;
 }
 
@@ -82,11 +82,11 @@
   cursor: pointer;
 }
 .button ~ .ripple {
-  background-color: var(--main-button-ripple);
+  background-color: var(--button-ripple);
 }
 .flatButton ~ .ripple,
 .borderlessButton ~ .ripple {
-  background-color: var(--main-button-dark-ripple);
+  background-color: var(--button-dark-ripple);
 }
 
 .rippleAnimation {

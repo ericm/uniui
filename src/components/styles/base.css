@@ -1,9 +1,6 @@
 :root {
   --border-size: 3px;
   --border-radius: 5px;
-  --main-border-colour: #16a085;
-  --main-bg-colour: #1abc9c;
-  --main-sub-text-colour: #fff;
-  --main-button-ripple: rgba(255, 255, 255, 0.4);
-  --main-button-dark-ripple: rgba(0, 0, 0, 0.3);
+  --button-ripple: rgba(255, 255, 255, 0.4);
+  --button-dark-ripple: rgba(0, 0, 0, 0.3);
 }

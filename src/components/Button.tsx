@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Base } from "./base";
+import { applyTheme, CTX } from "../theme";
 import * as style from "./styles/Button.css";
 
 export interface ButtonConfig extends Base {
@@ -24,6 +25,8 @@ export default function Button(props: ButtonConfig): JSX.Element {
       buttonStyle = style.button;
   }
 
+  const theme = React.useContext(CTX);
+
   const onClick = (e: React.MouseEvent) => {
     let [x, y] = [
       e.pageX - ref?.current.offsetLeft,
@@ -37,6 +40,8 @@ export default function Button(props: ButtonConfig): JSX.Element {
     // Passthrough event to user defined onClick
     if (props.onClick) props.onClick(e);
   };
+
+  React.useEffect(() => applyTheme(theme, ref));
 
   return (
     <button
