@@ -1,2 +1,4 @@
 import Button from "./components/Button";
-export { Button };
+import Theme, { Themes } from "./theme";
+
+export { Button, Theme, Themes };

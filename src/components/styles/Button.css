@@ -82,11 +82,11 @@
   cursor: pointer;
 }
 .button ~ .ripple {
-  background-color: var(--button-ripple);
+  background-color: var(--buttonRipple);
 }
 .flatButton ~ .ripple,
 .borderlessButton ~ .ripple {
-  background-color: var(--button-dark-ripple);
+  background-color: var(--buttonDarkRipple);
 }
 
 .rippleAnimation {
