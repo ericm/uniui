@@ -4,9 +4,7 @@ import { applyTheme, CTX } from "../theme";
 import * as style from "./styles/Button.css";
 
 export interface ButtonConfig extends Base {
-  onClick?: React.EventHandler<React.MouseEvent>;
   type?: "standard" | "flat" | "borderless";
-  style?: React.CSSProperties;
 }
 
 export default function Button(props: ButtonConfig): JSX.Element {
