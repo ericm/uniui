@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Base } from "./base";
 import { applyTheme, CTX } from "../theme";
+
 import * as style from "./styles/Button.css";
 
 export interface ButtonConfig extends Base {
