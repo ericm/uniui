@@ -8,7 +8,7 @@
   padding: 0;
   border: 0;
   background-color: transparent;
-  height: calc(1em + 25px);
+  height: calc(1em + 30px);
 }
 .root::-moz-focus-inner {
   border: 0;
@@ -63,6 +63,11 @@
 .flatButton:active {
   filter: blur(1px);
   transform: scale(0.95);
+}
+
+.borderlessButton {
+  color: var(--main-border-colour);
+  background-color: transparent;
 }
 
 .ripple {

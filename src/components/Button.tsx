@@ -4,14 +4,24 @@ import * as style from "./styles/Button.css";
 
 export interface ButtonConfig extends Base {
   onClick?: React.EventHandler<React.MouseEvent>;
-  type?: "standard" | "flat";
+  type?: "standard" | "flat" | "borderless";
 }
 
 export default function Button(props: ButtonConfig): JSX.Element {
   const [ripple, setRipple] = React.useState(style.ripple),
     [coords, setCoords] = React.useState({ top: 0, left: 0 }),
     ref = React.useRef<HTMLButtonElement>();
-  const buttonStyle = props.type === "flat" ? style.flatButton : style.button;
+  let buttonStyle: string;
+  switch (props.type) {
+    case "flat":
+      buttonStyle = style.flatButton;
+      break;
+    case "borderless":
+      buttonStyle = style.borderlessButton;
+      break;
+    default:
+      buttonStyle = style.button;
+  }
 
   const onClick = (e: React.MouseEvent) => {
     let [x, y] = [
