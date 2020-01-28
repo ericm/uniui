@@ -29,8 +29,10 @@ export default function Button(props: ButtonConfig): JSX.Element {
 
   return (
     <button ref={ref} onClick={onClick} className={style.root}>
-      <div className={buttonStyle}>{props.children}</div>
-      <div style={coords} className={ripple}></div>
+      <div className={style.container}>
+        <div className={buttonStyle}>{props.children}</div>
+        <div style={coords} className={ripple}></div>
+      </div>
     </button>
   );
 }

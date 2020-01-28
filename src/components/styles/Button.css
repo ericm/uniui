@@ -8,13 +8,23 @@
   padding: 0;
   border: 0;
   background-color: transparent;
-  overflow: hidden;
+  height: calc(1em + 25px);
 }
 .root::-moz-focus-inner {
   border: 0;
 }
 .root:focus {
   outline: 0;
+}
+
+.container {
+  overflow: hidden;
+  width: min-content;
+  height: min-content;
+  margin: 0;
+  border-radius: var(--border-radius);
+  position: relative;
+  padding: 0;
 }
 
 .button,
@@ -47,11 +57,12 @@
   border: var(--border-size) solid var(--main-border-colour);
   color: var(--main-border-colour);
   background-color: transparent;
-  transition: all 250ms ease-out;
+  transition: all 80ms ease-out;
 }
 
 .flatButton:active {
-  border-color: transparent;
+  filter: blur(1px);
+  transform: scale(0.95);
 }
 
 .ripple {
