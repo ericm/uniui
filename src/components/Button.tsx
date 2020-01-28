@@ -5,6 +5,7 @@ import * as style from "./styles/Button.css";
 export interface ButtonConfig extends Base {
   onClick?: React.EventHandler<React.MouseEvent>;
   type?: "standard" | "flat" | "borderless";
+  style?: React.CSSProperties;
 }
 
 export default function Button(props: ButtonConfig): JSX.Element {
@@ -38,7 +39,12 @@ export default function Button(props: ButtonConfig): JSX.Element {
   };
 
   return (
-    <button ref={ref} onClick={onClick} className={style.root}>
+    <button
+      style={props.style}
+      ref={ref}
+      onClick={onClick}
+      className={style.root}
+    >
       <div className={style.container}>
         <div className={buttonStyle}>{props.children}</div>
         <div style={coords} className={ripple}></div>

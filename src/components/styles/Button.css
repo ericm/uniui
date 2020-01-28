@@ -28,7 +28,8 @@
 }
 
 .button,
-.flatButton {
+.flatButton,
+.borderlessButton {
   margin: 0;
   cursor: pointer;
   outline: 0;
@@ -83,7 +84,8 @@
 .button ~ .ripple {
   background-color: var(--main-button-ripple);
 }
-.flatButton ~ .ripple {
+.flatButton ~ .ripple,
+.borderlessButton ~ .ripple {
   background-color: var(--main-button-dark-ripple);
 }
 
