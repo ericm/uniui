@@ -19,6 +19,9 @@ render(
         <Components.Button type="borderless">Button</Components.Button>
       </article>
     </Components.Theme>
+    <article>
+      <Components.TextField></Components.TextField>
+    </article>
   </div>,
   document.querySelector("#root")
 );
