@@ -20,7 +20,7 @@ render(
       </article>
     </Components.Theme>
     <article>
-      <Components.TextField></Components.TextField>
+      <Components.TextField value="Text" subtitle="TextField" />
     </article>
   </div>,
   document.querySelector("#root")
