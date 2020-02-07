@@ -8,7 +8,7 @@ export interface InputConfig extends Base {
   value?: string;
   subtitle?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onChangeText?: (_s?: string) => string;
+  onChangeText?: (s: string) => void;
 }
 export default function Input(props: InputConfig): JSX.Element {
   const [value, setValue] = React.useState(props.value ?? ""),
@@ -16,7 +16,6 @@ export default function Input(props: InputConfig): JSX.Element {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.currentTarget.value !== value) {
       setValue(e.currentTarget.value);
-
       if (onChangeText) onChangeText(e.currentTarget.value);
     }
     if (props.onChange) props.onChange(e);
