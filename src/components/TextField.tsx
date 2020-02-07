@@ -4,11 +4,13 @@ import { applyTheme, CTX } from "../theme";
 
 import * as style from "./styles/TextField.css";
 
-export interface InputConfig extends Base {}
+export interface InputConfig extends Base {
+  value?: string;
+}
 export default function Input(props: InputConfig) {
   return (
     <div className={style.root}>
-      <input style={props.style}></input>
+      <input value={props.value} style={props.style}></input>
     </div>
   );
 }
