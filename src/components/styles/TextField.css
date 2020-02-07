@@ -10,3 +10,6 @@
 .root > input:focus {
   outline: none;
 }
+.sub {
+  position: relative;
+}
