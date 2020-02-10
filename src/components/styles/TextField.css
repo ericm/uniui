@@ -4,14 +4,16 @@
   margin: 0;
   padding: 0;
   font-size: 1em;
-  height: min-content;
+  height: max-content;
+  position: relative;
 }
 .root > input {
   border: 0;
   border-bottom: var(--border-size) solid var(--borderColour);
-  position: absolute;
   color: var(--textColour);
   background: transparent;
+  position: absolute;
+  bottom: 0;
 }
 .root > input:focus {
   outline: none;

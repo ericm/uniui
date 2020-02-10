@@ -1,6 +1,6 @@
 :root {
-  --border-size: 3px;
-  --border-radius: 5px;
+  --border-size: 0.15em;
+  --border-radius: 0.25em;
   --button-ripple: rgba(255, 255, 255, 0.4);
   --button-dark-ripple: rgba(0, 0, 0, 0.3);
 }
