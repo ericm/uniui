@@ -7,7 +7,8 @@
   height: min-content;
 }
 .root > input {
-  border: var(--border-size) solid var(--borderColour);
+  border: 0;
+  border-bottom: var(--border-size) solid var(--borderColour);
 }
 .root > input:focus {
   outline: none;
@@ -16,4 +17,8 @@
   position: relative;
   display: block;
   font-size: 0.5em;
+}
+
+.subFg {
+  top: 10px;
 }

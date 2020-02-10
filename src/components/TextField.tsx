@@ -12,8 +12,18 @@ export interface InputConfig extends Base {
 }
 export default function Input(props: InputConfig): JSX.Element {
   const [value, setValue] = React.useState(props.value ?? ""),
+    [subState, setSubState] = React.useState(style.sub),
     onChangeText = props.onChangeText,
     ref = React.useRef<HTMLDivElement>();
+
+  const setSub = () => {
+    if (value.length > 0 && subState !== style.sub) {
+      setSubState(style.sub);
+    } else if (value.length === 0 && subState === style.sub) {
+      setSubState(`${style.sub} ${style.subFg}`);
+    }
+  };
+  React.useEffect(setSub, [value]);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.currentTarget.value !== value) {
@@ -30,7 +40,7 @@ export default function Input(props: InputConfig): JSX.Element {
     <div ref={ref} className={style.root}>
       {(() =>
         props.subtitle ? (
-          <span className={style.sub}>{props.subtitle}</span>
+          <span className={subState}>{props.subtitle}</span>
         ) : null)()}
       <input onChange={onChange} value={value} style={props.style}></input>
     </div>
