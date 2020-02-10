@@ -9,6 +9,9 @@
 .root > input {
   border: 0;
   border-bottom: var(--border-size) solid var(--borderColour);
+  position: absolute;
+  color: var(--textColour);
+  background: transparent;
 }
 .root > input:focus {
   outline: none;
@@ -16,9 +19,14 @@
 .sub {
   position: relative;
   display: block;
+  color: var(--borderColour);
   font-size: 0.5em;
+  transition: all 80ms linear;
 }
 
 .subFg {
-  top: 10px;
+  margin-top: -14px;
+  top: 20px;
+  margin-bottom: 0;
+  font-size: 1em;
 }
