@@ -7,9 +7,19 @@
   height: 2em;
   position: relative;
   width: auto;
+  overflow: hidden;
 }
-.root > input {
-  border: 0;
+.wrapper {
+  transition: all 80ms ease-in-out;
+  width: 12em;
+  height: fit-content;
+}
+.wrapper:focus-within {
+  border-radius: var(--border-radius);
+}
+.root input {
+  border: var(--border-size);
+  display: block;
   border-bottom: var(--border-size) solid var(--borderColour);
   color: var(--textColour);
   background: transparent;
@@ -20,10 +30,9 @@
   transition: all 80ms ease-in-out;
   padding-left: 0.2em;
 }
-.root > input:focus {
+.root input:focus {
   outline: none;
-  background-color: var(--buttonDarkRipple);
-  border-radius: var(--border-radius);
+  background: var(--input-back);
 }
 .sub {
   position: relative;

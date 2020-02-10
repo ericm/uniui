@@ -42,7 +42,9 @@ export default function Input(props: InputConfig): JSX.Element {
         props.subtitle ? (
           <span className={subState}>{props.subtitle}</span>
         ) : null)()}
-      <input onChange={onChange} value={value}></input>
+      <div className={style.wrapper}>
+        <input onChange={onChange} value={value}></input>
+      </div>
     </div>
   );
 }

@@ -94,7 +94,7 @@
 }
 @keyframes rippleKeys {
   100% {
-    transform: scale(90);
+    transform: scale(180);
     opacity: 0;
   }
 }
