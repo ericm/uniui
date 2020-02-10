@@ -22,11 +22,12 @@
   color: var(--borderColour);
   font-size: 0.5em;
   transition: all 80ms linear;
+  margin-top: 0.1em;
 }
 
 .subFg {
-  margin-top: -14px;
-  top: 20px;
+  margin-top: -0.5em;
+  top: 1em;
   margin-bottom: 0;
   font-size: 1em;
 }
