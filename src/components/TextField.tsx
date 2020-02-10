@@ -12,7 +12,9 @@ export interface InputConfig extends Base {
 }
 export default function Input(props: InputConfig): JSX.Element {
   const [value, setValue] = React.useState(props.value ?? ""),
-    onChangeText = props.onChangeText;
+    onChangeText = props.onChangeText,
+    ref = React.useRef<HTMLDivElement>();
+
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.currentTarget.value !== value) {
       setValue(e.currentTarget.value);
@@ -21,8 +23,11 @@ export default function Input(props: InputConfig): JSX.Element {
     if (props.onChange) props.onChange(e);
   };
 
+  const theme = React.useContext(CTX);
+  React.useEffect(() => applyTheme(theme, ref));
+
   return (
-    <div className={style.root}>
+    <div ref={ref} className={style.root}>
       {(() =>
         props.subtitle ? (
           <span className={style.sub}>{props.subtitle}</span>

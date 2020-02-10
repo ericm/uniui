@@ -3,13 +3,17 @@
 .root {
   margin: 0;
   padding: 0;
+  font-size: 1em;
+  height: min-content;
 }
 .root > input {
-  border: 0;
+  border: var(--border-size) solid var(--borderColour);
 }
 .root > input:focus {
   outline: none;
 }
 .sub {
   position: relative;
+  display: block;
+  font-size: 0.5em;
 }
