@@ -37,12 +37,12 @@ export default function Input(props: InputConfig): JSX.Element {
   React.useEffect(() => applyTheme(theme, ref));
 
   return (
-    <div ref={ref} className={style.root}>
+    <div ref={ref} className={style.root} style={props.style}>
       {(() =>
         props.subtitle ? (
           <span className={subState}>{props.subtitle}</span>
         ) : null)()}
-      <input onChange={onChange} value={value} style={props.style}></input>
+      <input onChange={onChange} value={value}></input>
     </div>
   );
 }
