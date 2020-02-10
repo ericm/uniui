@@ -9,14 +9,6 @@
   width: auto;
   overflow: hidden;
 }
-.wrapper {
-  transition: all 80ms ease-in-out;
-  width: 12em;
-  height: fit-content;
-}
-.wrapper:focus-within {
-  border-radius: var(--border-radius);
-}
 .root input {
   border: var(--border-size);
   display: block;
