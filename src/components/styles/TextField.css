@@ -26,6 +26,10 @@
   outline: none;
   background: var(--input-back);
 }
+.root input::selection {
+  background: var(--secondaryBackgroundColour);
+  color: var(--backgroundColour);
+}
 .sub {
   position: relative;
   display: block;
