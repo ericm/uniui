@@ -9,6 +9,7 @@
   border: 0;
   background-color: transparent;
   height: calc(1em + 30px);
+  font-family: var(--fontFamily);
 }
 .root::-moz-focus-inner {
   border: 0;

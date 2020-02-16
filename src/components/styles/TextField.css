@@ -8,6 +8,7 @@
   position: relative;
   width: auto;
   overflow: hidden;
+  font-family: var(--fontFamily);
 }
 .root input {
   border: var(--border-size);

@@ -1,6 +1,8 @@
 import * as React from "react";
 
 export interface Theme {
+  fontFamily: string;
+
   borderColour: string;
 
   backgroundColour: string;
@@ -14,6 +16,8 @@ export interface Theme {
 
 export const Themes: { [name: string]: Theme } = {
   lime: {
+    fontFamily: '"Open Sans", sans-serif',
+
     borderColour: "#16a085",
 
     backgroundColour: "#fff",
@@ -25,6 +29,8 @@ export const Themes: { [name: string]: Theme } = {
     buttonDarkRipple: "rgba(0, 0, 0, 0.3)"
   },
   limeDark: {
+    fontFamily: '"Open Sans", sans-serif',
+
     borderColour: "#16a085",
 
     backgroundColour: "#111",
@@ -36,6 +42,8 @@ export const Themes: { [name: string]: Theme } = {
     buttonDarkRipple: "rgba(0, 0, 0, 0.3)"
   },
   berry: {
+    fontFamily: '"Open Sans", sans-serif',
+
     borderColour: "#c0392b",
 
     backgroundColour: "#fff",
