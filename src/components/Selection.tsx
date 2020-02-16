@@ -42,7 +42,7 @@ export function Selection(props: SelectionConfig): JSX.Element {
         {render()}
       </label>
       <input
-        onChange={}
+        onChange={onChange}
         style={props.style && { display: "none" }}
         type={type}
         ref={ref}

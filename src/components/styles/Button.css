@@ -72,8 +72,8 @@
 }
 
 .ripple {
-  width: 1px;
-  height: 1px;
+  width: 5px;
+  height: 5px;
   border-radius: 100%;
   transform: scale(0);
   opacity: 1;
@@ -94,7 +94,7 @@
 }
 @keyframes rippleKeys {
   100% {
-    transform: scale(180);
+    transform: scale(40);
     opacity: 0;
   }
 }
