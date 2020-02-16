@@ -29,6 +29,16 @@ render(
         onChangeText={textChange}
       />
     </article>
+    <article>
+      <h1>Selections:</h1>
+      <section>
+        <h2>Radio:</h2>
+        <form action="">
+          <Components.Selection type="radio" label="Radio button 1" />
+          <Components.Selection type="radio" label="Radio button 2" />
+        </form>
+      </section>
+    </article>
   </div>,
   document.querySelector("#root")
 );

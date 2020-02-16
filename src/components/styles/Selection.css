@@ -2,3 +2,6 @@
 
 .root {
 }
+.root input {
+  /* display: none; */
+}

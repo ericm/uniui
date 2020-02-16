@@ -8,7 +8,7 @@
   padding: 0;
   border: 0;
   background-color: transparent;
-  height: calc(1em + 30px);
+  height: calc(2em + 30px);
   font-family: var(--fontFamily);
 }
 .root::-moz-focus-inner {

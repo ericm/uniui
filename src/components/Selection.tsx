@@ -6,15 +6,17 @@ import * as style from "./styles/Selection.css";
 
 export interface SelectionConfig extends Base {
   type: "radio" | "checkbox" | "switch";
+  name?: string;
   value?: string;
   checked?: boolean;
   label?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeValue?: (state: boolean) => void;
 }
-export function Selection(props: SelectionConfig): JSX.Element {
+export default function Selection(props: SelectionConfig): JSX.Element {
   const [checked, setChecked] = React.useState(props.checked ?? false),
-    ref = React.useRef<HTMLInputElement>();
+    ref = React.useRef<HTMLInputElement>(),
+    name = props.name ?? "input" + style.root;
   let type: string;
   if (props.type === "switch") {
     type = "radio";
@@ -23,15 +25,16 @@ export function Selection(props: SelectionConfig): JSX.Element {
   }
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.currentTarget.checked !== checked) {
-      setChecked(e.currentTarget.checked);
-      props.onChange(e);
-      props.onChangeValue(checked);
-    }
+    setChecked(e.currentTarget.checked);
+    console.log(e.currentTarget.checked);
+    if (props.onChange) props.onChange(e);
+    if (props.onChangeValue) props.onChangeValue(e.currentTarget.checked);
   };
 
   const render = () => {
     switch (props.type) {
+      default:
+        return null;
     }
   };
 
@@ -40,15 +43,16 @@ export function Selection(props: SelectionConfig): JSX.Element {
       <label>
         {(() => (props.label ? <span>{props.label}</span> : null))()}
         {render()}
+        <input
+          name={name}
+          onChange={onChange}
+          style={props.style}
+          type={type}
+          ref={ref}
+          value={props.value}
+          checked={checked}
+        />
       </label>
-      <input
-        onChange={onChange}
-        style={props.style && { display: "none" }}
-        type={type}
-        ref={ref}
-        value={props.value}
-        checked={checked}
-      />
     </div>
   );
 }
