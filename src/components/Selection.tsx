@@ -24,12 +24,11 @@ export default function Selection(props: SelectionConfig): JSX.Element {
     type = props.type;
   }
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setChecked(e.currentTarget.checked);
-    console.log(e.currentTarget.checked);
+  React.useEffect(() => {
+    console.log(props.label, checked);
     if (props.onChange) props.onChange(e);
-    if (props.onChangeValue) props.onChangeValue(e.currentTarget.checked);
-  };
+    if (props.onChangeValue) props.onChangeValue(e.target.checked);
+  }, [checked]);
 
   const render = () => {
     switch (props.type) {
@@ -45,12 +44,11 @@ export default function Selection(props: SelectionConfig): JSX.Element {
         {render()}
         <input
           name={name}
-          onChange={onChange}
+          onChange={() => setChecked(!checked)}
           style={props.style}
           type={type}
           ref={ref}
           value={props.value}
-          checked={checked}
         />
       </label>
     </div>
