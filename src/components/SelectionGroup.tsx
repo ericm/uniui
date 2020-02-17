@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Base } from "./base";
 export interface SelectMap {
   refs: React.MutableRefObject<HTMLInputElement>[];
   changers: (() => void)[];
@@ -14,4 +15,6 @@ const arr: SelectMap = {
 };
 const ctx = React.createContext(arr);
 
-export default ctx.Provider;
+export default function(props: Base) {
+  return <ctx.Provider value={arr}>{props.children}</ctx.Provider>;
+}

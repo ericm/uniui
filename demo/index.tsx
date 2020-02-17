@@ -33,10 +33,10 @@ render(
       <h1>Selections:</h1>
       <section>
         <h2>Radio:</h2>
-        <form action="">
+        <Components.SelectionGroup>
           <Components.Selection type="radio" label="Radio button 1" />
           <Components.Selection type="radio" label="Radio button 2" />
-        </form>
+        </Components.SelectionGroup>
       </section>
     </article>
   </div>,
