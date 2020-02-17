@@ -3,18 +3,22 @@ import { Base } from "./base";
 export interface SelectMap {
   refs: React.MutableRefObject<HTMLInputElement>[];
   changers: (() => void)[];
-  onChange: () => void;
+  onChange: (i: number) => void;
 }
 
-const arr: SelectMap = {
+const map: SelectMap = {
   refs: [],
   changers: [],
-  onChange: () => {
-    arr.changers.forEach(han => han());
+  onChange: (curr: number) => {
+    map.changers.forEach((handle, i) => {
+      if (i !== curr) handle();
+    });
   }
 };
-const ctx = React.createContext(arr);
+const ctx = React.createContext(map);
 
 export default function(props: Base) {
-  return <ctx.Provider value={arr}>{props.children}</ctx.Provider>;
+  return <ctx.Provider value={map}>{props.children}</ctx.Provider>;
 }
+
+export { ctx as SelectionContext };
