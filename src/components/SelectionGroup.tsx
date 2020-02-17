@@ -1,13 +1,11 @@
 import * as React from "react";
 import { Base } from "./base";
 export interface SelectMap {
-  refs: React.MutableRefObject<HTMLInputElement>[];
   changers: (() => void)[];
   onChange: (i: number) => void;
 }
 
 const map: SelectMap = {
-  refs: [],
   changers: [],
   onChange: (curr: number) => {
     map.changers.forEach((handle, i) => {
