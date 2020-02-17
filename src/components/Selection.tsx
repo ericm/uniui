@@ -26,7 +26,6 @@ export default function Selection(props: SelectionConfig): JSX.Element {
 
   React.useEffect(() => {
     console.log(props.label, checked);
-    if (props.onChange) props.onChange(e);
     if (props.onChangeValue) props.onChangeValue(e.target.checked);
   }, [checked]);
 
