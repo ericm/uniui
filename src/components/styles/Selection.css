@@ -1,7 +1,15 @@
 @import "./base.css";
 
 .root {
+  vertical-align: middle;
 }
 .root input {
-  /* display: none; */
+  display: none;
+}
+.radio {
+  display: inline-block;
+  border-radius: 100%;
+  background-color: var(--borderColour);
+  width: 0.3em;
+  height: 0.3em;
 }

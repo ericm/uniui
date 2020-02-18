@@ -47,15 +47,29 @@ export default function Selection(props: SelectionConfig): React.ReactElement {
     onClick.bind(checked);
   }
 
+  const theme = React.useContext(CTX);
+  React.useEffect(() => {
+    applyTheme(theme, ref);
+  }, []);
+
   const render = () => {
     switch (props.type) {
+      case "radio":
+        return (
+          <div
+            className={`${checked ? style.checked : style.unchecked} ${
+              style.radio
+            }`}
+          ></div>
+        );
+        break;
       default:
         return null;
     }
   };
 
   return (
-    <div className={style.root}>
+    <div className={style.root} ref={ref}>
       <label>
         {(() => (props.label ? <span>{props.label}</span> : null))()}
         {render()}
@@ -64,7 +78,6 @@ export default function Selection(props: SelectionConfig): React.ReactElement {
           onClick={onClick}
           style={props.style}
           type={type}
-          ref={ref}
           value={props.value}
         />
       </label>
