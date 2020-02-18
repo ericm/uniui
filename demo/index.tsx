@@ -36,6 +36,7 @@ render(
         <Components.SelectionGroup>
           <Components.Selection type="radio" label="Radio button 1" />
           <Components.Selection type="radio" label="Radio button 2" />
+          <Components.Selection type="radio" label="Radio button 3" />
         </Components.SelectionGroup>
       </section>
     </article>
