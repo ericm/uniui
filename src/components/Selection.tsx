@@ -53,14 +53,17 @@ export default function Selection(props: SelectionConfig): React.ReactElement {
   }, []);
 
   const render = () => {
+    const check = () => (checked ? style.checked : style.unchecked);
     switch (props.type) {
       case "radio":
         return (
-          <div
-            className={`${checked ? style.checked : style.unchecked} ${
-              style.radio
-            } ${style.select}`}
-          >
+          <div className={`${check()} ${style.radio} ${style.select}`}>
+            <div></div>
+          </div>
+        );
+      case "checkbox":
+        return (
+          <div className={`${check()} ${style.checkbox} ${style.select}`}>
             <div></div>
           </div>
         );

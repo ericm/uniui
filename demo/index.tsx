@@ -39,6 +39,12 @@ render(
           <Components.Selection type="radio" label="Radio button 3" />
         </Components.SelectionGroup>
       </section>
+      <section>
+        <h2>Checkbox:</h2>
+        <Components.SelectionGroup>
+          <Components.Selection type="checkbox" label="Checkbox 1" />
+        </Components.SelectionGroup>
+      </section>
     </article>
   </div>,
   document.querySelector("#root")

@@ -18,6 +18,7 @@
 .select {
   vertical-align: middle;
   display: inline-block;
+  padding: 0;
 }
 
 .radio div {
@@ -29,17 +30,11 @@
 }
 .radio {
   border-radius: 100%;
-  padding: 0;
   background-color: var(--borderColour);
   width: 0.5em;
   height: 0.5em;
   margin-bottom: 0.2em;
   margin-right: 0.3em;
-}
-
-.checked {
-}
-.unchecked {
 }
 .radio.unchecked div {
   border-color: transparent;
