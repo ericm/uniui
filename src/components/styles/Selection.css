@@ -1,15 +1,62 @@
 @import "./base.css";
 
 .root {
-  vertical-align: middle;
+  padding-left: 0.5em;
+  font-family: var(--fontFamily);
+  font-size: 2em;
 }
 .root input {
   display: none;
 }
-.radio {
+.root span {
+  font-weight: 200;
+  font-size: 0.6em;
   display: inline-block;
+  position: relative;
+  top: -0.3em;
+}
+.select {
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.radio div {
+  border: var(--backgroundColour) solid 0.1em;
   border-radius: 100%;
+  width: 0.2em;
+  margin: calc(0.05em) calc(0.05em);
+  height: 0.2em;
+  transition: all 0.1ms;
+}
+.radio {
+  border-radius: 100%;
+  padding: 0;
   background-color: var(--borderColour);
-  width: 0.3em;
-  height: 0.3em;
+  width: 0.5em;
+  height: 0.5em;
+  margin-bottom: 0.2em;
+  margin-right: 0.3em;
+}
+
+.checked {
+}
+.unchecked {
+}
+.radio.unchecked div {
+  border-color: transparent;
+  background-color: var(--backgroundColour);
+}
+.radio.checked div {
+  animation: radioAnim 0.4s ease-in-out;
+}
+@keyframes radioAnim {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(2);
+  }
+  100% {
+    transform: scale(1);
+  }
 }

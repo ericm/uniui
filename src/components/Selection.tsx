@@ -59,10 +59,11 @@ export default function Selection(props: SelectionConfig): React.ReactElement {
           <div
             className={`${checked ? style.checked : style.unchecked} ${
               style.radio
-            }`}
-          ></div>
+            } ${style.select}`}
+          >
+            <div></div>
+          </div>
         );
-        break;
       default:
         return null;
     }
@@ -71,8 +72,8 @@ export default function Selection(props: SelectionConfig): React.ReactElement {
   return (
     <div className={style.root} ref={ref}>
       <label>
-        {(() => (props.label ? <span>{props.label}</span> : null))()}
         {render()}
+        {(() => (props.label ? <span>{props.label}</span> : null))()}
         <input
           name={name}
           onClick={onClick}
