@@ -5,6 +5,9 @@
   font-family: var(--fontFamily);
   font-size: 2em;
 }
+.root * {
+  cursor: pointer;
+}
 .root input {
   display: none;
 }
@@ -19,13 +22,49 @@
   vertical-align: middle;
   display: inline-block;
   padding: 0;
+  margin-bottom: 0.2em;
+  overflow: hidden;
+  margin-right: 0.3em;
 }
 
+.checkbox {
+  border: 0.05em solid var(--borderColour);
+  width: 0.4em;
+  height: 0.4em;
+  border-radius: 0.15em;
+}
+.checkbox div {
+  width: 0;
+  height: 0;
+}
+.checkbox div:before {
+  content: "";
+  position: relative;
+  display: block;
+  background-color: var(--secondaryBackgroundColour);
+  width: 0.1em;
+  height: 0.2em;
+  top: 0.2em;
+  left: 0.05em;
+  transform: rotate(-45deg);
+}
+
+.checkbox div:after {
+  content: "";
+  position: relative;
+  display: block;
+  background-color: var(--secondaryBackgroundColour);
+  width: 0.1em;
+  height: 0.4em;
+  top: -0.2em;
+  left: 0.21em;
+  transform: rotate(45deg);
+}
 .radio div {
   border: var(--backgroundColour) solid 0.1em;
   border-radius: 100%;
   width: 0.2em;
-  margin: calc(0.05em) calc(0.05em);
+  margin: 0.05em 0.05em;
   height: 0.2em;
 }
 .radio {
@@ -33,8 +72,6 @@
   background-color: var(--borderColour);
   width: 0.5em;
   height: 0.5em;
-  margin-bottom: 0.2em;
-  margin-right: 0.3em;
 }
 .radio.unchecked div {
   border-color: transparent;
