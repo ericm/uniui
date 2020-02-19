@@ -14,47 +14,47 @@ export interface Theme {
   buttonDarkRipple: string;
 }
 
-export const Themes: { [name: string]: Theme } = {
-  lime: {
-    fontFamily: '"Open Sans", sans-serif',
+export const lime: Theme = {
+  fontFamily: '"Open Sans", sans-serif',
 
-    borderColour: "#16a085",
+  borderColour: "#16a085",
 
-    backgroundColour: "#fff",
-    textColour: "#111",
-    secondaryBackgroundColour: "#1abc9c",
-    secondaryTextColour: "#fff",
+  backgroundColour: "#fff",
+  textColour: "#111",
+  secondaryBackgroundColour: "#1abc9c",
+  secondaryTextColour: "#fff",
 
-    buttonRipple: "rgba(255, 255, 255, 0.4)",
-    buttonDarkRipple: "rgba(0, 0, 0, 0.3)"
-  },
-  limeDark: {
-    fontFamily: '"Open Sans", sans-serif',
-
-    borderColour: "#16a085",
-
-    backgroundColour: "#111",
-    textColour: "fff",
-    secondaryBackgroundColour: "#1abc9c",
-    secondaryTextColour: "#fff",
-
-    buttonRipple: "rgba(255, 255, 255, 0.4)",
-    buttonDarkRipple: "rgba(0, 0, 0, 0.3)"
-  },
-  berry: {
-    fontFamily: '"Open Sans", sans-serif',
-
-    borderColour: "#c0392b",
-
-    backgroundColour: "#fff",
-    textColour: "#111",
-    secondaryBackgroundColour: "#e74c3c",
-    secondaryTextColour: "#fff",
-
-    buttonRipple: "rgba(255, 255, 255, 0.4)",
-    buttonDarkRipple: "rgba(0, 0, 0, 0.3)"
-  }
+  buttonRipple: "rgba(255, 255, 255, 0.4)",
+  buttonDarkRipple: "rgba(0, 0, 0, 0.3)"
 };
+
+export const limeDark: Theme = {
+  fontFamily: '"Open Sans", sans-serif',
+
+  borderColour: "#16a085",
+
+  backgroundColour: "#111",
+  textColour: "fff",
+  secondaryBackgroundColour: "#1abc9c",
+  secondaryTextColour: "#fff",
+
+  buttonRipple: "rgba(255, 255, 255, 0.4)",
+  buttonDarkRipple: "rgba(0, 0, 0, 0.3)"
+};
+export const berry: Theme = {
+  fontFamily: '"Open Sans", sans-serif',
+
+  borderColour: "#c0392b",
+
+  backgroundColour: "#fff",
+  textColour: "#111",
+  secondaryBackgroundColour: "#e74c3c",
+  secondaryTextColour: "#fff",
+
+  buttonRipple: "rgba(255, 255, 255, 0.4)",
+  buttonDarkRipple: "rgba(0, 0, 0, 0.3)"
+};
+export const Themes: { [name: string]: Theme } = { lime, limeDark, berry };
 
 export function applyTheme<T extends HTMLElement>(
   theme: Theme,
@@ -66,4 +66,8 @@ export function applyTheme<T extends HTMLElement>(
 }
 
 export const CTX = React.createContext(Themes.lime);
+interface Props extends React.ProviderProps<Theme> {
+  googleFonts?: boolean;
+}
+
 export default CTX.Provider;

@@ -2,12 +2,13 @@ import * as React from "react";
 import { render } from "react-dom";
 
 import * as Uniui from "../src";
+import { lime, berry } from "../src/theme";
 
 const textChange = (s: string) => console.log(s);
 
 render(
   <div>
-    <Uniui.Theme value={Uniui.Themes.lime}>
+    <Uniui.Theme value={lime}>
       <article>
         <h1>Button Raised:</h1>
         <Uniui.Button>Button</Uniui.Button>
