@@ -43,6 +43,8 @@ render(
         <h2>Checkbox:</h2>
         <Components.SelectionGroup>
           <Components.Selection type="checkbox" label="Checkbox 1" />
+          <Components.Selection type="checkbox" label="Checkbox 2" />
+          <Components.Selection type="checkbox" label="Checkbox 3" />
         </Components.SelectionGroup>
       </section>
     </article>

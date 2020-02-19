@@ -26,8 +26,9 @@ export default function Selection(props: SelectionConfig): React.ReactElement {
     type = props.type;
   }
 
-  let onClick = () => {};
+  let onClick = () => setChecked(!checked);
   const selCtx = React.useContext(SelectionContext);
+
   if (props.type === "radio") {
     const onRadioChange = () => {
       setChecked(false);

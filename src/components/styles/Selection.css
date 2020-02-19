@@ -17,6 +17,7 @@
   display: inline-block;
   position: relative;
   top: -0.3em;
+  user-select: none;
 }
 .select {
   vertical-align: middle;
@@ -44,9 +45,33 @@
   background-color: var(--secondaryBackgroundColour);
   width: 0.1em;
   height: 0.2em;
-  top: 0.2em;
+  top: 0.18em;
   left: 0.05em;
   transform: rotate(-45deg);
+}
+.checkbox.checked div:before {
+  animation: checkAnim 0.1s linear;
+}
+@keyframes checkAnim {
+  0% {
+    height: 0;
+  }
+  100% {
+    height: 0.2em;
+  }
+}
+@keyframes checkAnim2 {
+  0% {
+    height: 0;
+  }
+  50% {
+    height: 0;
+    top: 0.15em;
+    left: 0;
+  }
+  100% {
+    height: 0.4em;
+  }
 }
 
 .checkbox div:after {
@@ -59,6 +84,12 @@
   top: -0.2em;
   left: 0.21em;
   transform: rotate(45deg);
+}
+.checkbox.checked div:after {
+  animation: checkAnim2 0.2s linear;
+}
+.checkbox.unchecked div {
+  opacity: 0;
 }
 .radio div {
   border: var(--backgroundColour) solid 0.1em;
