@@ -1,29 +1,29 @@
 import * as React from "react";
 import { render } from "react-dom";
 
-import * as Components from "../src";
+import * as Uniui from "../src";
 
 const textChange = (s: string) => console.log(s);
 
 render(
   <div>
-    <Components.Theme value={Components.Themes.lime}>
+    <Uniui.Theme value={Uniui.Themes.lime}>
       <article>
         <h1>Button Raised:</h1>
-        <Components.Button>Button</Components.Button>
+        <Uniui.Button>Button</Uniui.Button>
       </article>
       <article>
         <h1>Button Flat:</h1>
-        <Components.Button type="flat">Button</Components.Button>
+        <Uniui.Button type="flat">Button</Uniui.Button>
       </article>
       <article>
         <h1>Button Borderless:</h1>
-        <Components.Button type="borderless">Button</Components.Button>
+        <Uniui.Button type="borderless">Button</Uniui.Button>
       </article>
-    </Components.Theme>
+    </Uniui.Theme>
     <article>
       <h1>Text Field:</h1>
-      <Components.TextField
+      <Uniui.TextField
         value="Text"
         subtitle="TextField"
         onChangeText={textChange}
@@ -33,19 +33,19 @@ render(
       <h1>Selections:</h1>
       <section>
         <h2>Radio:</h2>
-        <Components.SelectionGroup>
-          <Components.Selection type="radio" label="Radio button 1" />
-          <Components.Selection type="radio" label="Radio button 2" />
-          <Components.Selection type="radio" label="Radio button 3" />
-        </Components.SelectionGroup>
+        <Uniui.SelectionGroup>
+          <Uniui.Selection type="radio" label="Radio button 1" />
+          <Uniui.Selection type="radio" label="Radio button 2" />
+          <Uniui.Selection type="radio" label="Radio button 3" />
+        </Uniui.SelectionGroup>
       </section>
       <section>
         <h2>Checkbox:</h2>
-        <Components.SelectionGroup>
-          <Components.Selection type="checkbox" label="Checkbox 1" />
-          <Components.Selection type="checkbox" label="Checkbox 2" />
-          <Components.Selection type="checkbox" label="Checkbox 3" />
-        </Components.SelectionGroup>
+        <Uniui.SelectionGroup>
+          <Uniui.Selection type="checkbox" label="Checkbox 1" />
+          <Uniui.Selection type="checkbox" label="Checkbox 2" />
+          <Uniui.Selection type="checkbox" label="Checkbox 3" />
+        </Uniui.SelectionGroup>
       </section>
     </article>
   </div>,
