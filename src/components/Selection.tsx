@@ -65,7 +65,7 @@ export default function Selection(props: SelectionConfig): React.ReactElement {
         break;
     }
     return (
-      <div className={`${check()} ${style.checkbox} ${style.select}`}>
+      <div className={`${check()} ${cl} ${style.select}`}>
         <div></div>
       </div>
     );
