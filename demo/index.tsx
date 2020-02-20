@@ -48,6 +48,14 @@ render(
           <Uniui.Selection type="checkbox" label="Checkbox 3" />
         </Uniui.SelectionGroup>
       </section>
+      <section>
+        <h2>Switch:</h2>
+        <Uniui.SelectionGroup>
+          <Uniui.Selection type="switch" label="Switch 1"></Uniui.Selection>
+          <Uniui.Selection type="switch" label="Switch 2"></Uniui.Selection>
+          <Uniui.Selection type="switch" label="Switch 3"></Uniui.Selection>
+        </Uniui.SelectionGroup>
+      </section>
     </article>
   </div>,
   document.querySelector("#root")

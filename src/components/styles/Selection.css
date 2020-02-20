@@ -109,7 +109,13 @@
   background-color: var(--backgroundColour);
 }
 .radio.checked div {
-  animation: radioAnim 0.4s ease-in-out;
+  animation: radioAnim 0.5s ease-in-out;
+}
+
+.switch {
+  border-radius: 0.3em;
+  background-color: var(--backgroundColour);
+  border: 0.1em solid var(--borderColour);
 }
 @keyframes radioAnim {
   0% {
