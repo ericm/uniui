@@ -26,13 +26,23 @@ export default function Selection(props: SelectionConfig): React.ReactElement {
     type = props.type;
   }
 
-  let onClick = () => setChecked(!checked);
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (props.onChange) props.onChange(e);
+  };
+  if (props.onChangeValue) {
+    React.useEffect(() => {
+      props.onChangeValue(checked);
+    }, [checked]);
+  }
+
+  let onClick = () => {
+    setChecked(!checked);
+  };
   const selCtx = React.useContext(SelectionContext);
 
   if (props.type === "radio") {
     const onRadioChange = () => {
       setChecked(false);
-      console.log(props.label, false);
     };
     onRadioChange.bind(checked);
     if (curr === -1) {
@@ -43,7 +53,6 @@ export default function Selection(props: SelectionConfig): React.ReactElement {
     onClick = () => {
       setChecked(true);
       selCtx.onChange(curr);
-      console.log(props.label, true);
     };
     onClick.bind(checked);
   }
@@ -85,6 +94,7 @@ export default function Selection(props: SelectionConfig): React.ReactElement {
           style={props.style}
           type={type}
           value={props.value}
+          onChange={onChange}
         />
       </label>
     </div>
