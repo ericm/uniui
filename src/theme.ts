@@ -12,6 +12,8 @@ export interface Theme {
 
   buttonRipple: string;
   buttonDarkRipple: string;
+
+  accentColour: string;
 }
 
 export const lime: Theme = {
@@ -25,7 +27,9 @@ export const lime: Theme = {
   secondaryTextColour: "#fff",
 
   buttonRipple: "rgba(255, 255, 255, 0.4)",
-  buttonDarkRipple: "rgba(0, 0, 0, 0.3)"
+  buttonDarkRipple: "rgba(0, 0, 0, 0.3)",
+
+  accentColour: "#707171"
 };
 
 export const limeDark: Theme = {
@@ -39,7 +43,9 @@ export const limeDark: Theme = {
   secondaryTextColour: "#fff",
 
   buttonRipple: "rgba(255, 255, 255, 0.4)",
-  buttonDarkRipple: "rgba(0, 0, 0, 0.3)"
+  buttonDarkRipple: "rgba(0, 0, 0, 0.3)",
+
+  accentColour: "#707171"
 };
 export const berry: Theme = {
   fontFamily: '"Open Sans", sans-serif',
@@ -52,7 +58,9 @@ export const berry: Theme = {
   secondaryTextColour: "#fff",
 
   buttonRipple: "rgba(255, 255, 255, 0.4)",
-  buttonDarkRipple: "rgba(0, 0, 0, 0.3)"
+  buttonDarkRipple: "rgba(0, 0, 0, 0.3)",
+
+  accentColour: "#707171"
 };
 export const Themes: { [name: string]: Theme } = { lime, limeDark, berry };
 

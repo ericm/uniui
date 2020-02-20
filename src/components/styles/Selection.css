@@ -11,6 +11,10 @@
 .root input {
   display: none;
 }
+.root label {
+  color: var(--textColour);
+  font-smooth: always;
+}
 .root span {
   font-weight: 200;
   font-size: 0.6em;
@@ -115,8 +119,33 @@
 .switch {
   border-radius: 0.3em;
   background-color: var(--backgroundColour);
-  border: 0.1em solid var(--borderColour);
+  border: 0.05em solid var(--accentColour);
+  width: 0.8em;
+  height: 0.4em;
+  overflow: hidden;
+  transition: all 0.2s ease-in-out;
 }
+
+.switch div {
+  position: relative;
+  height: 0.3em;
+  width: 0.3em;
+  margin: 0.05em;
+  border-radius: 100%;
+  background-color: var(--accentColour);
+  transition: all 0.2s ease-in-out;
+  left: 0;
+}
+
+.switch.checked {
+  background-color: var(--secondaryBackgroundColour);
+  border-color: var(--borderColour);
+}
+.switch.checked div {
+  background-color: var(--borderColour);
+  left: 0.4em;
+}
+
 @keyframes radioAnim {
   0% {
     transform: scale(0);
