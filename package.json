@@ -6,12 +6,16 @@
   "scripts": {
     "start": "parcel demo/index.html",
     "build": "parcel build src/index.ts -d lib",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docz:dev": "docz dev",
+    "docz:build": "docz build",
+    "docz:serve": "docz build && docz serve"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "autoprefixer": "^9.7.4",
+    "docz": "^2.2.0",
     "postcss-modules": "^1.5.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
