@@ -1,15 +1,13 @@
 export default {
-  onCreateWebpackChain: config => {
-    // Allow CSS imports
-    config.module
-      .rule("scss")
-      .test(/\.css|scss|sass$/)
-      .use("style")
-      .loader("style-loader")
-      .end()
-      .use("css")
-      .loader("css-loader")
-      .end();
+  modifyBundlerConfig: bundlerConfig => {
+    const rules = [
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader", "postcss-loader"]
+      }
+    ];
+    bundlerConfig.module.rules.push(...rules);
+    return bundlerConfig;
   },
   typescript: true
 };

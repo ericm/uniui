@@ -27,12 +27,14 @@ export default function Button(props: ButtonConfig): JSX.Element {
   const theme = React.useContext(CTX);
 
   const onClick = (e: React.MouseEvent) => {
-    let [x, y] = [
-      e.pageX - ref?.current.offsetLeft,
-      e.pageY - ref?.current.offsetTop
-    ];
+    if (ref?.current) {
+      let [x, y] = [
+        e.pageX - ref?.current.offsetLeft,
+        e.pageY - ref?.current.offsetTop
+      ];
 
-    setCoords({ top: y, left: x });
+      setCoords({ top: y, left: x });
+    }
     setRipple(`${style.rippleAnimation} ${style.ripple}`);
     setTimeout(() => setRipple(style.ripple), 500);
 
