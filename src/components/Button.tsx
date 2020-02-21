@@ -5,6 +5,12 @@ import { applyTheme, CTX } from "../theme";
 import * as style from "./styles/Button.css";
 
 export interface ButtonConfig extends Base {
+  /**
+   * Type of the button.
+   * Standard is a 3d effect block element
+   * Flat is a bordered modern button
+   * Borderless is exclusively a ripple element
+   */
   type?: "standard" | "flat" | "borderless";
 }
 
