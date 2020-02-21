@@ -28,10 +28,8 @@ export default function Button(props: ButtonConfig): JSX.Element {
 
   const onClick = (e: React.MouseEvent) => {
     if (ref?.current) {
-      let [x, y] = [
-        e.pageX - ref?.current.offsetLeft,
-        e.pageY - ref?.current.offsetTop
-      ];
+      const rect = e.currentTarget.getBoundingClientRect();
+      let [x, y] = [e.clientX - rect.left, e.clientY - rect.top];
 
       setCoords({ top: y, left: x });
     }

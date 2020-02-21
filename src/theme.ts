@@ -1,5 +1,4 @@
 import * as React from "react";
-
 export interface Theme {
   fontFamily: string;
 
@@ -66,11 +65,13 @@ export const Themes: { [name: string]: Theme } = { lime, limeDark, berry };
 
 export function applyTheme<T extends HTMLElement>(
   theme: Theme,
-  ref: React.MutableRefObject<T>
+  ref: React.MutableRefObject<T | undefined> | undefined
 ) {
-  Object.keys(theme).forEach(key =>
-    ref.current.style.setProperty(`--${key}`, theme[key])
-  );
+  if (ref) {
+    Object.keys(theme).forEach(key =>
+      ref.current?.style.setProperty(`--${key}`, theme[key])
+    );
+  }
 }
 
 export const CTX = React.createContext(Themes.lime);
