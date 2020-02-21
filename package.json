@@ -5,7 +5,7 @@
   "main": "src/index.ts",
   "scripts": {
     "start": "parcel demo/index.html",
-    "build": "parcel build src/index.ts -d lib",
+    "build": "nwb build-react-app",
     "test": "echo \"Error: no test specified\" && exit 1",
     "docz:dev": "docz dev",
     "docz:build": "docz build",
@@ -28,9 +28,12 @@
     "@types/react-dom": "^16.9.5",
     "css-loader": "^3.4.2",
     "docz-plugin-css": "^0.11.0",
+    "nwb": "^0.23.0",
     "parcel": "^1.12.4",
     "postcss-loader": "^3.0.0",
+    "precss": "^4.0.0",
     "style-loader": "^1.1.3",
+    "ts-loader": "^6.2.1",
     "typescript": "^3.7.5"
   }
 }
