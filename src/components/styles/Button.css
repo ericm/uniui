@@ -1,7 +1,6 @@
 @import "./base.css";
 
 :local(.root) {
-  position: relative;
   font-size: 1em;
   width: fit-content;
   outline: 0;
@@ -10,6 +9,7 @@
   background-color: transparent;
   height: calc(2em + 30px);
   font-family: var(--fontFamily);
+  margin: 0.5em 1em;
 }
 :local(.root)::-moz-focus-inner {
   border: 0;

@@ -4,7 +4,7 @@ route: /components/button
 menu: 2. Components
 ---
 
-import UniButton from "../../src/components/Button";
+import { Button } from "../../src";
 import { Playground } from 'docz';
 
 
@@ -12,6 +12,8 @@ import { Playground } from 'docz';
 
 <Playground>
 
-    <UniButton>Button</UniButton>
+    <Button>Button</Button>
+    <Button type="flat">Button</Button>
+    <Button type="borderless">Button</Button>
 
 </Playground>

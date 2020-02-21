@@ -8,7 +8,7 @@
     "removeComments": true,
     "sourceMap": true,
     "jsx": "react",
-    "typeRoots": ["src/index.d.ts", "node_modules/@types"]
+    "typeRoots": ["src/global.d.ts", "node_modules/@types"]
   },
   "include": ["./src/**/*.tsx", "./src/**/*.ts"],
   "exclude": ["node_modules"]

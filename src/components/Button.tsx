@@ -43,16 +43,23 @@ export default function Button(props: ButtonConfig): JSX.Element {
   React.useEffect(() => applyTheme(theme, ref));
 
   return (
-    <button
-      style={props.style}
-      ref={ref}
-      onClick={onClick}
-      className={style.root}
+    <div
+      style={{
+        display:
+          !props.type || props.type === "standard" ? "block" : "inline-block"
+      }}
     >
-      <div className={style.container}>
-        <div className={buttonStyle}>{props.children}</div>
-        <div style={coords} className={ripple}></div>
-      </div>
-    </button>
+      <button
+        style={props.style}
+        ref={ref}
+        onClick={onClick}
+        className={style.root}
+      >
+        <div className={style.container}>
+          <div className={buttonStyle}>{props.children}</div>
+          <div style={coords} className={ripple}></div>
+        </div>
+      </button>
+    </div>
   );
 }
