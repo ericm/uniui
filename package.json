@@ -1,9 +1,8 @@
 {
-  "name": "uniui",
+  "name": "react-uniui",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
-  "module": "dist/index.module.js",
   "source": "src/index.ts",
   "scripts": {
     "start": "parcel demo/index.html",

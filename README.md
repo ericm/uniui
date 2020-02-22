@@ -1,9 +1,3 @@
----
-name: 1. Quick Start
-route: /
-order: 1
----
-
 # Uniui
 
 Uniui is a React Typescript UI library currently in beta.
@@ -31,4 +25,4 @@ Or individually:
     import { Button, Selection } from "react-uniui";
 ```
 
-See the [Component API docs](components/button) for further reference
+See the [Component API docs](http://uniui.moynihan.io/components/button) for further reference
