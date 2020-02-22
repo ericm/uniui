@@ -1,0 +1,9 @@
+version: "3"
+
+services: 
+  web:
+    image: nginx
+    volumes: 
+     - .docz/dist:/usr/share/nginx/html
+    ports: 
+     - "8889:80"

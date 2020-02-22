@@ -15,7 +15,7 @@ indent_size = 2
 [lib/**.js]
 indent_style = space
 indent_size = 2
-[{*.css,*.html}]
+[{*.css,*.html,*.yml}]
 charset = utf-8
 indent_style = space
 indent_size = 2
