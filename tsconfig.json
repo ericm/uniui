@@ -6,6 +6,8 @@
     "noImplicitAny": false,
     "strictNullChecks": false,
     "removeComments": true,
+    "declaration": true,
+    "declarationMap": true,
     "sourceMap": true,
     "jsx": "react",
     "typeRoots": ["src/global.d.ts", "node_modules/@types"]

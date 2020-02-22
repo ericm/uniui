@@ -1,28 +1,24 @@
 module.exports = {
-  type: "react-component",
+  type: 'react-component',
   npm: {
     esModules: true,
-    umd: {
-      global: "ReactNwbTest",
-      externals: {
-        react: "React"
-      }
-    }
+    umd: false,
   },
   webpack: {
-    extra: {
-      entry: "./src/index",
-      resolve: {
-        extensions: [".ts", ".tsx", ".js", ".jsx"]
-      },
-      module: {
-        rules: [{ test: /\.tsx$/, loader: "ts-loader" }]
-      }
+    config(config) {
+      config.resolve.extensions = ['.ts', '.tsx', '.js', '.jsx']
+      config.module.rules.push({
+        'test': /\.tsx?$/,
+        'loader': 'ts-loader',
+      },{
+        test: /\.css$/,
+        use: [
+          "postcss-loader",
+          "css-loader", // translates CSS into CommonJS
+        ]
+    })
+
+      return config
     },
-    rules: {
-      postcss: {
-        plugins: [require("precss")(), require("autoprefixer")()]
-      }
-    }
-  }
-};
+  },
+}
