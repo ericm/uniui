@@ -1,0 +1,6 @@
+src
+node_modules
+demo
+.docz
+.cache
+.parcel-cache
