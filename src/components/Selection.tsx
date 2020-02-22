@@ -12,11 +12,29 @@ export interface SelectionConfig extends Base {
    * Checkbox and switch are skinned checkboxes
    */
   type: "radio" | "checkbox" | "switch";
+  /**
+   * name prop for form usage
+   */
   name?: string;
+  /**
+   * value prop for form usage
+   */
   value?: string;
+  /**
+   * Initial checked state
+   */
   checked?: boolean;
+  /**
+   * Label text next to selection
+   */
   label?: string;
+  /**
+   * onChange event to be passed to the target
+   */
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  /**
+   * function called when checked state is changed
+   */
   onChangeValue?: (state: boolean) => void;
 }
 export default function Selection(props: SelectionConfig): React.ReactElement {
