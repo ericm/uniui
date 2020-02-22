@@ -1,7 +1,7 @@
 @import "./base.css";
 
-.root {
-  margin: 0;
+:local(.root) {
+  margin: .5em 1em;
   padding: 0;
   font-size: 1em;
   height: 2em;
@@ -10,7 +10,7 @@
   overflow: hidden;
   font-family: var(--fontFamily);
 }
-.root input {
+:local(.root) input {
   border: var(--border-size);
   display: block;
   border-bottom: var(--border-size) solid var(--borderColour);
@@ -23,15 +23,15 @@
   transition: all 80ms ease-in-out;
   padding-left: 0.2em;
 }
-.root input:focus {
+:local(.root) input:focus {
   outline: none;
   background: var(--input-back);
 }
-.root input::selection {
+:local(.root) input::selection {
   background: var(--secondaryBackgroundColour);
   color: var(--backgroundColour);
 }
-.sub {
+:local(.sub) {
   position: relative;
   display: block;
   color: var(--borderColour);
@@ -41,7 +41,7 @@
   padding-left: 0.2em;
 }
 
-.subFg {
+:local(.subFg) {
   font-size: 1em;
   top: 0.5em;
 }

@@ -5,9 +5,21 @@ import { applyTheme, CTX } from "../theme";
 import * as style from "./styles/TextField.css";
 
 export interface InputConfig extends Base {
+  /**
+   * Value of the input field
+   */
   value?: string;
+  /**
+   * Title of the field
+   */
   subtitle?: string;
+  /**
+   * onChange event on the target
+   */
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  /**
+   * Called when the value of the input text changes
+   */
   onChangeText?: (s: string) => void;
 }
 export default function Input(props: InputConfig): JSX.Element {
