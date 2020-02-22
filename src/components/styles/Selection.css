@@ -1,21 +1,21 @@
 @import "./base.css";
 
-.root {
+:local(.root) {
   padding-left: 0.5em;
   font-family: var(--fontFamily);
   font-size: 2em;
 }
-.root * {
+:local(.root) * {
   cursor: pointer;
 }
-.root input {
+:local(.root) input {
   display: none;
 }
-.root label {
+:local(.root) label {
   color: var(--textColour);
   font-smooth: always;
 }
-.root span {
+:local(.root) span {
   font-weight: 200;
   font-size: 0.6em;
   display: inline-block;
@@ -23,7 +23,7 @@
   top: -0.3em;
   user-select: none;
 }
-.select {
+:local(.select) {
   vertical-align: middle;
   display: inline-block;
   padding: 0;
@@ -32,17 +32,17 @@
   margin-right: 0.3em;
 }
 
-.checkbox {
+:local(.checkbox) {
   border: 0.05em solid var(--borderColour);
   width: 0.4em;
   height: 0.4em;
   border-radius: 0.15em;
 }
-.checkbox div {
+:local(.checkbox) div {
   width: 0;
   height: 0;
 }
-.checkbox div:before {
+:local(.checkbox) div:before {
   content: "";
   position: relative;
   display: block;
@@ -53,7 +53,7 @@
   left: 0.05em;
   transform: rotate(-45deg);
 }
-.checkbox.checked div:before {
+:local(.checkbox):local(.checked) div:before {
   animation: checkAnim 0.1s linear;
 }
 @keyframes checkAnim {
@@ -78,7 +78,7 @@
   }
 }
 
-.checkbox div:after {
+:local(.checkbox) div:after {
   content: "";
   position: relative;
   display: block;
@@ -89,34 +89,34 @@
   left: 0.21em;
   transform: rotate(45deg);
 }
-.checkbox.checked div:after {
+:local(.checkbox):local(.checked) div:after {
   animation: checkAnim2 0.2s linear;
 }
-.checkbox.unchecked div {
+:local(.checkbox):local(.unchecked) div {
   opacity: 0;
 }
-.radio div {
+:local(.radio) div {
   border: var(--backgroundColour) solid 0.1em;
   border-radius: 100%;
   width: 0.2em;
   margin: 0.05em 0.05em;
   height: 0.2em;
 }
-.radio {
+:local(.radio) {
   border-radius: 100%;
   background-color: var(--borderColour);
   width: 0.5em;
   height: 0.5em;
 }
-.radio.unchecked div {
+:local(.radio):local(.unchecked) div {
   border-color: transparent;
   background-color: var(--backgroundColour);
 }
-.radio.checked div {
+:local(.radio):local(.checked) div {
   animation: radioAnim 0.5s ease-in-out;
 }
 
-.switch {
+:local(.switch) {
   border-radius: 0.3em;
   background-color: var(--backgroundColour);
   border: 0.05em solid var(--accentColour);
@@ -126,7 +126,7 @@
   transition: all 0.2s ease-in-out;
 }
 
-.switch div {
+:local(.switch) div {
   position: relative;
   height: 0.3em;
   width: 0.3em;
@@ -137,11 +137,11 @@
   left: 0;
 }
 
-.switch.checked {
+:local(.switch):local(.checked) {
   background-color: var(--secondaryBackgroundColour);
   border-color: var(--borderColour);
 }
-.switch.checked div {
+:local(.switch):local(.checked) div {
   background-color: var(--borderColour);
   left: 0.4em;
 }
