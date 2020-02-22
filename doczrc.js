@@ -9,5 +9,8 @@ export default {
     bundlerConfig.module.rules.push(...rules);
     return bundlerConfig;
   },
-  typescript: true
+  typescript: true,
+  themeConfig: {
+    showPlaygroundEditor: true
+  }
 };

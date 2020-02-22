@@ -14,7 +14,7 @@ export interface ButtonConfig extends Base {
   type?: "standard" | "flat" | "borderless";
 }
 
-export default function Button(props: ButtonConfig): JSX.Element {
+export default function Button(props: ButtonConfig): React.ReactElement {
   const [ripple, setRipple] = React.useState(style.ripple),
     [coords, setCoords] = React.useState({ top: 0, left: 0 }),
     ref = React.useRef<HTMLButtonElement>();

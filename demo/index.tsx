@@ -8,7 +8,7 @@ const textChange = (s: string) => console.log(s);
 
 render(
   <div>
-    <Uniui.Theme value={lime}>
+    <Uniui.Themer value={lime}>
       <article>
         <h1>Button Raised:</h1>
         <Uniui.Button>Button</Uniui.Button>
@@ -21,7 +21,7 @@ render(
         <h1>Button Borderless:</h1>
         <Uniui.Button type="borderless">Button</Uniui.Button>
       </article>
-    </Uniui.Theme>
+    </Uniui.Themer>
     <article>
       <h1>Text Field:</h1>
       <Uniui.TextField

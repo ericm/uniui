@@ -6,6 +6,11 @@ import { SelectionContext } from "./SelectionGroup";
 import * as style from "./styles/Selection.css";
 
 export interface SelectionConfig extends Base {
+  /**
+   * Type of the selection.
+   * Radio can only be selected one at a time
+   * Checkbox and switch are skinned checkboxes
+   */
   type: "radio" | "checkbox" | "switch";
   name?: string;
   value?: string;
