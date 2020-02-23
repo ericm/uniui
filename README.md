@@ -1,6 +1,6 @@
-# Uniui
+# [Uniui](http://uniui.moynihan.io)
 
-Uniui is a React Typescript UI library currently in beta.
+[Uniui](http://uniui.moynihan.io) is a React Typescript UI library currently in beta.
 
 ## Installation
 
@@ -25,4 +25,14 @@ Or individually:
     import { Button, Selection } from "react-uniui";
 ```
 
-See the [Component API docs](http://uniui.moynihan.io/components/button) for further reference
+## Components Preview
+### Buttons
+![button](img/button.png)
+```tsx
+<Button>Button</Button>
+<Button type="flat">Button</Button>
+<Button type="borderless">Button</Button>
+```
+
+
+See the [Component API docs](http://uniui.moynihan.io) for further reference

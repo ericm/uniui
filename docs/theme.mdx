@@ -1,0 +1,115 @@
+---
+name: 3. Theming
+route: /theming
+menu: 3. Theming
+---
+
+import { Button, Themer, Theme, Themes } from "../src/";
+import { lime } from "../src/theme";
+import { Playground, Props } from 'docz';
+
+
+# Themer Component
+
+The Themer component uses context to provide a certain theme to it's child compoenents.
+
+To import the component, do:
+```tsx
+    import { Themer } from "react-uniui";
+```
+
+The themer then requires a `Theme` to be passed in as a value.
+
+To import a premade theme, do:
+```tsx
+    import { Themes } from "react-uniui";
+```
+The current themes available are `lime` and `berry`
+
+## Basic Usage
+
+<Playground>
+
+    <Themer value={Themes.lime}>
+        <Button>Button</Button>
+        <Button type="flat">Button</Button>
+        <Button type="borderless">Button</Button>
+    </Themer>
+
+    <Themer value={Themes.berry}>
+        <Button>Button</Button>
+        <Button type="flat">Button</Button>
+        <Button type="borderless">Button</Button>
+    </Themer>
+
+</Playground>
+
+## Advanced use cases
+Since context can be stacked, you can provide themes to a subcollection of components:
+
+<Playground>
+
+    <Themer value={Themes.lime}>
+        <Button>Button</Button>
+        <Themer value={Themes.berry}>
+            <Button>Button</Button>
+        </Themer>
+        <Button>Button</Button>
+    </Themer>
+
+</Playground>
+
+## Custom Themes
+The current Theme API requires an object that will be have the following attributes:
+```tsx
+interface Theme {
+  fontFamily: string;
+
+  borderColour: string;
+
+  backgroundColour: string;
+  textColour: string;
+  secondaryBackgroundColour: string;
+  secondaryTextColour: string;
+
+  buttonRipple: string;
+  buttonDarkRipple: string;
+
+  accentColour: string;
+}
+```
+
+If you're using typescript, you can import the `Theme` interface from uniui
+```tsx
+    import { Theme } from "react-uniui"
+```
+
+Then you can make your own theme:
+
+```tsx
+const lime: Theme = {
+  fontFamily: '"Open Sans", sans-serif',
+
+  borderColour: "#16a085",
+
+  backgroundColour: "#fff",
+  textColour: "#111",
+  secondaryBackgroundColour: "#1abc9c",
+  secondaryTextColour: "#fff",
+
+  buttonRipple: "rgba(255, 255, 255, 0.4)",
+  buttonDarkRipple: "rgba(0, 0, 0, 0.3)",
+
+  accentColour: "#707171"
+};
+```
+
+<Playground>
+
+    <Themer value={lime}>
+        <Button>Button</Button>
+        <Button type="flat">Button</Button>
+        <Button type="borderless">Button</Button>
+    </Themer>
+
+</Playground>
