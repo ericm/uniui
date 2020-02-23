@@ -7,3 +7,5 @@ services:
      - .docz/dist:/usr/share/nginx/html
     ports: 
      - "8889:80"
+    environment:
+     - NGINX_HOST=uniui.moynihan.io
