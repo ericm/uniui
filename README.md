@@ -35,15 +35,6 @@ Or individually:
 ```
 [See more in the docs](http://uniui.moynihan.io/components/button)
 
-### Buttons
-![button](img/button.png)
-```tsx
-<Button>Button</Button>
-<Button type="flat">Button</Button>
-<Button type="borderless">Button</Button>
-```
-[See more in the docs](http://uniui.moynihan.io/components/button)
-
 ### Radio Menu
 ![button](img/radio.png)
 ```tsx
