@@ -3,3 +3,4 @@ dist
 .cache
 .docz
 .parcel-cache
+lib

@@ -2,11 +2,11 @@
   "name": "react-uniui",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
+  "main": "lib/index.js",
   "source": "src/index.ts",
   "scripts": {
     "start": "parcel demo/index.html",
-    "build": "parcel build src/index.ts",
+    "build": "webpack -p; cd src/components/styles && rm *.css.json",
     "prepublishOnly": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "docz:dev": "docz dev",
@@ -31,11 +31,13 @@
     "css-loader": "^3.4.2",
     "docz-plugin-css": "^0.11.0",
     "nwb": "^0.23.0",
-    "parcel": "^1.12.4",
+    "parcel": "^2.0.0-nightly.119",
     "postcss-loader": "^3.0.0",
     "precss": "^4.0.0",
     "style-loader": "^1.1.3",
     "ts-loader": "^6.2.1",
-    "typescript": "^3.7.5"
+    "typescript": "^3.7.5",
+    "webpack": "^4.41.6",
+    "webpack-cli": "^3.3.11"
   }
 }
