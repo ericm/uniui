@@ -1,9 +1,8 @@
 {
   "name": "react-uniui",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "main": "lib/index.js",
-  "source": "src/index.ts",
   "scripts": {
     "start": "parcel demo/index.html",
     "build": "webpack -p; cd src/components/styles && rm *.css.json",
@@ -26,8 +25,11 @@
     "styled-components": "^5.0.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
     "@types/react": "^16.9.19",
     "@types/react-dom": "^16.9.5",
+    "babel-loader": "^8.0.6",
     "css-loader": "^3.4.2",
     "docz-plugin-css": "^0.11.0",
     "nwb": "^0.23.0",
@@ -38,6 +40,7 @@
     "ts-loader": "^6.2.1",
     "typescript": "^3.7.5",
     "webpack": "^4.41.6",
-    "webpack-cli": "^3.3.11"
+    "webpack-cli": "^3.3.11",
+    "webpack-node-externals": "^1.7.2"
   }
 }
