@@ -2,11 +2,7 @@ import * as React from "react";
 import { Base } from "./base";
 import { CTX } from "../theme";
 
-import styled, {
-  keyframes,
-  withTheme,
-  ThemedStyledFunction
-} from "styled-components";
+import styled, { keyframes, css } from "styled-components";
 import { Theme } from "..";
 
 const Root = styled.button<{ theme: Theme; prop: ButtonConfig }>`
@@ -30,13 +26,6 @@ const Root = styled.button<{ theme: Theme; prop: ButtonConfig }>`
     border: 0;
   }
   &:focus {
-    outline: 0;
-  }
-  &:active {
-    border-right: 0 solid ${({ theme }) => theme.borderColour};
-    border-bottom: 0 solid ${({ theme }) => theme.borderColour};
-    margin-left: var(--border-size);
-    margin-top: var(--border-size);
     outline: 0;
   }
 `;
@@ -95,27 +84,26 @@ const ButtonStyled = styled.div<{ theme: Theme; prop: ButtonConfig }>`
   }}
 `;
 
-const rippleKeys = () => keyframes`
+const rippleKeys = keyframes`
     100% {
       transform: scale(40);
       opacity: 0;
     }
   `;
 
+const rippleAnim = css`
+    animation ${rippleKeys} 0.5s linear;
+`;
 let Ripple = styled.div<{ active: boolean; props: ButtonConfig; theme: Theme }>`
   width: 5px;
   height: 5px;
-  border-radius: 100%;
+  border-radius: 1000px;
   transform: scale(0);
   opacity: 1;
   position: absolute;
   z-index: 100;
   cursor: pointer;
-  ${({ active }) =>
-    active &&
-    `
-      animation: ${rippleKeys} 0.5s linear;
-    `}
+  ${({ active }) => active && rippleAnim}
   background-color: ${({ props, theme }) => {
     if (!props.type || props.type === "standard") {
       return theme.buttonRipple;
@@ -124,6 +112,7 @@ let Ripple = styled.div<{ active: boolean; props: ButtonConfig; theme: Theme }>`
     }
   }}
 `;
+
 export interface ButtonConfig extends Base {
   /**
    * Type of the button.
@@ -142,12 +131,10 @@ export default function Button(props: ButtonConfig): React.ReactElement {
   const theme = React.useContext(CTX);
 
   const onClick = (e: React.MouseEvent) => {
-    if (ref?.current) {
-      const rect = e.currentTarget.getBoundingClientRect();
-      let [x, y] = [e.clientX - rect.left, e.clientY - rect.top];
+    const rect = e.currentTarget.getBoundingClientRect();
+    let [x, y] = [e.clientX - rect.left, e.clientY - rect.top];
 
-      setCoords({ top: y, left: x });
-    }
+    setCoords({ top: y, left: x });
     setRipple(true);
     setTimeout(() => setRipple(false), 500);
 
