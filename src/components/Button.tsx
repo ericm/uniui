@@ -2,7 +2,11 @@ import * as React from "react";
 import { Base } from "./base";
 import { CTX } from "../theme";
 
-import styled, { keyframes } from "styled-components";
+import styled, {
+  keyframes,
+  withTheme,
+  ThemedStyledFunction
+} from "styled-components";
 
 export interface ButtonConfig extends Base {
   /**
@@ -122,7 +126,10 @@ export default function Button(props: ButtonConfig): React.ReactElement {
     }
   `;
 
-  let Ripple = styled.div`
+  interface ripProps {
+    active: boolean;
+  }
+  let Ripple = styled.div<ripProps>`
     width: 5px;
     height: 5px;
     border-radius: 100%;
@@ -131,7 +138,8 @@ export default function Button(props: ButtonConfig): React.ReactElement {
     position: absolute;
     z-index: 100;
     cursor: pointer;
-    ${ripple &&
+    ${({ active }) =>
+      active &&
       `
       animation: ${rippleKeys} 0.5s linear;
     `}
@@ -156,7 +164,7 @@ export default function Button(props: ButtonConfig): React.ReactElement {
       <Root ref={ref} style={props.style} onClick={onClick}>
         <Container>
           <ButtonStyled>{props.children}</ButtonStyled>
-          <Ripple style={coords} />
+          <Ripple active={ripple} style={coords} />
         </Container>
       </Root>
     </div>
