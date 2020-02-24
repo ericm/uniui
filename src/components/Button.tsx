@@ -7,7 +7,123 @@ import styled, {
   withTheme,
   ThemedStyledFunction
 } from "styled-components";
+import { Theme } from "..";
 
+const Root = styled.button<{ theme: Theme; prop: ButtonConfig }>`
+  font-size: 1em;
+  width: fit-content;
+  outline: 0;
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+  height: calc(2em + 30px);
+  font-family: ${({ theme }) => theme.fontFamily};
+  margin: 0.5em 1em;
+  display: ${({ prop }) => {
+    if (!prop.type || prop.type === "standard") {
+      return "block";
+    } else {
+      return "inline-block";
+    }
+  }};
+  &::-moz-focus-inner {
+    border: 0;
+  }
+  &:focus {
+    outline: 0;
+  }
+  &:active {
+    border-right: 0 solid ${({ theme }) => theme.borderColour};
+    border-bottom: 0 solid ${({ theme }) => theme.borderColour};
+    margin-left: var(--border-size);
+    margin-top: var(--border-size);
+    outline: 0;
+  }
+`;
+const Container = styled.div`
+  overflow: hidden;
+  width: min-content;
+  height: min-content;
+  margin: 0;
+  border-radius: var(--border-radius);
+  position: relative;
+  padding: 0;
+`;
+
+const ButtonStyled = styled.div<{ theme: Theme; prop: ButtonConfig }>`
+  margin: 0;
+  cursor: pointer;
+  outline: 0;
+  width: min-content;
+  padding: 0.25em 0.5em;
+  border-radius: var(--border-radius);
+
+  ${({ theme, prop }) => {
+    switch (prop.type) {
+      case "flat":
+        return `
+          border: var(--border-size) solid ${theme.borderColour};
+          color: ${theme.borderColour};
+          background-color: transparent;
+          transition: all 80ms ease-out;
+          &:active {
+            filter: blur(1px);
+            transform: scale(0.95);
+          }
+        `;
+      case "borderless":
+        return `
+          color: ${theme.borderColour};
+          background-color: transparent;
+        `;
+      default:
+        return `
+          border-right: var(--border-size) solid ${theme.borderColour};
+          border-bottom: var(--border-size) solid ${theme.borderColour};
+          background-color: ${theme.secondaryBackgroundColour};
+          color: ${theme.secondaryTextColour};
+          transition: all 150ms ease-in-out;
+          &:active {
+            border-right: 0 solid ${theme.borderColour};
+            border-bottom: 0 solid ${theme.borderColour};
+            margin-left: var(--border-size);
+            margin-top: var(--border-size);
+            outline: 0;
+          }
+        `;
+    }
+  }}
+`;
+
+const rippleKeys = () => keyframes`
+    100% {
+      transform: scale(40);
+      opacity: 0;
+    }
+  `;
+
+let Ripple = styled.div<{ active: boolean; props: ButtonConfig; theme: Theme }>`
+  width: 5px;
+  height: 5px;
+  border-radius: 100%;
+  transform: scale(0);
+  opacity: 1;
+  position: absolute;
+  z-index: 100;
+  cursor: pointer;
+  ${({ active }) =>
+    active &&
+    `
+      animation: ${rippleKeys} 0.5s linear;
+    `}
+  background-color: ${({ props, theme }) => {
+    if (!props.type || props.type === "standard") {
+      return theme.buttonRipple;
+    } else {
+      return theme.buttonDarkRipple;
+    }
+  }}
+`;
 export interface ButtonConfig extends Base {
   /**
    * Type of the button.
@@ -39,121 +155,6 @@ export default function Button(props: ButtonConfig): React.ReactElement {
     if (props.onClick) props.onClick(e);
   };
 
-  const Root = styled.button`
-    font-size: 1em;
-    width: fit-content;
-    outline: 0;
-    padding: 0;
-    border: 0;
-    background-color: transparent;
-    height: calc(2em + 30px);
-    font-family: ${theme.fontFamily};
-    margin: 0.5em 1em;
-    display: ${!props.type || props.type === "standard"
-      ? "block"
-      : "inline-block"};
-    &::-moz-focus-inner {
-      border: 0;
-    }
-    &:focus {
-      outline: 0;
-    }
-    &:active {
-      border-right: 0 solid ${theme.borderColour};
-      border-bottom: 0 solid ${theme.borderColour};
-      margin-left: var(--border-size);
-      margin-top: var(--border-size);
-      outline: 0;
-    }
-  `;
-  const Container = styled.div`
-    overflow: hidden;
-    width: min-content;
-    height: min-content;
-    margin: 0;
-    border-radius: var(--border-radius);
-    position: relative;
-    padding: 0;
-  `;
-  let ButtonStyled = styled.div`
-    margin: 0;
-    cursor: pointer;
-    outline: 0;
-    width: min-content;
-    padding: 0.25em 0.5em;
-    border-radius: var(--border-radius);
-  `;
-  switch (props.type) {
-    case "flat":
-      ButtonStyled = styled(ButtonStyled)`
-        border: var(--border-size) solid ${theme.borderColour};
-        color: ${theme.borderColour};
-        background-color: transparent;
-        transition: all 80ms ease-out;
-        &:active {
-          filter: blur(1px);
-          transform: scale(0.95);
-        }
-      `;
-      break;
-    case "borderless":
-      ButtonStyled = styled(ButtonStyled)`
-        color: ${theme.borderColour};
-        background-color: transparent;
-      `;
-      break;
-    default:
-      ButtonStyled = styled(ButtonStyled)`
-        border-right: var(--border-size) solid ${theme.borderColour};
-        border-bottom: var(--border-size) solid ${theme.borderColour};
-        background-color: ${theme.secondaryBackgroundColour};
-        color: ${theme.secondaryTextColour};
-        transition: all 150ms ease-in-out;
-        &:active {
-          border-right: 0 solid ${theme.borderColour};
-          border-bottom: 0 solid ${theme.borderColour};
-          margin-left: var(--border-size);
-          margin-top: var(--border-size);
-          outline: 0;
-        }
-      `;
-  }
-
-  const rippleKeys = keyframes`
-    100% {
-      transform: scale(40);
-      opacity: 0;
-    }
-  `;
-
-  interface ripProps {
-    active: boolean;
-  }
-  let Ripple = styled.div<ripProps>`
-    width: 5px;
-    height: 5px;
-    border-radius: 100%;
-    transform: scale(0);
-    opacity: 1;
-    position: absolute;
-    z-index: 100;
-    cursor: pointer;
-    ${({ active }) =>
-      active &&
-      `
-      animation: ${rippleKeys} 0.5s linear;
-    `}
-  `;
-  if (!props.type || props.type === "standard") {
-    Ripple = styled(Ripple)`
-      background-color: ${theme.buttonRipple};
-    `;
-  } else {
-    Ripple = styled(Ripple)`
-      background-color: ${theme.buttonDarkRipple};
-    `;
-  }
-
   return (
     <div
       style={{
@@ -161,10 +162,18 @@ export default function Button(props: ButtonConfig): React.ReactElement {
           !props.type || props.type === "standard" ? "block" : "inline-block"
       }}
     >
-      <Root ref={ref} style={props.style} onClick={onClick}>
+      <Root
+        theme={theme}
+        prop={props}
+        ref={ref}
+        style={props.style}
+        onClick={onClick}
+      >
         <Container>
-          <ButtonStyled>{props.children}</ButtonStyled>
-          <Ripple active={ripple} style={coords} />
+          <ButtonStyled prop={props} theme={theme}>
+            {props.children}
+          </ButtonStyled>
+          <Ripple props={props} theme={theme} active={ripple} style={coords} />
         </Container>
       </Root>
     </div>
