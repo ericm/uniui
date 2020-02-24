@@ -4,6 +4,7 @@ import { CTX } from "../theme";
 
 import styled, { keyframes, css } from "styled-components";
 import { Theme } from "..";
+import bstyle from "./base.styles";
 
 const Root = styled.button<{ theme: Theme; prop: ButtonConfig }>`
   font-size: 1em;
@@ -34,7 +35,7 @@ const Container = styled.div`
   width: min-content;
   height: min-content;
   margin: 0;
-  border-radius: var(--border-radius);
+  border-radius: ${bstyle.borderRadius};
   position: relative;
   padding: 0;
 `;
@@ -45,13 +46,13 @@ const ButtonStyled = styled.div<{ theme: Theme; prop: ButtonConfig }>`
   outline: 0;
   width: min-content;
   padding: 0.25em 0.5em;
-  border-radius: var(--border-radius);
+  border-radius: ${bstyle.borderRadius};
 
   ${({ theme, prop }) => {
     switch (prop.type) {
       case "flat":
         return `
-          border: var(--border-size) solid ${theme.borderColour};
+          border: ${bstyle.borderSize} solid ${theme.borderColour};
           color: ${theme.borderColour};
           background-color: transparent;
           transition: all 80ms ease-out;
@@ -67,16 +68,16 @@ const ButtonStyled = styled.div<{ theme: Theme; prop: ButtonConfig }>`
         `;
       default:
         return `
-          border-right: var(--border-size) solid ${theme.borderColour};
-          border-bottom: var(--border-size) solid ${theme.borderColour};
+          border-right: ${bstyle.borderSize} solid ${theme.borderColour};
+          border-bottom: ${bstyle.borderSize} solid ${theme.borderColour};
           background-color: ${theme.secondaryBackgroundColour};
           color: ${theme.secondaryTextColour};
           transition: all 150ms ease-in-out;
           &:active {
             border-right: 0 solid ${theme.borderColour};
             border-bottom: 0 solid ${theme.borderColour};
-            margin-left: var(--border-size);
-            margin-top: var(--border-size);
+            margin-left: ${bstyle.borderSize};
+            margin-top: ${bstyle.borderSize};
             outline: 0;
           }
         `;
