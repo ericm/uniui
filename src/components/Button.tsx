@@ -1,10 +1,8 @@
 import * as React from "react";
 import { Base } from "./base";
-import { applyTheme, CTX } from "../theme";
+import { CTX } from "../theme";
 
-import * as style from "./styles/Button.css";
-
-import styled, { StyledComponent } from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 export interface ButtonConfig extends Base {
   /**
@@ -17,7 +15,7 @@ export interface ButtonConfig extends Base {
 }
 
 export default function Button(props: ButtonConfig): React.ReactElement {
-  const [ripple, setRipple] = React.useState(style.ripple),
+  const [ripple, setRipple] = React.useState(false),
     [coords, setCoords] = React.useState({ top: 0, left: 0 }),
     ref = React.useRef<HTMLButtonElement>();
 
@@ -30,8 +28,8 @@ export default function Button(props: ButtonConfig): React.ReactElement {
 
       setCoords({ top: y, left: x });
     }
-    setRipple(`${style.rippleAnimation} ${style.ripple}`);
-    setTimeout(() => setRipple(style.ripple), 500);
+    setRipple(true);
+    setTimeout(() => setRipple(false), 500);
 
     // Passthrough event to user defined onClick
     if (props.onClick) props.onClick(e);
@@ -82,10 +80,28 @@ export default function Button(props: ButtonConfig): React.ReactElement {
     border-radius: var(--border-radius);
   `;
   switch (props.type) {
+    case "flat":
+      ButtonStyled = styled(ButtonStyled)`
+        border: var(--border-size) solid ${theme.borderColour};
+        color: ${theme.borderColour};
+        background-color: transparent;
+        transition: all 80ms ease-out;
+        &:active {
+          filter: blur(1px);
+          transform: scale(0.95);
+        }
+      `;
+      break;
+    case "borderless":
+      ButtonStyled = styled(ButtonStyled)`
+        color: ${theme.borderColour};
+        background-color: transparent;
+      `;
+      break;
     default:
       ButtonStyled = styled(ButtonStyled)`
-        border-right: var(--border-size) solid var(--borderColour);
-        border-bottom: var(--border-size) solid var(--borderColour);
+        border-right: var(--border-size) solid ${theme.borderColour};
+        border-bottom: var(--border-size) solid ${theme.borderColour};
         background-color: ${theme.secondaryBackgroundColour};
         color: ${theme.secondaryTextColour};
         transition: all 150ms ease-in-out;
@@ -99,6 +115,37 @@ export default function Button(props: ButtonConfig): React.ReactElement {
       `;
   }
 
+  const rippleKeys = keyframes`
+    100% {
+      transform: scale(40);
+      opacity: 0;
+    }
+  `;
+
+  let Ripple = styled.div`
+    width: 5px;
+    height: 5px;
+    border-radius: 100%;
+    transform: scale(0);
+    opacity: 1;
+    position: absolute;
+    z-index: 100;
+    cursor: pointer;
+    ${ripple &&
+      `
+      animation: ${rippleKeys} 0.5s linear;
+    `}
+  `;
+  if (!props.type || props.type === "standard") {
+    Ripple = styled(Ripple)`
+      background-color: ${theme.buttonRipple};
+    `;
+  } else {
+    Ripple = styled(Ripple)`
+      background-color: ${theme.buttonDarkRipple};
+    `;
+  }
+
   return (
     <div
       style={{
@@ -106,10 +153,10 @@ export default function Button(props: ButtonConfig): React.ReactElement {
           !props.type || props.type === "standard" ? "block" : "inline-block"
       }}
     >
-      <Root style={props.style} onClick={onClick}>
+      <Root ref={ref} style={props.style} onClick={onClick}>
         <Container>
-          <div className={buttonStyle}>{props.children}</div>
-          <div style={coords} className={ripple}></div>
+          <ButtonStyled>{props.children}</ButtonStyled>
+          <Ripple style={coords} />
         </Container>
       </Root>
     </div>
