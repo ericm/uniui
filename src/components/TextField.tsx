@@ -1,8 +1,7 @@
 import * as React from "react";
 import { Base } from "./base";
-import { applyTheme, CTX } from "../theme";
+import { CTX } from "../theme";
 
-import * as style from "./styles/TextField.css";
 import styled from "styled-components";
 import bstyle from "./base.styles";
 import { Theme } from "..";
@@ -16,6 +15,43 @@ const Root = styled.div<{ theme: Theme }>`
   width: auto;
   overflow: hidden;
   font-family: ${({ theme }) => theme.fontFamily};
+`;
+const Input = styled.input<{ theme: Theme }>`
+  border: ${bstyle.borderSize};
+  display: block;
+  border-bottom: ${bstyle.borderSize} solid ${({ theme }) => theme.borderColour};
+  color: ${({ theme }) => theme.textColour};
+  background: transparent;
+  position: absolute;
+  bottom: 0;
+  width: 12em;
+  font-size: 1em;
+  transition: all 80ms ease-in-out;
+  padding-left: 0.2em;
+  &:focus {
+    outline: none;
+    background: ${bstyle.inputBack};
+  }
+  &::selection {
+    background: ${({ theme }) => theme.secondaryBackgroundColour};
+    color: ${({ theme }) => theme.backgroundColour};
+  }
+`;
+
+const Sub = styled.span<{ theme: Theme; state: boolean }>`
+  position: relative;
+  display: block;
+  color: ${({ theme }) => theme.borderColour};
+  font-size: 0.5em;
+  transition: all 80ms ease-in-out;
+  top: 0;
+  padding-left: 0.2em;
+  ${({ state }) =>
+    state &&
+    `
+      font-size: 1em;
+      top: 0.5em;
+  `}
 `;
 export interface InputConfig extends Base {
   /**
@@ -35,17 +71,17 @@ export interface InputConfig extends Base {
    */
   onChangeText?: (s: string) => void;
 }
-export default function Input(props: InputConfig): JSX.Element {
+export default function(props: InputConfig): JSX.Element {
   const [value, setValue] = React.useState(props.value ?? ""),
-    [subState, setSubState] = React.useState(style.sub),
+    [subState, setSubState] = React.useState(false),
     onChangeText = props.onChangeText,
     ref = React.useRef<HTMLDivElement>();
 
   const setSub = () => {
-    if (value.length > 0 && subState !== style.sub) {
-      setSubState(style.sub);
-    } else if (value.length === 0 && subState === style.sub) {
-      setSubState(`${style.sub} ${style.subFg}`);
+    if (value.length > 0 && subState) {
+      setSubState(false);
+    } else if (value.length === 0 && !subState) {
+      setSubState(true);
     }
   };
   React.useEffect(setSub, [value]);
@@ -59,17 +95,18 @@ export default function Input(props: InputConfig): JSX.Element {
   };
 
   const theme = React.useContext(CTX);
-  React.useEffect(() => applyTheme(theme, ref));
 
   return (
-    <div ref={ref} className={style.root} style={props.style}>
+    <Root theme={theme} style={props.style}>
       {(() =>
         props.subtitle ? (
-          <span className={subState}>{props.subtitle}</span>
+          <Sub state={subState} theme={theme}>
+            {props.subtitle}
+          </Sub>
         ) : null)()}
-      <div className={style.wrapper}>
-        <input onChange={onChange} value={value}></input>
+      <div>
+        <Input theme={theme} onChange={onChange} value={value}></Input>
       </div>
-    </div>
+    </Root>
   );
 }
