@@ -3,7 +3,20 @@ import { Base } from "./base";
 import { applyTheme, CTX } from "../theme";
 
 import * as style from "./styles/TextField.css";
+import styled from "styled-components";
+import bstyle from "./base.styles";
+import { Theme } from "..";
 
+const Root = styled.div<{ theme: Theme }>`
+  margin: 0.5em 1em;
+  padding: 0;
+  font-size: 1em;
+  height: 2em;
+  position: relative;
+  width: auto;
+  overflow: hidden;
+  font-family: ${({ theme }) => theme.fontFamily};
+`;
 export interface InputConfig extends Base {
   /**
    * Value of the input field
