@@ -140,6 +140,40 @@ const Select = styled.div<{ theme: Theme; checked: boolean }>`
     width: 0.5em;
     height: 0.5em;
   }
+  &.switch {
+    border-radius: 0.3em;
+    background-color: ${({theme}) => theme.backgroundColour};
+    border: 0.05em solid ${({theme}) => theme.accentColour};
+    width: 0.8em;
+    height: 0.4em;
+    overflow: hidden;
+    transition: all 0.2s ease-in-out;
+    ${({ checked, theme }) =>
+      checked &&
+      `
+    background-color: ${theme.secondaryBackgroundColour};
+    border-color: ${theme.borderColour};
+    `}
+  }
+
+  &.switch div {
+    position: relative;
+    height: 0.3em;
+    width: 0.3em;
+    margin: 0.05em;
+    border-radius: 100%;
+    background-color: ${({ theme }) => theme.accentColour};
+    transition: all 0.2s ease-in-out;
+    left: 0;
+  }
+
+  ${({ checked, theme }) =>
+    checked &&
+    `
+    &.switch div {
+      background-color: ${theme.borderColour};
+      left: 0.4em;
+    }`}
 `;
 export interface SelectionConfig extends Base {
   /**
