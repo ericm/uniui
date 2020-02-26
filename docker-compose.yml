@@ -1,11 +1,13 @@
 version: "3"
 
-services: 
+services:
   web:
-    image: nginx
-    volumes: 
-     - .docz/dist:/usr/share/nginx/html
-    ports: 
-     - "8889:80"
-    environment:
-     - NGINX_HOST=uniui.moynihan.io
+    image: alpine
+    volumes:
+      - .docz/dist:/docz
+    ports:
+      - "9000:80"
+    entrypoint:
+      - npm
+      - run
+      - docz:serve
