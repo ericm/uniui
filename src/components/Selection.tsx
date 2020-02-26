@@ -4,7 +4,32 @@ import { applyTheme, CTX } from "../theme";
 import { SelectionContext } from "./SelectionGroup";
 
 import * as style from "./styles/Selection.css";
+import styled from "styled-components";
+import { Theme } from "..";
 
+const Root = styled.div<{ theme: Theme }>`
+  padding-left: 0.5em;
+  font-family: ${({ theme }) => theme.fontFamily};
+  font-size: 2em;
+  & * {
+    cursor: pointer;
+  }
+  & input {
+    display: none;
+  }
+  & label {
+    color: ${({ theme }) => theme.textColour};
+    font-smooth: always;
+  }
+  & span {
+    font-weight: 200;
+    font-size: 0.6em;
+    display: inline-block;
+    position: relative;
+    top: -0.3em;
+    user-select: none;
+  }
+`;
 export interface SelectionConfig extends Base {
   /**
    * Type of the selection.
@@ -81,9 +106,6 @@ export default function Selection(props: SelectionConfig): React.ReactElement {
   }
 
   const theme = React.useContext(CTX);
-  React.useEffect(() => {
-    applyTheme(theme, ref);
-  }, []);
 
   const render = () => {
     const check = () => (checked ? style.checked : style.unchecked);
@@ -107,7 +129,7 @@ export default function Selection(props: SelectionConfig): React.ReactElement {
   };
 
   return (
-    <div className={style.root} ref={ref}>
+    <Root theme={theme}>
       <label>
         {render()}
         {(() => (props.label ? <span>{props.label}</span> : null))()}
@@ -120,6 +142,6 @@ export default function Selection(props: SelectionConfig): React.ReactElement {
           onChange={onChange}
         />
       </label>
-    </div>
+    </Root>
   );
 }
