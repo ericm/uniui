@@ -2,7 +2,7 @@ version: "3"
 
 services:
   web:
-    image: alpine
+    image: node:13.8.0-alpine3.10
     volumes:
       - .docz/dist:/docz
     ports:
