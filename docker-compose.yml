@@ -4,7 +4,7 @@ services:
   web:
     image: node:13.8.0-alpine3.10
     volumes:
-      - .docz/dist:/docz
+      - .:/docz
     ports:
       - "8889:9000"
     working_dir: /docz
