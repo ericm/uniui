@@ -6,7 +6,7 @@ services:
     volumes:
       - .docz/dist:/docz
     ports:
-      - "9000:80"
+      - "8889:9000"
     entrypoint:
       - npm
       - run
