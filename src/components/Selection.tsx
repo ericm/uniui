@@ -30,6 +30,32 @@ const Root = styled.div<{ theme: Theme }>`
     user-select: none;
   }
 `;
+
+const Select = styled.div<{ theme: Theme }>`
+  vertical-align: middle;
+  display: inline-block;
+  padding: 0;
+  margin-bottom: 0.2em;
+  overflow: hidden;
+  margin-right: 0.3em;
+  &.checkbox {
+    border: 0.05em solid ${({ theme }) => theme.borderColour};
+    width: 0.4em;
+    height: 0.4em;
+    border-radius: 0.15em;
+  }
+  &.checkbox div:before {
+    content: "";
+    position: relative;
+    display: block;
+    background-color: ${({ theme }) => theme.secondaryBackgroundColour};
+    width: 0.1em;
+    height: 0.2em;
+    top: 0.18em;
+    left: 0.05em;
+    transform: rotate(-45deg);
+  }
+`;
 export interface SelectionConfig extends Base {
   /**
    * Type of the selection.
