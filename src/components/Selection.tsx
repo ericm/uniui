@@ -1,9 +1,8 @@
 import * as React from "react";
 import { Base } from "./base";
-import { applyTheme, CTX } from "../theme";
+import { CTX } from "../theme";
 import { SelectionContext } from "./SelectionGroup";
 
-import * as style from "./styles/Selection.css";
 import styled, { keyframes, css } from "styled-components";
 import { Theme } from "..";
 
@@ -142,8 +141,8 @@ const Select = styled.div<{ theme: Theme; checked: boolean }>`
   }
   &.switch {
     border-radius: 0.3em;
-    background-color: ${({theme}) => theme.backgroundColour};
-    border: 0.05em solid ${({theme}) => theme.accentColour};
+    background-color: ${({ theme }) => theme.backgroundColour};
+    border: 0.05em solid ${({ theme }) => theme.accentColour};
     width: 0.8em;
     height: 0.4em;
     overflow: hidden;
@@ -210,7 +209,7 @@ export interface SelectionConfig extends Base {
 export default function Selection(props: SelectionConfig): React.ReactElement {
   const [checked, setChecked] = React.useState(props.checked ?? false),
     [curr, setCurr] = React.useState(-1),
-    name = props.name ?? "input" + style.root;
+    name = props.name ?? "";
   let type: string;
   if (props.type === "switch") {
     type = "checkbox";
