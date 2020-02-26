@@ -4,7 +4,7 @@ import { applyTheme, CTX } from "../theme";
 import { SelectionContext } from "./SelectionGroup";
 
 import * as style from "./styles/Selection.css";
-import styled from "styled-components";
+import styled, { keyframes, css } from "styled-components";
 import { Theme } from "..";
 
 const Root = styled.div<{ theme: Theme }>`
@@ -31,7 +31,36 @@ const Root = styled.div<{ theme: Theme }>`
   }
 `;
 
-const Select = styled.div<{ theme: Theme }>`
+const checkAnim = keyframes`
+  0% {
+    height: 0;
+  }
+  100% {
+    height: 0.2em;
+  }
+`;
+const checkAnim2 = keyframes`
+  0% {
+    height: 0;
+  }
+  50% {
+    height: 0;
+    top: 0.15em;
+    left: 0;
+  }
+  100% {
+    height: 0.4em;
+  }
+`;
+const checkAnimCss = css`
+  &.checkbox div:before {
+    animation ${checkAnim} 0.1s linear;
+  }
+  &.checkbox div:after {
+    animation ${checkAnim2} 0.2s linear;
+  }
+`;
+const Select = styled.div<{ theme: Theme; checked: boolean }>`
   vertical-align: middle;
   display: inline-block;
   padding: 0;
@@ -55,6 +84,26 @@ const Select = styled.div<{ theme: Theme }>`
     left: 0.05em;
     transform: rotate(-45deg);
   }
+  &.checkbox div:after {
+    content: "";
+    position: relative;
+    display: block;
+    background-color: ${({ theme }) => theme.secondaryBackgroundColour};
+    width: 0.1em;
+    height: 0.4em;
+    top: -0.2em;
+    left: 0.21em;
+    transform: rotate(45deg);
+  }
+  ${({ checked }) => {
+    return checked
+      ? checkAnimCss
+      : `
+  &.checkbox div {
+    opacity: 0;
+  }
+  `;
+  }}
 `;
 export interface SelectionConfig extends Base {
   /**
@@ -134,23 +183,10 @@ export default function Selection(props: SelectionConfig): React.ReactElement {
   const theme = React.useContext(CTX);
 
   const render = () => {
-    const check = () => (checked ? style.checked : style.unchecked);
-    let cl = "";
-    switch (props.type) {
-      case "radio":
-        cl = style.radio;
-        break;
-      case "checkbox":
-        cl = style.checkbox;
-        break;
-      case "switch":
-        cl = style.switch;
-        break;
-    }
     return (
-      <div className={`${check()} ${cl} ${style.select}`}>
+      <Select theme={theme} checked={checked} className={props.type}>
         <div></div>
-      </div>
+      </Select>
     );
   };
 
