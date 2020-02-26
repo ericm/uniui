@@ -60,6 +60,21 @@ const checkAnimCss = css`
     animation ${checkAnim2} 0.2s linear;
   }
 `;
+
+const radioAnim = keyframes`
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(2);
+  }
+  100% {
+    transform: scale(1);
+  }
+`;
+const radioAnimCss = css`
+  animation: ${radioAnim} 0.5s ease-in-out;
+`;
 const Select = styled.div<{ theme: Theme; checked: boolean }>`
   vertical-align: middle;
   display: inline-block;
@@ -101,9 +116,30 @@ const Select = styled.div<{ theme: Theme; checked: boolean }>`
       : `
   &.checkbox div {
     opacity: 0;
-  }
-  `;
+  }`;
   }}
+
+  &.radio div {
+    border: ${({ theme }) => theme.backgroundColour} solid 0.1em;
+    border-radius: 100%;
+    width: 0.2em;
+    margin: 0.05em 0.05em;
+    height: 0.2em;
+    ${({ checked, theme }) => {
+      return !checked
+        ? `
+      border-color: transparent;
+      background-color: ${theme.backgroundColour};
+    `
+        : radioAnimCss;
+    }}
+  }
+  &.radio {
+    border-radius: 100%;
+    background-color: ${({ theme }) => theme.borderColour};
+    width: 0.5em;
+    height: 0.5em;
+  }
 `;
 export interface SelectionConfig extends Base {
   /**
@@ -140,7 +176,6 @@ export interface SelectionConfig extends Base {
 export default function Selection(props: SelectionConfig): React.ReactElement {
   const [checked, setChecked] = React.useState(props.checked ?? false),
     [curr, setCurr] = React.useState(-1),
-    ref = React.useRef<HTMLInputElement>(),
     name = props.name ?? "input" + style.root;
   let type: string;
   if (props.type === "switch") {
