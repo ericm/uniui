@@ -4,6 +4,8 @@ import { CTX } from "../theme";
 
 import styled from "styled-components";
 import bstyle from "./base.styles";
+import view from "./svg/view_password.svg";
+import noview from "./svg/no_view_password.svg";
 import { Theme } from "..";
 
 const Root = styled.div<{ theme: Theme }>`
@@ -16,18 +18,21 @@ const Root = styled.div<{ theme: Theme }>`
   overflow: hidden;
   font-family: ${({ theme }) => theme.fontFamily};
 `;
-const Input = styled.input<{ theme: Theme }>`
+const Input = styled.input<{ theme: Theme; change: boolean }>`
   border: ${bstyle.borderSize};
-  display: block;
+  display: inline-block;
   border-bottom: ${bstyle.borderSize} solid ${({ theme }) => theme.borderColour};
   color: ${({ theme }) => theme.textColour};
   background: transparent;
   position: absolute;
   bottom: 0;
-  width: 12em;
+  ${({ change }) => change && `
+    width: 10em;
+    padding-right: 2.3em;
+  `}
   font-size: 1em;
-  transition: all 80ms ease-in-out;
   padding-left: 0.2em;
+  float:left;
   &:focus {
     outline: none;
     background: ${bstyle.inputBack};
@@ -53,6 +58,16 @@ const Sub = styled.span<{ theme: Theme; state: boolean }>`
       top: 0.5em;
   `}
 `;
+
+const PasswordView = styled.img`
+  display: inline-block;
+  height: auto;
+  width: 2em;
+  position: absolute;
+  top: .9em;
+  cursor: pointer;
+`;
+
 export interface InputConfig extends Base {
   /**
    * Value of the input field
@@ -78,8 +93,8 @@ export interface InputConfig extends Base {
 export default function (props: InputConfig): JSX.Element {
   const [value, setValue] = React.useState(props.value ?? ""),
     [subState, setSubState] = React.useState(false),
-    onChangeText = props.onChangeText,
-    ref = React.useRef<HTMLDivElement>();
+    [type, setType] = React.useState(props.type ?? "text"),
+    onChangeText = props.onChangeText;
 
   const setSub = () => {
     if (value.length > 0 && subState) {
@@ -109,7 +124,19 @@ export default function (props: InputConfig): JSX.Element {
           </Sub>
         ) : null)()}
       <div>
-        <Input type={props.type ?? "text"} theme={theme} onChange={onChange} value={value} />
+
+        <Input
+          change={props.type === "password" && value.length > 0}
+          type={type}
+          theme={theme}
+          onChange={onChange}
+          value={value} />
+        {props.type === "password" && value.length > 0 &&
+          <PasswordView
+            style={{ left: `10em` }}
+            src={(type === "password" && view) || type === "text" && noview}
+            onClick={() => setType(type === "password" ? "text" : "password")} />}
+
       </div>
     </Root>
   );
