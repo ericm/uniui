@@ -60,9 +60,12 @@ const ButtonStyled = styled.div<{
           color: ${theme.borderColour};
           background-color: transparent;
           transition: all 80ms ease-out;
-          &:active {
-            filter: blur(1px);
+          filter: blur(0);
+          ${clicked &&
+            `
+            filter: blur(.5px);
             transform: scale(0.95);
+          `}
           }
         `;
       case "borderless":
