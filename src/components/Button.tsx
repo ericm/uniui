@@ -40,7 +40,11 @@ const Container = styled.div`
   padding: 0;
 `;
 
-const ButtonStyled = styled.div<{ theme: Theme; prop: ButtonConfig }>`
+const ButtonStyled = styled.div<{
+  theme: Theme;
+  prop: ButtonConfig;
+  clicked: boolean;
+}>`
   margin: 0;
   cursor: pointer;
   outline: 0;
@@ -48,7 +52,7 @@ const ButtonStyled = styled.div<{ theme: Theme; prop: ButtonConfig }>`
   padding: 0.25em 0.5em;
   border-radius: ${bstyle.borderRadius};
 
-  ${({ theme, prop }) => {
+  ${({ theme, prop, clicked }) => {
     switch (prop.type) {
       case "flat":
         return `
@@ -73,13 +77,14 @@ const ButtonStyled = styled.div<{ theme: Theme; prop: ButtonConfig }>`
           background-color: ${theme.secondaryBackgroundColour};
           color: ${theme.secondaryTextColour};
           transition: all 150ms ease-in-out;
-          &:active {
-            border-right: 0 solid ${theme.borderColour};
-            border-bottom: 0 solid ${theme.borderColour};
-            margin-left: ${bstyle.borderSize};
-            margin-top: ${bstyle.borderSize};
-            outline: 0;
-          }
+              ${clicked &&
+                `
+                  border-right: 0 solid ${theme.borderColour};
+                  border-bottom: 0 solid ${theme.borderColour};
+                  margin-left: ${bstyle.borderSize};
+                  margin-top: ${bstyle.borderSize};
+                  outline: 0;
+                `}
         `;
     }
   }}
@@ -126,6 +131,7 @@ export interface ButtonConfig extends Base {
 
 export default function Button(props: ButtonConfig): React.ReactElement {
   const [ripple, setRipple] = React.useState(false),
+    [click, setClick] = React.useState(false),
     [coords, setCoords] = React.useState({ top: 0, left: 0 }),
     ref = React.useRef<HTMLButtonElement>();
 
@@ -137,7 +143,13 @@ export default function Button(props: ButtonConfig): React.ReactElement {
 
     setCoords({ top: y, left: x });
     setRipple(true);
-    setTimeout(() => setRipple(false), 500);
+    setClick(true);
+    setTimeout(() => {
+      setRipple(false);
+    }, 500);
+    setTimeout(() => {
+      setClick(false);
+    }, 200);
 
     // Passthrough event to user defined onClick
     if (props.onClick) props.onClick(e);
@@ -158,7 +170,7 @@ export default function Button(props: ButtonConfig): React.ReactElement {
         onClick={onClick}
       >
         <Container>
-          <ButtonStyled prop={props} theme={theme}>
+          <ButtonStyled clicked={click} prop={props} theme={theme}>
             {props.children}
           </ButtonStyled>
           <Ripple props={props} theme={theme} active={ripple} style={coords} />
