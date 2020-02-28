@@ -1,4 +1,4 @@
-# [Uniui](http://uniui.moynihan.io)
+# [![Uniui](./img/uniui.svg?sanitize=true)](http://uniui.moynihan.io)
 
 [Uniui](http://uniui.moynihan.io) is a React Typescript UI library currently in beta.
 
