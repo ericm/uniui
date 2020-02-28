@@ -63,6 +63,10 @@ export interface InputConfig extends Base {
    */
   subtitle?: string;
   /**
+   * Type prop passed to input
+   */
+  type?: "text" | "search" | "password" | "number";
+  /**
    * onChange event on the target
    */
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -71,7 +75,7 @@ export interface InputConfig extends Base {
    */
   onChangeText?: (s: string) => void;
 }
-export default function(props: InputConfig): JSX.Element {
+export default function (props: InputConfig): JSX.Element {
   const [value, setValue] = React.useState(props.value ?? ""),
     [subState, setSubState] = React.useState(false),
     onChangeText = props.onChangeText,
@@ -105,7 +109,7 @@ export default function(props: InputConfig): JSX.Element {
           </Sub>
         ) : null)()}
       <div>
-        <Input theme={theme} onChange={onChange} value={value}></Input>
+        <Input type={props.type ?? "text"} theme={theme} onChange={onChange} value={value} />
       </div>
     </Root>
   );
