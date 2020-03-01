@@ -195,6 +195,7 @@ export default function (props: SelectConfig): JSX.Element {
     setSub = () => setSubState(false);
   }
   React.useEffect(setSub, [value]);
+  React.useEffect(setSub, []);
   const onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setValue(e.currentTarget.selectedIndex);
     if (onChangeText) onChangeText(e.currentTarget.value);
