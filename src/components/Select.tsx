@@ -16,7 +16,7 @@ const Root = styled.div<{ theme: Theme }>`
   overflow: hidden;
   font-family: ${({ theme }) => theme.fontFamily};
 `;
-const Input = styled.select<{ theme: Theme; change: boolean }>`
+const Input = styled.select<{ theme: Theme; custom: boolean }>`
   border: ${bstyle.borderSize};
   display: inline-block;
   border-bottom: ${bstyle.borderSize} solid ${({ theme }) => theme.borderColour};
@@ -28,6 +28,11 @@ const Input = styled.select<{ theme: Theme; change: boolean }>`
   font-size: 1em;
   padding-left: 0.2em;
   float:left;
+  ${({ custom }) => custom && `
+    & option {
+      display: none;
+    }
+  `}
   &:focus {
     outline: none;
     background: ${bstyle.inputBack};
@@ -53,6 +58,21 @@ const Sub = styled.span<{ theme: Theme; state: boolean }>`
       top: 0.5em;
   `}
 `;
+
+const OptionsSelect = styled.div<{ theme: Theme; open: boolean }>``;
+
+interface OptionProps {
+  theme: Theme;
+  clicked: boolean;
+  coords: { x: number; y: number };
+}
+function Options(props: OptionProps): JSX.Element | null {
+  if (props.clicked) {
+    return <OptionsSelect theme={props.theme} open={props.clicked}></OptionsSelect>
+  } else {
+    return null;
+  }
+}
 
 export interface Option {
   name: string;
@@ -91,6 +111,8 @@ export interface SelectConfig extends Base {
 export default function (props: SelectConfig): JSX.Element {
   const [value, setValue] = React.useState(props.selectedIndex ?? 0),
     [subState, setSubState] = React.useState(false),
+    [clicked, setClicked] = React.useState(false),
+    [coords, setCoords] = React.useState({ x: 0, y: 0 }),
     [selectValue, setSelectValue] = React.useState(
       (props.emptyEntry ?? true) ? -1 : props.options[0].value),
     [options, setOptions] = React.useState<Array<JSX.Element>>([]),
@@ -135,13 +157,14 @@ export default function (props: SelectConfig): JSX.Element {
       <div>
 
         <Input
-          change={value > -1}
+          custom={!props.native}
           theme={theme}
           onChange={onChange}
           value={selectValue}
         >
           {options}
         </Input>
+        {!props.native && <Options coords={coords} theme={theme} clicked={clicked} />}
       </div>
     </Root>
   );
