@@ -174,7 +174,7 @@ export interface SelectConfig extends Base {
 }
 export default function (props: SelectConfig): JSX.Element {
   const [value, setValue] = React.useState(props.selectedIndex ?? 0),
-    [subState, setSubState] = React.useState(false),
+    [subState, setSubState] = React.useState(true),
     [clicked, setClicked] = React.useState(false),
     [coords, setCoords] = React.useState({ x: 0, y: 0, width: 0 }),
     [selectValue, setSelectValue] = React.useState(
@@ -191,6 +191,8 @@ export default function (props: SelectConfig): JSX.Element {
         setSubState(true);
       }
     };
+  } else if (options.length > 0) {
+    setSub = () => setSubState(false);
   }
   React.useEffect(setSub, [value]);
   const onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
