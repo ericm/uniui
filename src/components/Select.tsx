@@ -6,6 +6,8 @@ import styled, { keyframes, css } from "styled-components";
 import bstyle from "./base.styles";
 import { Theme } from "../theme";
 
+type OptionElement = React.DetailedReactHTMLElement<React.OptionHTMLAttributes<HTMLOptionElement>, HTMLOptionElement>;
+
 const Root = styled.div<{ theme: Theme }>`
   margin: 0.5em 1em;
   padding: 0;
@@ -99,16 +101,30 @@ interface OptionProps {
   clicked: boolean;
   coords: { x: number; y: number; width: number };
   setClicked: React.Dispatch<React.SetStateAction<boolean>>;
-  options: Array<JSX.Element>;
+  options: Array<OptionElement>;
+  index: number;
+  setIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 function Options(props: OptionProps): JSX.Element | null {
+  const onClick = (o: number) => (e: React.MouseEvent<HTMLOptionElement>) => {
+    console.log(o);
+    props.setIndex(o);
+    props.setClicked(false);
+  }
+  let options: Array<OptionElement> = [];
+  for (let o in props.options) {
+    let opt = React.cloneElement(props.options[o], {
+      className: +o === props.index ? "selected" : "", onClick: onClick(+o).bind(+o)
+    });
+    options.push(opt);
+  }
   if (props.clicked) {
     return <OptionsSelect
       style={{ top: props.coords.y, left: props.coords.x, width: props.coords.width }}
       theme={props.theme}
       open={props.clicked}
       onMouseLeave={() => props.setClicked(false)}
-    >{props.options}</OptionsSelect>
+    >{options}</OptionsSelect>
   } else {
     return null;
   }
@@ -155,7 +171,7 @@ export default function (props: SelectConfig): JSX.Element {
     [coords, setCoords] = React.useState({ x: 0, y: 0, width: 0 }),
     [selectValue, setSelectValue] = React.useState(
       (props.emptyEntry ?? true) ? -1 : props.options[0].value),
-    [options, setOptions] = React.useState<Array<JSX.Element>>([]),
+    [options, setOptions] = React.useState<Array<OptionElement>>([]),
     onChangeText = props.onChangeText;
 
   const setSub = () => {
@@ -169,20 +185,29 @@ export default function (props: SelectConfig): JSX.Element {
 
   const onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setValue(e.currentTarget.selectedIndex);
-    setSelectValue(e.currentTarget.selectedOptions.item(0).value);
     if (onChangeText) onChangeText(e.currentTarget.value);
     if (props.onChange) props.onChange(e);
   };
 
+  React.useEffect(() => {
+    if (options.length > value) {
+      const opt = options[value].props.value
+      if (typeof (opt) === "number")
+        setSelectValue(opt.toString());
+      else if (typeof (opt) === "string")
+        setSelectValue(opt);
+    }
+  }, [value]);
+
   const theme = React.useContext(CTX);
 
   React.useEffect(() => {
-    let opts: Array<JSX.Element> = [];
+    let opts: Array<OptionElement> = [];
     if (props.emptyEntry ?? true) {
-      opts = [<option value={-1} key={-1}></option>];
+      opts = [<option value={-1} key={-1}></option> as OptionElement];
     }
     for (let element of props.options) {
-      opts.push(<option key={element.value} value={element.value}>{element.name}</option>);
+      opts.push(<option key={element.value} value={element.value}>{element.name}</option> as OptionElement);
     }
     setOptions(opts);
   }, [])
@@ -218,7 +243,10 @@ export default function (props: SelectConfig): JSX.Element {
           coords={coords}
           theme={theme}
           clicked={clicked}
-          options={options} />}
+          options={options}
+          index={value}
+          setIndex={setValue}
+        />}
       </div>
     </Root>
   );
