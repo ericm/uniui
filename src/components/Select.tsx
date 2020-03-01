@@ -135,6 +135,7 @@ export default function (props: SelectConfig): JSX.Element {
   };
 
   const theme = React.useContext(CTX);
+
   React.useEffect(() => {
     let opts: Array<JSX.Element> = [];
     if (props.emptyEntry ?? true) {
@@ -160,6 +161,14 @@ export default function (props: SelectConfig): JSX.Element {
           custom={!props.native}
           theme={theme}
           onChange={onChange}
+          onMouseDown={!props.native ? e => {
+            const rect = e.currentTarget.getBoundingClientRect();
+            let [x, y] = [rect.left, rect.top];
+            setCoords({ x, y });
+            setClicked(true);
+            e.stopPropagation();
+            e.preventDefault();
+          } : () => { }}
           value={selectValue}
         >
           {options}

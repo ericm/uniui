@@ -9,16 +9,17 @@ import "../global.css";
 import { Playground, Props } from 'docz';
 
 
-# Selection Component
+# Select Component
 
 <Props of={Select} />
 
-## Basic Radio Usage
+## Basic Usage
 
 <Playground>
 
     <SelectionGroup>
-        <Select options={[{name: "test", value: "test"}]} subtitle="Radio button 1" />
+        <Select options={[{name: "test", value: "test"}]} subtitle="Select 1" />
+        <Select options={[{name: "test", value: "test"}]} native={true} subtitle="Select 2" />
     </SelectionGroup>
 
 </Playground>
