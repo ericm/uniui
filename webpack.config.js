@@ -13,6 +13,9 @@ module.exports = {
   },
   externals: [nodeExternals()],
   module: {
-    rules: [{ test: /\.tsx?$/, loader: "ts-loader" }]
+    rules: [
+      { test: /\.tsx?$/, loader: "ts-loader" },
+      { test: /\.svg?$/, loader: "svg-url-loader" }
+    ]
   }
 };
