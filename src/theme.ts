@@ -26,8 +26,8 @@ export const lime: Theme = {
   secondaryBackgroundColour: "#1abc9c",
   secondaryTextColour: "#fff",
 
-  buttonRipple: "rgba(255, 255, 255, 0.4)",
-  buttonDarkRipple: "rgba(0, 0, 0, 0.3)",
+  buttonRipple: "#ffffff66",
+  buttonDarkRipple: "#0000004c",
 
   accentColour: "#707171"
 };
@@ -42,8 +42,8 @@ export const limeDark: Theme = {
   secondaryBackgroundColour: "#1abc9c",
   secondaryTextColour: "#fff",
 
-  buttonRipple: "rgba(255, 255, 255, 0.4)",
-  buttonDarkRipple: "rgba(0, 0, 0, 0.3)",
+  buttonRipple: "#ffffff66",
+  buttonDarkRipple: "#0000004c",
 
   accentColour: "#707171"
 };
@@ -57,8 +57,8 @@ export const berry: Theme = {
   secondaryBackgroundColour: "#e74c3c",
   secondaryTextColour: "#fff",
 
-  buttonRipple: "rgba(255, 255, 255, 0.4)",
-  buttonDarkRipple: "rgba(0, 0, 0, 0.3)",
+  buttonRipple: "#ffffff66",
+  buttonDarkRipple: "#0000004c",
 
   accentColour: "#707171"
 };
