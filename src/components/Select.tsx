@@ -193,6 +193,7 @@ export default function (props: SelectConfig): JSX.Element {
     };
   } else if (options.length > 0) {
     setSub = () => setSubState(false);
+    if (subState) setSubState(false);
   }
   React.useEffect(setSub, [value]);
   React.useEffect(setSub, []);
