@@ -125,7 +125,7 @@ function Options(props: OptionProps): JSX.Element | null {
     });
     options.push(opt);
   }
-  window.addEventListener("scroll", () => props.setClicked(false));
+  window && window.addEventListener("scroll", () => props.setClicked(false));
   if (props.clicked) {
     return <OptionsSelect
       style={{ top: props.coords.y, left: props.coords.x, width: props.coords.width }}
