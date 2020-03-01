@@ -113,18 +113,19 @@ interface OptionProps {
   setIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 function Options(props: OptionProps): JSX.Element | null {
-  const onClick = (o: number) => (e: React.MouseEvent<HTMLOptionElement>) => {
-    console.log(o);
-    props.setIndex(o);
+  const onClick = <T extends React.SyntheticEvent<HTMLOptionElement>>(o: number) => (e: T) => {
+    if (o !== -1) props.setIndex(o);
     props.setClicked(false);
   }
   let options: Array<OptionElement> = [];
   for (let o in props.options) {
     let opt = React.cloneElement(props.options[o], {
-      className: +o === props.index ? "selected" : "", onClick: onClick(+o).bind(+o)
+      className: +o === props.index ? "selected" : "",
+      onClick: onClick(+o).bind(+o),
     });
     options.push(opt);
   }
+  window.addEventListener("scroll", () => props.setClicked(false));
   if (props.clicked) {
     return <OptionsSelect
       style={{ top: props.coords.y, left: props.coords.x, width: props.coords.width }}
