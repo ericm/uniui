@@ -90,6 +90,13 @@ const OptionsSelect = styled.div<{ theme: Theme, open: boolean }>`
     color: ${({ theme }) => theme.secondaryTextColour};
     transition: all .2s;
   }
+  & .selected {
+    color: ${({ theme }) => theme.secondaryBackgroundColour};
+    text-shadow: 0 0 10px #0000008c;
+  }
+  & .selected:hover {
+    color: ${({ theme }) => theme.secondaryTextColour};
+  }
   & option:hover {
     background-color: ${({ theme }) => theme.secondaryBackgroundColour}
   }
