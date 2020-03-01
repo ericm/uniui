@@ -24,10 +24,7 @@ const Input = styled.select<{ theme: Theme; change: boolean }>`
   background: transparent;
   position: absolute;
   bottom: 0;
-  ${({ change }) => change && `
-    width: 10em;
-    padding-right: 2.3em;
-  `}
+  width: 10em;
   font-size: 1em;
   padding-left: 0.2em;
   float:left;
@@ -71,6 +68,10 @@ export interface SelectConfig extends Base {
    */
   selectedIndex?: number;
   /**
+   * If there should be an empty entry
+   */
+  emptyEntry?: boolean;
+  /**
    * Title of the field
    */
   subtitle?: string;
@@ -84,14 +85,15 @@ export interface SelectConfig extends Base {
   onChangeText?: (s: string) => void;
 }
 export default function (props: SelectConfig): JSX.Element {
-  const [value, setValue] = React.useState(props.selectedIndex ?? -1),
+  const [value, setValue] = React.useState(props.selectedIndex ?? 0),
     [subState, setSubState] = React.useState(false),
+    [optons, setOptions] = React.useState<Array<JSX.Element>>([]),
     onChangeText = props.onChangeText;
 
   const setSub = () => {
-    if (value > -1 && subState) {
+    if (value > 0) {
       setSubState(false);
-    } else if (value === -1 && !subState) {
+    } else if (value === 0) {
       setSubState(true);
     }
   };
@@ -106,6 +108,16 @@ export default function (props: SelectConfig): JSX.Element {
   };
 
   const theme = React.useContext(CTX);
+  React.useEffect(() => {
+    let opts: Array<JSX.Element> = [];
+    if (props.emptyEntry ?? true) {
+      opts = [<option key={-1}></option>];
+    }
+    for (let element of props.options) {
+      opts.push(<option key={element.value} value={element.value}>{element.name}</option>);
+    }
+    setOptions(opts);
+  }, [])
 
   return (
     <Root theme={theme} style={props.style}>
@@ -121,17 +133,8 @@ export default function (props: SelectConfig): JSX.Element {
           change={value > -1}
           theme={theme}
           onChange={onChange}
-          value={value} >
-          {(() => {
-            let opts: Array<JSX.Element> = [];
-            if (value === -1) {
-              opts = [<option></option>];
-            }
-            for (let element of props.options) {
-              opts.push(<option value={element.value}>{element.name}</option>);
-            }
-            return opts;
-          })()}
+        >
+          {optons}
         </Input>
       </div>
     </Root>
