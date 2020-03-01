@@ -72,6 +72,10 @@ export interface SelectConfig extends Base {
    */
   emptyEntry?: boolean;
   /**
+   * If the select element should be native
+   */
+  native?: boolean;
+  /**
    * Title of the field
    */
   subtitle?: string;
@@ -87,7 +91,9 @@ export interface SelectConfig extends Base {
 export default function (props: SelectConfig): JSX.Element {
   const [value, setValue] = React.useState(props.selectedIndex ?? 0),
     [subState, setSubState] = React.useState(false),
-    [optons, setOptions] = React.useState<Array<JSX.Element>>([]),
+    [selectValue, setSelectValue] = React.useState(
+      (props.emptyEntry ?? true) ? -1 : props.options[0].value),
+    [options, setOptions] = React.useState<Array<JSX.Element>>([]),
     onChangeText = props.onChangeText;
 
   const setSub = () => {
@@ -100,10 +106,9 @@ export default function (props: SelectConfig): JSX.Element {
   React.useEffect(setSub, [value]);
 
   const onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    if (e.currentTarget.selectedIndex !== value) {
-      setValue(e.currentTarget.selectedIndex);
-      if (onChangeText) onChangeText(e.currentTarget.value);
-    }
+    setValue(e.currentTarget.selectedIndex);
+    setSelectValue(e.currentTarget.selectedOptions.item(0).value);
+    if (onChangeText) onChangeText(e.currentTarget.value);
     if (props.onChange) props.onChange(e);
   };
 
@@ -111,7 +116,7 @@ export default function (props: SelectConfig): JSX.Element {
   React.useEffect(() => {
     let opts: Array<JSX.Element> = [];
     if (props.emptyEntry ?? true) {
-      opts = [<option key={-1}></option>];
+      opts = [<option value={-1} key={-1}></option>];
     }
     for (let element of props.options) {
       opts.push(<option key={element.value} value={element.value}>{element.name}</option>);
@@ -133,8 +138,9 @@ export default function (props: SelectConfig): JSX.Element {
           change={value > -1}
           theme={theme}
           onChange={onChange}
+          value={selectValue}
         >
-          {optons}
+          {options}
         </Input>
       </div>
     </Root>
