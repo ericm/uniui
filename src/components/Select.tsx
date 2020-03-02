@@ -2,6 +2,7 @@ import * as React from "react";
 import { Base } from "./base";
 import { CTX } from "../theme";
 
+import { cloneDeep } from "lodash";
 import styled, { keyframes, css, StyledComponent } from "styled-components";
 import bstyle from "./base.styles";
 import { Theme } from "../theme";
@@ -85,6 +86,7 @@ const animInCss = css`
   animation: ${animIn} 0.2s ease-in-out;
 `;
 const OptionsSelect = styled.div<{ theme: Theme; open: boolean }>`
+  outline: 0;
   position: fixed;
   background-color: ${({ theme }) => theme.accentColour}f0;
   border-radius: ${bstyle.borderRadius};
@@ -108,6 +110,7 @@ const OptionsSelect = styled.div<{ theme: Theme; open: boolean }>`
     background-color: ${({ theme }) => theme.secondaryBackgroundColour};
   }
   & .highlighted {
+    background-color: ${({ theme }) => theme.secondaryBackgroundColour};
   }
   z-index: 1000;
 `;
@@ -140,9 +143,11 @@ function Options(props: OptionProps): JSX.Element | null {
   }
   const [options, setOptions] = React.useState<Array<OptionElement>>([]),
     [optionIndex, setOptionIndex] = React.useState(-1);
-  React.useEffect(() => setOptions(options_collect), [props]);
   React.useEffect(() => {
-    let opts = options;
+    setOptions(options_collect);
+  }, [props]);
+  React.useEffect(() => {
+    let opts = cloneDeep(options);
     for (let o in opts) {
       if (+o === optionIndex) {
         opts[o].props.className = "highlighted";
@@ -153,12 +158,11 @@ function Options(props: OptionProps): JSX.Element | null {
   if (typeof window !== "undefined") {
     window.addEventListener("scroll", () => props.setClicked(false));
   }
-  React.useEffect(
-    () =>
-      typeof window !== "undefined" &&
-      window.addEventListener("click", () => props.setClicked(false)),
-    []
-  );
+  React.useEffect(() => {
+    typeof window !== "undefined" &&
+      props.clicked &&
+      window.addEventListener("click", () => props.setClicked(false));
+  }, []);
   React.useLayoutEffect(() => {
     if (ref.current && typeof window !== "undefined") {
       if (ref.current.clientHeight > window.innerHeight - props.coords.y) {
@@ -168,33 +172,47 @@ function Options(props: OptionProps): JSX.Element | null {
       }
     }
   });
+
+  const eventHandler = (e: KeyboardEvent) => {
+    console.log(e.key);
+    switch (e.key) {
+      case "ArrowDown":
+        if (optionIndex + 1 < options.length) {
+          // Move forward
+          setOptionIndex(optionIndex + 1);
+        } else if (optionIndex === -1) {
+          setOptionIndex(0);
+        }
+        break;
+      case "ArrowUp":
+        if (optionIndex > 0) {
+          setOptionIndex(optionIndex - 1);
+        } else if (optionIndex === -1) {
+          setOptionIndex(0);
+        }
+        break;
+      case "Enter":
+        if (optionIndex >= 0 && optionIndex < options.length) {
+          props.setIndex(optionIndex);
+          props.setClicked(false);
+        }
+    }
+    e.stopPropagation();
+    e.preventDefault();
+  };
+  React.useEffect(() => {
+    if (typeof window !== "undefined") {
+      if (props.clicked) {
+        window.addEventListener("keyup", eventHandler);
+      } else {
+        window.removeEventListener("keyup", eventHandler);
+      }
+    }
+  }, [props.clicked]);
   if (props.clicked) {
     return (
       <OptionsSelect
-        onKeyPress={e => {
-          switch (e.key) {
-            case "ArrowDown":
-              if (optionIndex + 1 < options.length) {
-                // Move forward
-                setOptionIndex(optionIndex + 1);
-              } else if (optionIndex === -1) {
-                setOptionIndex(0);
-              }
-              break;
-            case "ArrowUp":
-              if (optionIndex > 0) {
-                setOptionIndex(optionIndex - 1);
-              } else if (optionIndex === -1) {
-                setOptionIndex(0);
-              }
-              break;
-            case "Enter":
-              if (optionIndex >= 0 && optionIndex < options.length) {
-                props.setIndex(optionIndex);
-                props.setClicked(false);
-              }
-          }
-        }}
+        tabIndex={0}
         ref={ref}
         style={{
           top: props.coords.y,
