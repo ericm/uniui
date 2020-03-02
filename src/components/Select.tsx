@@ -22,6 +22,7 @@ const Root = styled.div<{ theme: Theme }>`
   font-family: ${({ theme }) => theme.fontFamily};
 `;
 const Input = styled.select<{ theme: Theme; custom: boolean }>`
+  touch-action: none;
   border: ${bstyle.borderSize};
   display: inline-block;
   -webkit-appearance: none;
@@ -137,7 +138,6 @@ function Options(props: OptionProps): JSX.Element | null {
   if (typeof window !== "undefined")
     window.addEventListener("scroll", () => props.setClicked(false));
   React.useLayoutEffect(() => {
-    console.log(ref.current);
     if (ref.current && typeof window !== "undefined") {
       if (ref.current.clientHeight > window.innerHeight - props.coords.y) {
         ref.current.style.top = `${props.coords.y +
@@ -260,6 +260,26 @@ export default function(props: SelectConfig): JSX.Element {
     setOptions(opts);
   }, []);
 
+  const activateEvent = () =>
+    !props.native
+      ? (
+          e:
+            | React.MouseEvent<HTMLSelectElement>
+            | React.TouchEvent<HTMLSelectElement>
+        ) => {
+          const rect = e.currentTarget.getBoundingClientRect();
+          let [x, y] = [rect.left, rect.top];
+          setCoords({ x, y, width: e.currentTarget.offsetWidth });
+          setClicked(true);
+          try {
+            e.stopPropagation();
+            e.preventDefault();
+          } catch (error) {
+            console.log(error);
+          }
+        }
+      : () => {};
+
   return (
     <Root theme={theme} style={props.style}>
       {(() =>
@@ -273,18 +293,8 @@ export default function(props: SelectConfig): JSX.Element {
           custom={!props.native}
           theme={theme}
           onChange={onChange}
-          onMouseDown={
-            !props.native
-              ? e => {
-                  const rect = e.currentTarget.getBoundingClientRect();
-                  let [x, y] = [rect.left, rect.top];
-                  setCoords({ x, y, width: e.currentTarget.offsetWidth });
-                  setClicked(true);
-                  e.stopPropagation();
-                  e.preventDefault();
-                }
-              : () => {}
-          }
+          onMouseDown={activateEvent()}
+          onTouchEnd={activateEvent()}
           value={selectValue}
         >
           {options}
