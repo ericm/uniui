@@ -203,9 +203,9 @@ function Options(props: OptionProps): JSX.Element | null {
   React.useEffect(() => {
     if (typeof window !== "undefined") {
       if (props.clicked) {
-        window.addEventListener("keyup", eventHandler);
+        window.addEventListener("keydown", eventHandler);
       } else {
-        window.removeEventListener("keyup", eventHandler);
+        window.removeEventListener("keydown", eventHandler);
       }
     }
   }, [props.clicked]);
