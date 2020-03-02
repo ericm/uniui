@@ -107,6 +107,8 @@ const OptionsSelect = styled.div<{ theme: Theme; open: boolean }>`
   & option:hover {
     background-color: ${({ theme }) => theme.secondaryBackgroundColour};
   }
+  & .highlighted {
+  }
   z-index: 1000;
 `;
 
@@ -127,16 +129,27 @@ function Options(props: OptionProps): JSX.Element | null {
     props.setClicked(false);
   };
   const ref = React.useRef<HTMLDivElement>(null);
-  let options: Array<OptionElement> = [];
+
+  let options_collect: Array<OptionElement> = [];
   for (let o in props.options) {
     let opt = React.cloneElement(props.options[o], {
       className: +o === props.index ? "selected" : "",
       onClick: onClick(+o).bind(+o)
     });
-    options.push(opt);
+    options_collect.push(opt);
   }
-  if (typeof window !== "undefined")
+  const [options, setOptions] = React.useState<Array<OptionElement>>([]),
+    [optionIndex, setOptionIndex] = React.useState(-1);
+  React.useEffect(() => setOptions(options_collect), [props]);
+  if (typeof window !== "undefined") {
     window.addEventListener("scroll", () => props.setClicked(false));
+  }
+  React.useEffect(
+    () =>
+      typeof window !== "undefined" &&
+      window.addEventListener("click", () => props.setClicked(false)),
+    []
+  );
   React.useLayoutEffect(() => {
     if (ref.current && typeof window !== "undefined") {
       if (ref.current.clientHeight > window.innerHeight - props.coords.y) {
@@ -149,6 +162,30 @@ function Options(props: OptionProps): JSX.Element | null {
   if (props.clicked) {
     return (
       <OptionsSelect
+        onKeyPress={e => {
+          switch (e.key) {
+            case "ArrowDown":
+              if (optionIndex + 1 < options.length) {
+                // Move forward
+                setOptionIndex(optionIndex + 1);
+              } else if (optionIndex === -1) {
+                setOptionIndex(0);
+              }
+              break;
+            case "ArrowUp":
+              if (optionIndex > 0) {
+                setOptionIndex(optionIndex - 1);
+              } else if (optionIndex === -1) {
+                setOptionIndex(0);
+              }
+              break;
+            case "Enter":
+              if (optionIndex >= 0 && optionIndex < options.length) {
+                props.setIndex(optionIndex);
+                props.setClicked(false);
+              }
+          }
+        }}
         ref={ref}
         style={{
           top: props.coords.y,
