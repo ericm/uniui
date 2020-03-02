@@ -110,7 +110,7 @@ const OptionsSelect = styled.div<{ theme: Theme; open: boolean }>`
     background-color: ${({ theme }) => theme.secondaryBackgroundColour};
   }
   & .highlighted {
-    background-color: ${({ theme }) => theme.secondaryBackgroundColour};
+    background-color: ${({ theme }) => theme.borderColour};
   }
   z-index: 1000;
 `;
@@ -172,9 +172,8 @@ function Options(props: OptionProps): JSX.Element | null {
       }
     }
   });
-
   const eventHandler = (e: KeyboardEvent) => {
-    console.log(e.key);
+    console.log(e);
     switch (e.key) {
       case "ArrowDown":
         if (optionIndex + 1 < options.length) {
@@ -196,19 +195,17 @@ function Options(props: OptionProps): JSX.Element | null {
           props.setIndex(optionIndex);
           props.setClicked(false);
         }
+        return;
     }
     e.stopPropagation();
     e.preventDefault();
   };
   React.useEffect(() => {
-    if (typeof window !== "undefined") {
-      if (props.clicked) {
-        window.addEventListener("keydown", eventHandler);
-      } else {
-        window.removeEventListener("keydown", eventHandler);
-      }
+    if (typeof window !== "undefined" && props.clicked) {
+      window.addEventListener("keydown", eventHandler, { once: true });
     }
-  }, [props.clicked]);
+  }, [props, optionIndex]);
+  window.removeEventListener("keydown", eventHandler);
   if (props.clicked) {
     return (
       <OptionsSelect
@@ -265,7 +262,7 @@ export interface SelectConfig extends Base {
    */
   onChangeText?: (s: string) => void;
 }
-export default function(props: SelectConfig): JSX.Element {
+export default function (props: SelectConfig): JSX.Element {
   const [value, setValue] = React.useState(props.selectedIndex ?? 0),
     [subState, setSubState] = React.useState(true),
     [clicked, setClicked] = React.useState(false),
@@ -276,7 +273,7 @@ export default function(props: SelectConfig): JSX.Element {
     [options, setOptions] = React.useState<Array<OptionElement>>([]),
     onChangeText = props.onChangeText;
 
-  let setSub = () => {};
+  let setSub = () => { };
   if (options.length > 0 && options[0].props.value === -1) {
     setSub = () => {
       if (value > 0) {
@@ -327,22 +324,22 @@ export default function(props: SelectConfig): JSX.Element {
   const activateEvent = () =>
     !props.native
       ? (
-          e:
-            | React.MouseEvent<HTMLSelectElement>
-            | React.TouchEvent<HTMLSelectElement>
-        ) => {
-          const rect = e.currentTarget.getBoundingClientRect();
-          let [x, y] = [rect.left, rect.top];
-          setCoords({ x, y, width: e.currentTarget.offsetWidth });
-          setClicked(true);
-          try {
-            e.stopPropagation();
-            e.preventDefault();
-          } catch (error) {
-            console.log(error);
-          }
+        e:
+          | React.MouseEvent<HTMLSelectElement>
+          | React.TouchEvent<HTMLSelectElement>
+      ) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        let [x, y] = [rect.left, rect.top];
+        setCoords({ x, y, width: e.currentTarget.offsetWidth });
+        setClicked(true);
+        try {
+          e.stopPropagation();
+          e.preventDefault();
+        } catch (error) {
+          console.log(error);
         }
-      : () => {};
+      }
+      : () => { };
 
   return (
     <Root theme={theme} style={props.style}>
