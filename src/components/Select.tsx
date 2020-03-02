@@ -180,7 +180,6 @@ function Options(props: OptionProps): JSX.Element | null {
     }
   });
   const eventHandler = (e: KeyboardEvent) => {
-    console.log(e);
     switch (e.key) {
       case "ArrowDown":
         if (optionIndex + 1 < options.length) {
