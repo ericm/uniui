@@ -2,7 +2,7 @@ import * as React from "react";
 import { Base } from "./base";
 import { CTX } from "../theme";
 
-import styled, { keyframes, css } from "styled-components";
+import styled, { keyframes, css, StyledComponent } from "styled-components";
 import bstyle from "./base.styles";
 import { Theme } from "../theme";
 
@@ -125,6 +125,7 @@ function Options(props: OptionProps): JSX.Element | null {
     if (o !== -1) props.setIndex(o);
     props.setClicked(false);
   };
+  const ref = React.useRef<HTMLDivElement>(null);
   let options: Array<OptionElement> = [];
   for (let o in props.options) {
     let opt = React.cloneElement(props.options[o], {
@@ -135,9 +136,20 @@ function Options(props: OptionProps): JSX.Element | null {
   }
   if (typeof window !== "undefined")
     window.addEventListener("scroll", () => props.setClicked(false));
+  React.useLayoutEffect(() => {
+    console.log(ref.current);
+    if (ref.current && typeof window !== "undefined") {
+      if (ref.current.clientHeight > window.innerHeight - props.coords.y) {
+        ref.current.style.top = `${props.coords.y +
+          20 -
+          ref.current.clientHeight}px`;
+      }
+    }
+  });
   if (props.clicked) {
     return (
       <OptionsSelect
+        ref={ref}
         style={{
           top: props.coords.y,
           left: props.coords.x,
