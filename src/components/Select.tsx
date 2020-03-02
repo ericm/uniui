@@ -225,7 +225,6 @@ function Options(props: OptionProps): JSX.Element | null {
       window.addEventListener("keydown", eventHandler, { once: true });
     }
   }, [props, optionIndex]);
-  window.removeEventListener("keydown", eventHandler);
   if (props.clicked) {
     return (
       <OptionsSelect
