@@ -110,7 +110,7 @@ const OptionsSelect = styled.div<{ theme: Theme; open: boolean }>`
     background-color: ${({ theme }) => theme.secondaryBackgroundColour};
   }
   & .highlighted {
-    background-color: ${({ theme }) => theme.borderColour};
+    background-color: ${({ theme }) => theme.borderColour} !important;
   }
   z-index: 1000;
 `;
@@ -145,12 +145,19 @@ function Options(props: OptionProps): JSX.Element | null {
     [optionIndex, setOptionIndex] = React.useState(-1);
   React.useEffect(() => {
     setOptions(options_collect);
+    if (!props.clicked) {
+      setOptionIndex(-1);
+    }
   }, [props]);
   React.useEffect(() => {
     let opts = cloneDeep(options);
     for (let o in opts) {
       if (+o === optionIndex) {
-        opts[o].props.className = "highlighted";
+        opts[o].props.className += " highlighted";
+      } else if (opts[o].props.className === " highlighted") {
+        opts[o].props.className = "";
+      } else if (opts[o].props.className === "selected highlighted") {
+        opts[o].props.className = "selected";
       }
     }
     setOptions(opts);
@@ -181,6 +188,8 @@ function Options(props: OptionProps): JSX.Element | null {
           setOptionIndex(optionIndex + 1);
         } else if (optionIndex === -1) {
           setOptionIndex(0);
+        } else {
+          setOptionIndex(-1);
         }
         break;
       case "ArrowUp":
@@ -188,6 +197,8 @@ function Options(props: OptionProps): JSX.Element | null {
           setOptionIndex(optionIndex - 1);
         } else if (optionIndex === -1) {
           setOptionIndex(0);
+        } else {
+          setOptionIndex(options.length - 1);
         }
         break;
       case "Enter":
