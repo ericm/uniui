@@ -237,7 +237,7 @@ function Options(props: OptionProps): JSX.Element | null {
         }}
         theme={props.theme}
         open={props.clicked}
-        onMouseLeave={() => props.setClicked(false)}
+      // onMouseLeave={() => props.setClicked(false)}
       >
         {options}
       </OptionsSelect>
