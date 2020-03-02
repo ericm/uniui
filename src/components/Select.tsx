@@ -6,7 +6,10 @@ import styled, { keyframes, css } from "styled-components";
 import bstyle from "./base.styles";
 import { Theme } from "../theme";
 
-type OptionElement = React.DetailedReactHTMLElement<React.OptionHTMLAttributes<HTMLOptionElement>, HTMLOptionElement>;
+type OptionElement = React.DetailedReactHTMLElement<
+  React.OptionHTMLAttributes<HTMLOptionElement>,
+  HTMLOptionElement
+>;
 
 const Root = styled.div<{ theme: Theme }>`
   margin: 0.5em 1em;
@@ -21,6 +24,7 @@ const Root = styled.div<{ theme: Theme }>`
 const Input = styled.select<{ theme: Theme; custom: boolean }>`
   border: ${bstyle.borderSize};
   display: inline-block;
+  -webkit-appearance: none;
   border-bottom: ${bstyle.borderSize} solid ${({ theme }) => theme.borderColour};
   color: ${({ theme }) => theme.textColour};
   background: transparent;
@@ -30,8 +34,10 @@ const Input = styled.select<{ theme: Theme; custom: boolean }>`
   font-size: 1em;
   padding-left: 0.2em;
   cursor: pointer;
-  float:left;
-  ${({ custom }) => custom && `
+  float: left;
+  ${({ custom }) =>
+    custom &&
+    `
     & option {
       display: none;
     }
@@ -75,9 +81,9 @@ const animIn = keyframes`
   }
 `;
 const animInCss = css`
-  animation: ${animIn} .2s ease-in-out;
+  animation: ${animIn} 0.2s ease-in-out;
 `;
-const OptionsSelect = styled.div<{ theme: Theme, open: boolean }>`
+const OptionsSelect = styled.div<{ theme: Theme; open: boolean }>`
   position: fixed;
   background-color: ${({ theme }) => theme.accentColour}f0;
   border-radius: ${bstyle.borderRadius};
@@ -86,9 +92,9 @@ const OptionsSelect = styled.div<{ theme: Theme, open: boolean }>`
   padding: 0;
   overflow: hidden;
   & option {
-    padding: .5em 1em;
+    padding: 0.5em 1em;
     color: ${({ theme }) => theme.secondaryTextColour};
-    transition: all .2s;
+    transition: all 0.2s;
   }
   & .selected {
     color: ${({ theme }) => theme.secondaryBackgroundColour};
@@ -98,7 +104,7 @@ const OptionsSelect = styled.div<{ theme: Theme, open: boolean }>`
     color: ${({ theme }) => theme.secondaryTextColour};
   }
   & option:hover {
-    background-color: ${({ theme }) => theme.secondaryBackgroundColour}
+    background-color: ${({ theme }) => theme.secondaryBackgroundColour};
   }
   z-index: 1000;
 `;
@@ -113,26 +119,37 @@ interface OptionProps {
   setIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 function Options(props: OptionProps): JSX.Element | null {
-  const onClick = <T extends React.SyntheticEvent<HTMLOptionElement>>(o: number) => (e: T) => {
+  const onClick = <T extends React.SyntheticEvent<HTMLOptionElement>>(
+    o: number
+  ) => (e: T) => {
     if (o !== -1) props.setIndex(o);
     props.setClicked(false);
-  }
+  };
   let options: Array<OptionElement> = [];
   for (let o in props.options) {
     let opt = React.cloneElement(props.options[o], {
       className: +o === props.index ? "selected" : "",
-      onClick: onClick(+o).bind(+o),
+      onClick: onClick(+o).bind(+o)
     });
     options.push(opt);
   }
-  if (typeof (window) !== "undefined") window.addEventListener("scroll", () => props.setClicked(false));
+  if (typeof window !== "undefined")
+    window.addEventListener("scroll", () => props.setClicked(false));
   if (props.clicked) {
-    return <OptionsSelect
-      style={{ top: props.coords.y, left: props.coords.x, width: props.coords.width }}
-      theme={props.theme}
-      open={props.clicked}
-      onMouseLeave={() => props.setClicked(false)}
-    >{options}</OptionsSelect>
+    return (
+      <OptionsSelect
+        style={{
+          top: props.coords.y,
+          left: props.coords.x,
+          width: props.coords.width
+        }}
+        theme={props.theme}
+        open={props.clicked}
+        onMouseLeave={() => props.setClicked(false)}
+      >
+        {options}
+      </OptionsSelect>
+    );
   } else {
     return null;
   }
@@ -144,9 +161,9 @@ export interface Option {
 }
 export interface SelectConfig extends Base {
   /**
-   * Options array 
+   * Options array
    */
-  options: [Option]
+  options: [Option];
   /**
    * Index of option selected
    */
@@ -172,17 +189,18 @@ export interface SelectConfig extends Base {
    */
   onChangeText?: (s: string) => void;
 }
-export default function (props: SelectConfig): JSX.Element {
+export default function(props: SelectConfig): JSX.Element {
   const [value, setValue] = React.useState(props.selectedIndex ?? 0),
     [subState, setSubState] = React.useState(true),
     [clicked, setClicked] = React.useState(false),
     [coords, setCoords] = React.useState({ x: 0, y: 0, width: 0 }),
     [selectValue, setSelectValue] = React.useState(
-      (props.emptyEntry ?? true) ? -1 : props.options[0].value),
+      props.emptyEntry ?? true ? -1 : props.options[0].value
+    ),
     [options, setOptions] = React.useState<Array<OptionElement>>([]),
     onChangeText = props.onChangeText;
 
-  let setSub = () => { };
+  let setSub = () => {};
   if (options.length > 0 && options[0].props.value === -1) {
     setSub = () => {
       if (value > 0) {
@@ -205,11 +223,9 @@ export default function (props: SelectConfig): JSX.Element {
 
   React.useEffect(() => {
     if (options.length > value) {
-      const opt = options[value].props.value
-      if (typeof (opt) === "number")
-        setSelectValue(opt.toString());
-      else if (typeof (opt) === "string")
-        setSelectValue(opt);
+      const opt = options[value].props.value;
+      if (typeof opt === "number") setSelectValue(opt.toString());
+      else if (typeof opt === "string") setSelectValue(opt);
     }
   }, [value]);
 
@@ -218,13 +234,19 @@ export default function (props: SelectConfig): JSX.Element {
   React.useEffect(() => {
     let opts: Array<OptionElement> = [];
     if (props.emptyEntry ?? true) {
-      opts = [<option value={-1} key={-1}></option> as OptionElement];
+      opts = [(<option value={-1} key={-1}></option>) as OptionElement];
     }
     for (let element of props.options) {
-      opts.push(<option key={element.value} value={element.value}>{element.name}</option> as OptionElement);
+      opts.push(
+        (
+          <option key={element.value} value={element.value}>
+            {element.name}
+          </option>
+        ) as OptionElement
+      );
     }
     setOptions(opts);
-  }, [])
+  }, []);
 
   return (
     <Root theme={theme} style={props.style}>
@@ -235,32 +257,37 @@ export default function (props: SelectConfig): JSX.Element {
           </Sub>
         ) : null)()}
       <div>
-
         <Input
           custom={!props.native}
           theme={theme}
           onChange={onChange}
-          onMouseDown={!props.native ? e => {
-            const rect = e.currentTarget.getBoundingClientRect();
-            let [x, y] = [rect.left, rect.top];
-            setCoords({ x, y, width: e.currentTarget.offsetWidth });
-            setClicked(true);
-            e.stopPropagation();
-            e.preventDefault();
-          } : () => { }}
+          onMouseDown={
+            !props.native
+              ? e => {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  let [x, y] = [rect.left, rect.top];
+                  setCoords({ x, y, width: e.currentTarget.offsetWidth });
+                  setClicked(true);
+                  e.stopPropagation();
+                  e.preventDefault();
+                }
+              : () => {}
+          }
           value={selectValue}
         >
           {options}
         </Input>
-        {!props.native && <Options
-          setClicked={setClicked}
-          coords={coords}
-          theme={theme}
-          clicked={clicked}
-          options={options}
-          index={value}
-          setIndex={setValue}
-        />}
+        {!props.native && (
+          <Options
+            setClicked={setClicked}
+            coords={coords}
+            theme={theme}
+            clicked={clicked}
+            options={options}
+            index={value}
+            setIndex={setValue}
+          />
+        )}
       </div>
     </Root>
   );
