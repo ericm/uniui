@@ -141,6 +141,15 @@ function Options(props: OptionProps): JSX.Element | null {
   const [options, setOptions] = React.useState<Array<OptionElement>>([]),
     [optionIndex, setOptionIndex] = React.useState(-1);
   React.useEffect(() => setOptions(options_collect), [props]);
+  React.useEffect(() => {
+    let opts = options;
+    for (let o in opts) {
+      if (+o === optionIndex) {
+        opts[o].props.className = "highlighted";
+      }
+    }
+    setOptions(opts);
+  }, [optionIndex]);
   if (typeof window !== "undefined") {
     window.addEventListener("scroll", () => props.setClicked(false));
   }
