@@ -207,6 +207,16 @@ function Options(props: OptionProps): JSX.Element | null {
           props.setClicked(false);
         }
         return;
+      default:
+        // Jumps to letter on type
+        for (let o in options) {
+          let key = options[o].key.toString();
+          if (key.length > 0 && key[0].toLowerCase() === e.key.toLowerCase()) {
+            setOptionIndex(+o);
+            return;
+          }
+        }
+        setOptionIndex(-1);
     }
     e.stopPropagation();
     e.preventDefault();
@@ -323,7 +333,7 @@ export default function (props: SelectConfig): JSX.Element {
     for (let element of props.options) {
       opts.push(
         (
-          <option key={element.value} value={element.value}>
+          <option key={element.name} value={element.value}>
             {element.name}
           </option>
         ) as OptionElement
