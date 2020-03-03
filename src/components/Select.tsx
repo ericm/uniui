@@ -165,11 +165,6 @@ function Options(props: OptionProps): JSX.Element | null {
   if (typeof window !== "undefined") {
     window.addEventListener("scroll", () => props.setClicked(false));
   }
-  React.useEffect(() => {
-    typeof window !== "undefined" &&
-      props.clicked &&
-      window.addEventListener("click", () => props.setClicked(false));
-  }, []);
   React.useLayoutEffect(() => {
     if (ref.current && typeof window !== "undefined") {
       if (ref.current.clientHeight > window.innerHeight - props.coords.y) {
@@ -237,7 +232,7 @@ function Options(props: OptionProps): JSX.Element | null {
         }}
         theme={props.theme}
         open={props.clicked}
-      // onMouseLeave={() => props.setClicked(false)}
+        onMouseLeave={() => props.setClicked(false)}
       >
         {options}
       </OptionsSelect>
@@ -281,7 +276,7 @@ export interface SelectConfig extends Base {
    */
   onChangeText?: (s: string) => void;
 }
-export default function (props: SelectConfig): JSX.Element {
+export default function(props: SelectConfig): JSX.Element {
   const [value, setValue] = React.useState(props.selectedIndex ?? 0),
     [subState, setSubState] = React.useState(true),
     [clicked, setClicked] = React.useState(false),
@@ -292,7 +287,7 @@ export default function (props: SelectConfig): JSX.Element {
     [options, setOptions] = React.useState<Array<OptionElement>>([]),
     onChangeText = props.onChangeText;
 
-  let setSub = () => { };
+  let setSub = () => {};
   if (options.length > 0 && options[0].props.value === -1) {
     setSub = () => {
       if (value > 0) {
@@ -343,22 +338,22 @@ export default function (props: SelectConfig): JSX.Element {
   const activateEvent = () =>
     !props.native
       ? (
-        e:
-          | React.MouseEvent<HTMLSelectElement>
-          | React.TouchEvent<HTMLSelectElement>
-      ) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        let [x, y] = [rect.left, rect.top];
-        setCoords({ x, y, width: e.currentTarget.offsetWidth });
-        setClicked(true);
-        try {
-          e.stopPropagation();
-          e.preventDefault();
-        } catch (error) {
-          console.log(error);
+          e:
+            | React.MouseEvent<HTMLSelectElement>
+            | React.TouchEvent<HTMLSelectElement>
+        ) => {
+          const rect = e.currentTarget.getBoundingClientRect();
+          let [x, y] = [rect.left, rect.top];
+          setCoords({ x, y, width: e.currentTarget.offsetWidth });
+          setClicked(true);
+          try {
+            e.stopPropagation();
+            e.preventDefault();
+          } catch (error) {
+            console.log(error);
+          }
         }
-      }
-      : () => { };
+      : () => {};
 
   return (
     <Root theme={theme} style={props.style}>
