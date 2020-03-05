@@ -7,12 +7,34 @@ menu: 4. Containers
 import "../global.css";
 import Box from "../../src/containers/Box";
 import TextField from "../../src/components/TextField";
+import { Button } from "../../src/";
 import { Playground, Props } from "docz";
+
+# Box Component
+
+<Props of={Box} />
+
+## Basic Usage
 
 <Playground>
   <Box layout="horizontal">
     <TextField value="Text" subtitle="TextField" />
     <TextField value="1234" subtitle="Phone Number" type="number" />
     <TextField subtitle="Password" type="password" />
+  </Box>
+  <Box layout="horizontal">
+    <Button>Button</Button>
+    <Button type="flat">Button</Button>
+    <Button type="borderless">Button</Button>
+  </Box>
+  <Box layout="vertical">
+    <TextField value="Text" subtitle="TextField" />
+    <TextField value="1234" subtitle="Phone Number" type="number" />
+    <TextField subtitle="Password" type="password" />
+  </Box>
+  <Box layout="vertical">
+    <Button>Button</Button>
+    <Button type="flat">Button</Button>
+    <Button type="borderless">Button</Button>
   </Box>
 </Playground>
