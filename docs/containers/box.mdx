@@ -1,0 +1,19 @@
+---
+name: Box
+route: /containers/box
+menu: 4. Containers
+---
+
+import "../global.css";
+import Box from "../../src/containers/Box";
+import TextField from "../../src/components/TextField";
+import { Playground, Props } from "docz";
+
+<Playground>
+  <Box layout="horizontal">
+    <TextField value="Text" subtitle="TextField" />
+    <TextField value="1234" subtitle="Phone Number" type="number" />
+    <TextField subtitle="Search" type="search" />
+    <TextField subtitle="Password" type="password" />
+  </Box>
+</Playground>

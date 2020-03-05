@@ -1,6 +1,6 @@
 import * as React from "react";
 
-declare type Base = Readonly<{
+declare type Base = {
   children?: React.ReactNode;
   /**
    * onClick event to be passed through to the target
@@ -10,4 +10,4 @@ declare type Base = Readonly<{
    * Styles to be passed through to the target
    */
   style?: React.CSSProperties;
-}>;
+};

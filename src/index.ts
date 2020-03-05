@@ -16,5 +16,6 @@ export {
   Theme,
   Selection,
   SelectionGroup,
-  Select
+  Select,
+  Box
 };
