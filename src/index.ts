@@ -7,6 +7,7 @@ import Select from "./components/Select";
 import Themer, { Themes, Theme } from "./theme";
 
 import Box from "./containers/Box";
+import NavBar from "./containers/NavBar";
 
 export {
   Button,
@@ -17,5 +18,6 @@ export {
   Selection,
   SelectionGroup,
   Select,
-  Box
+  Box,
+  NavBar
 };
