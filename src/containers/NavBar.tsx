@@ -2,7 +2,13 @@ import * as React from "react";
 import Button from "../components/Button";
 import styled from "styled-components";
 
-const Root = styled.div``;
+const Root = styled.div`
+  position: relative;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0.5em 1em;
+`;
 const Flex = styled.div`
   display: flex;
 `;
