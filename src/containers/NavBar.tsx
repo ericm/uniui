@@ -1,25 +1,30 @@
 import * as React from "react";
+import Button from "../components/Button";
 import styled from "styled-components";
-import { Base } from "../components/base";
-import { ButtonConfig } from "../components/Button";
 
-function instanceOfUniui(props: any): props is Base {
-  return "children" in props && "onClick" in props && "style" in props;
-}
-function isButton(props: Base): props is ButtonConfig {
-  return "type" in props;
-}
+const Root = styled.div``;
+const Flex = styled.div`
+  display: flex;
+`;
 export interface NavBarConfig {
   children: Array<JSX.Element>;
 }
-export default function (props: NavBarConfig): JSX.Element {
+export default function(props: NavBarConfig): JSX.Element {
+  const flexChildren: Array<JSX.Element> = [];
+  const navChildren: Array<JSX.Element> = [];
+  let i = 0;
   props.children.forEach(element => {
-    let el_props = element.props;
-    if (instanceOfUniui(el_props)) {
-      if (isButton(el_props)) {
-        console.log(el_props);
-      }
+    if (element.type === Button) {
+      // Checks if JSX Element is Button
+      flexChildren.push(React.cloneElement(element));
+    } else {
+      navChildren.push(element);
     }
-  })
-  return <div></div>
+  });
+  return (
+    <Root>
+      {navChildren}
+      <Flex>{flexChildren}</Flex>
+    </Root>
+  );
 }
