@@ -1,6 +1,7 @@
 import * as React from "react";
 import Button from "../components/Button";
 import styled from "styled-components";
+import { Base } from "../components/base";
 
 const Root = styled.div`
   position: relative;
@@ -8,29 +9,36 @@ const Root = styled.div`
   left: 0;
   margin: 0;
   padding: 0.5em 1em;
+  height: 3em;
+  box-shadow: 0px 4px 10px -8px black;
 `;
 const Flex = styled.div`
   display: flex;
+  height: 3em;
+  justify-content: flex-end;
+  align-items: center;
 `;
 export interface NavBarConfig {
-  children: Array<JSX.Element>;
+  children: Array<React.FunctionComponentElement<Base>>;
 }
 export default function(props: NavBarConfig): JSX.Element {
-  const flexChildren: Array<JSX.Element> = [];
-  const navChildren: Array<JSX.Element> = [];
-  let i = 0;
+  const flexChildren: Array<React.FunctionComponentElement<Base>> = [];
+  const titleChildren: Array<React.FunctionComponentElement<Base>> = [];
   props.children.forEach(element => {
-    if (element.type === Button) {
+    let cloned = React.cloneElement(element);
+    if (element.type !== Button) {
       // Checks if JSX Element is Button
-      flexChildren.push(React.cloneElement(element));
+      titleChildren.push(cloned);
     } else {
-      navChildren.push(element);
+      flexChildren.push(cloned);
     }
   });
   return (
     <Root>
-      {navChildren}
-      <Flex>{flexChildren}</Flex>
+      <Flex>
+        <div style={{ flexGrow: 1 }}>{titleChildren}</div>
+        {flexChildren}
+      </Flex>
     </Root>
   );
 }
