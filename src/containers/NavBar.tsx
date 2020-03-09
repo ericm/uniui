@@ -2,15 +2,20 @@ import * as React from "react";
 import Button from "../components/Button";
 import styled from "styled-components";
 import { Base } from "../components/base";
+import { Theme, CTX } from "../theme";
 
-const Root = styled.div`
+const Root = styled.div<{ theme: Theme }>`
   position: relative;
   top: 0;
   left: 0;
   margin: 0;
-  padding: 0.5em 1em;
+  padding: 0.5em 2em;
   height: 3em;
-  box-shadow: 0px 4px 10px -8px black;
+  box-shadow: 0px 4px 10px -8px ${({ theme }) => theme.borderColour};
+  background-color: ${({ theme }) => theme.backgroundColour};
+  & > button {
+    padding: 0 1em;
+  }
 `;
 const Flex = styled.div`
   display: flex;
@@ -33,8 +38,11 @@ export default function(props: NavBarConfig): JSX.Element {
       flexChildren.push(cloned);
     }
   });
+
+  const theme = React.useContext(CTX);
+
   return (
-    <Root>
+    <Root theme={theme}>
       <Flex>
         <div style={{ flexGrow: 1 }}>{titleChildren}</div>
         {flexChildren}
