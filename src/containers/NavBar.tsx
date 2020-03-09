@@ -4,8 +4,8 @@ import styled from "styled-components";
 import { Base } from "../components/base";
 import { Theme, CTX } from "../theme";
 
-const Root = styled.div<{ theme: Theme }>`
-  position: relative;
+const Root = styled.div<{ theme: Theme; position: "relative" | "fixed" }>`
+  position: ${({ position }) => position};
   top: 0;
   left: 0;
   margin: 0;
@@ -24,6 +24,7 @@ const Flex = styled.div`
   align-items: center;
 `;
 export interface NavBarConfig {
+  position: "relative" | "fixed";
   children: Array<React.FunctionComponentElement<Base>>;
 }
 export default function(props: NavBarConfig): JSX.Element {
