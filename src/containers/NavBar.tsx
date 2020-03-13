@@ -27,12 +27,13 @@ export interface NavBarConfig {
   position: "relative" | "fixed";
   children: Array<React.FunctionComponentElement<Base>>;
 }
-export default function(props: NavBarConfig): JSX.Element {
+export default function (props: NavBarConfig): JSX.Element {
   const flexChildren: Array<React.FunctionComponentElement<Base>> = [];
   const titleChildren: Array<React.FunctionComponentElement<Base>> = [];
   props.children.forEach(element => {
     let cloned = React.cloneElement(element);
-    if (element.type !== Button) {
+    let children = element.props.children as Array<React.FunctionComponentElement<Base>>;
+    if (element.type !== Button || !children.find(value => value.type === Button)) {
       // Checks if JSX Element is Button
       titleChildren.push(cloned);
     } else {
