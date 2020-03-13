@@ -32,8 +32,11 @@ export default function (props: NavBarConfig): JSX.Element {
   const titleChildren: Array<React.FunctionComponentElement<Base>> = [];
   props.children.forEach(element => {
     let cloned = React.cloneElement(element);
-    let children = element.props.children as Array<React.FunctionComponentElement<Base>>;
-    if (element.type !== Button || !children.find(value => value.type === Button)) {
+    let children = element.props.children;
+    // Add to titleChild if item isnt Button or doesnt contian button
+    if (element.type !== Button
+      || Array.isArray(children)
+      && !children.find(value => React.isValidElement(value) && value.type === Button)) {
       // Checks if JSX Element is Button
       titleChildren.push(cloned);
     } else {
