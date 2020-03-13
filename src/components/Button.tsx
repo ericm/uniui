@@ -62,7 +62,7 @@ const ButtonStyled = styled.div<{
           transition: all 80ms ease-out;
           filter: blur(0);
           ${clicked &&
-            `
+          `
             filter: blur(.5px);
             transform: scale(0.95);
           `}
@@ -81,7 +81,7 @@ const ButtonStyled = styled.div<{
           color: ${theme.secondaryTextColour};
           transition: all 150ms ease-in-out;
               ${clicked &&
-                `
+          `
                   border-right: 0 solid ${theme.borderColour};
                   border-bottom: 0 solid ${theme.borderColour};
                   margin-left: ${bstyle.borderSize};
@@ -132,7 +132,7 @@ export interface ButtonConfig extends Base {
   type?: "standard" | "flat" | "borderless";
 }
 
-export default function Button(props: ButtonConfig): React.ReactElement {
+export default function Button(props: ButtonConfig): React.ReactElement<ButtonConfig> {
   const [ripple, setRipple] = React.useState(false),
     [click, setClick] = React.useState(false),
     [coords, setCoords] = React.useState({ top: 0, left: 0 }),
