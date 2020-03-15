@@ -1,11 +1,6 @@
 {
   "name": "gatsby-theme-uniui",
   "version": "1.0.0",
-  "description": "Theme for http://uniui.moynihan.io",
-  "main": "index.jsx",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Eric Moynihan",
-  "license": "ISC"
+  "main": "index.js",
+  "license": "MIT"
 }
