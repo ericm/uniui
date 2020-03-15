@@ -2,6 +2,7 @@ import * as path from 'path'
 const PUBLIC = path.resolve(__dirname, 'public')
 
 export default {
+  theme: 'gatsby-theme-uniui',
   modifyBundlerConfig: bundlerConfig => {
     const rules = [
       {

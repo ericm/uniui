@@ -5,7 +5,7 @@ import { ThemeProvider } from 'theme-ui';
 import { Menu } from "./Menu";
 
 const Theme = ({ children }) => {
-  const config = useConfig()
+  const config = useConfig();
   return (
     <ThemeProvider theme={config}>
       <Menu />
