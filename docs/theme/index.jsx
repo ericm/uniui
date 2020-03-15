@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { theme, useConfig, ComponentsProvider } from 'docz';
+import { theme, useConfig } from 'docz';
 import { ThemeProvider } from 'theme-ui';
 
 import { Menu } from "./Menu";
@@ -9,12 +9,12 @@ const Theme = ({ children }) => {
   return (
     <ThemeProvider theme={config}>
       <Menu />
-      <ComponentsProvider components={map}>
+      <div>
         {children}
-      </ComponentsProvider>
+      </div>
     </ThemeProvider>
   )
-}
+};
 
 const themeConfig = {
   colors: {
@@ -22,6 +22,6 @@ const themeConfig = {
     secondary: 'khaki',
     gray: 'lightslategray',
   },
-}
-export default theme(themeConfig)(Theme)
+};
+export default theme(themeConfig)(Theme);
 
