@@ -20,9 +20,8 @@ export const Header = props => {
     <div>
       <NavBar position="fixed">
         <h1>Uniui</h1>
-        {repository && <a href={repository}>
-          <Button type="borderless">GitHub</Button>
-        </a>}
+        <a href={repository}><Button type="borderless">GitHub</Button></a>
+        <Button type="borderless">Home</Button>
       </NavBar>
     </div>
   )
