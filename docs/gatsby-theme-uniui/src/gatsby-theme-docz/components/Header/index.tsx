@@ -1,7 +1,8 @@
 import { jsx, Box, Flex, useColorMode } from 'theme-ui'
 import { useConfig, useCurrentDoc } from 'docz'
-
+import { Menu } from "react-feather"
 import { NavBar, Button } from "../../../../../../src"
+import * as styles from "./styles";
 
 export const Header = props => {
   const { onOpen } = props
@@ -18,6 +19,11 @@ export const Header = props => {
 
   return (
     <div>
+      <Box style={styles.menuIcon}>
+        <button style={styles.menuButton} onClick={onOpen}>
+          <Menu size={25} />
+        </button>
+      </Box>
       <NavBar position="fixed">
         <h1>Uniui</h1>
         <a href={repository}><Button type="borderless">GitHub</Button></a>
