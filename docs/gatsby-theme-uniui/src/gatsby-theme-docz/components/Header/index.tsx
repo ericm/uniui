@@ -3,6 +3,14 @@ import { useConfig, useCurrentDoc } from 'docz'
 import { Menu } from "react-feather"
 import { NavBar, Button } from "../../../../../../src"
 import * as styles from "./styles";
+import styled from "styled-components";
+
+const MenuDiv = styled.div`
+  display: none;
+  @media (max-width: 920px) {
+    display: block;
+  }
+`;
 
 export const Header = props => {
   const { onOpen } = props
@@ -19,11 +27,11 @@ export const Header = props => {
 
   return (
     <div>
-      <Box style={styles.menuIcon}>
+      <MenuDiv>
         <button style={styles.menuButton} onClick={onOpen}>
           <Menu size={25} />
         </button>
-      </Box>
+      </MenuDiv>
       <NavBar position="fixed">
         <h1>Uniui</h1>
         <a href={repository}><Button type="borderless">GitHub</Button></a>
