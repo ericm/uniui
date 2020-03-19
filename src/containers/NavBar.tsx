@@ -29,6 +29,7 @@ const Flex = styled.div`
   align-items: center;
   & div {
     display: flex;
+    align-items: center;
     flex-direction: row;
   }
 `;
@@ -42,10 +43,11 @@ export default function (props: NavBarConfig): JSX.Element {
   props.children.forEach(element => {
     let cloned = React.cloneElement(element);
     let children = element.props.children;
+    console.log(React.isValidElement(children) && children)
     // Add to titleChild if item isnt Button or doesnt contian button
-    if (element.type !== Button
-      || Array.isArray(children)
-      && !children.find(value => React.isValidElement(value) && value.type === Button)) {
+    if ((Array.isArray(children)
+      && !children.find(value => React.isValidElement(value) && value.type === Button))
+      || (React.isValidElement(children) && children.type !== Button) || element.type !== Button) {
       // Checks if JSX Element is Button
       titleChildren.push(cloned);
     } else {
