@@ -21,6 +21,7 @@ export const Header = props => {
       <NavBar position="fixed">
         <h1>Uniui</h1>
         <a href={repository}><Button type="borderless">GitHub</Button></a>
+        <a href="https://www.npmjs.com/package/react-uniui"><Button type="borderless">NPM</Button></a>
       </NavBar>
     </div>
   )

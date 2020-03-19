@@ -62,11 +62,16 @@ export default function (props: NavBarConfig): JSX.Element {
   const theme = React.useContext(CTX);
 
   return (
-    <Root position={props.position} theme={theme}>
-      <Flex>
-        <div style={{ flexGrow: 1 }}>{titleChildren}</div>
-        {flexChildren}
-      </Flex>
-    </Root>
+    <div>
+      {props.position === "fixed" &&
+        <div style={{ width: "calc(100-4em)", height: "3em", padding: ".5em 2em" }} />}
+
+      <Root position={props.position} theme={theme}>
+        <Flex>
+          <div style={{ flexGrow: 1 }}>{titleChildren}</div>
+          {flexChildren}
+        </Flex>
+      </Root>
+    </div>
   );
 }
