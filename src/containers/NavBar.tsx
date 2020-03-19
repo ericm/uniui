@@ -12,7 +12,7 @@ const Root = styled.div<{ theme: Theme; position: "relative" | "fixed" }>`
   padding: 0.5em 2em;
   ${({ position }) => position === "fixed" && `
     z-index: 1000;
-    width: 100%;
+    width: calc(100% - 4em);
   `}
   height: 3em;
   box-shadow: 0px 4px 10px -8px ${({ theme }) => theme.borderColour};
@@ -45,7 +45,6 @@ export default function (props: NavBarConfig): JSX.Element {
     let children = element.props.children;
     // Add to titleChild if item isnt Button or doesnt contian button
     if (element.type !== Button) {
-
       if ((Array.isArray(children)
         && !children.find(value => React.isValidElement(value) && value.type === Button))
         ||
