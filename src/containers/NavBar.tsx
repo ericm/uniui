@@ -10,6 +10,10 @@ const Root = styled.div<{ theme: Theme; position: "relative" | "fixed" }>`
   left: 0;
   margin: 0;
   padding: 0.5em 2em;
+  ${({ position }) => position === "fixed" && `
+    z-index: 1000;
+    width: 100%;
+  `}
   height: 3em;
   box-shadow: 0px 4px 10px -8px ${({ theme }) => theme.borderColour};
   background-color: ${({ theme }) => theme.backgroundColour};
@@ -21,7 +25,12 @@ const Flex = styled.div`
   display: flex;
   height: 3em;
   justify-content: flex-end;
+  flex-direction: row;
   align-items: center;
+  & div {
+    display: flex;
+    flex-direction: row;
+  }
 `;
 export interface NavBarConfig {
   position: "relative" | "fixed";
