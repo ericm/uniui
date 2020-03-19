@@ -4,6 +4,7 @@ import { Menu } from "react-feather"
 import { NavBar, Button } from "../../../../../../src"
 import * as styles from "./styles";
 import styled from "styled-components";
+import svg from "../../../../../../img/uniui.svg"
 
 const MenuDiv = styled.div`
   display: none;
@@ -33,7 +34,7 @@ export const Header = props => {
         </button>
       </MenuDiv>
       <NavBar position="fixed">
-        <h1>Uniui</h1>
+        <img style={{ height: "2em" }} src={svg} alt="Uniui" />
         <a href={repository}><Button type="borderless">GitHub</Button></a>
         <a href="https://www.npmjs.com/package/react-uniui"><Button type="borderless">NPM</Button></a>
       </NavBar>
