@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Base } from "./base";
+import { Base, getBaseAttributes } from "./base";
 import { CTX } from "../theme";
 
 import styled, { keyframes, css } from "styled-components";
@@ -122,7 +122,7 @@ let Ripple = styled.div<{ active: boolean; props: ButtonConfig; theme: Theme }>`
   }}
 `;
 
-export interface ButtonConfig extends Base {
+export interface ButtonConfig extends Base<HTMLButtonElement> {
   /**
    * Type of the button.
    * Standard is a 3d effect block element
@@ -140,7 +140,7 @@ export default function Button(props: ButtonConfig): React.ReactElement<ButtonCo
 
   const theme = React.useContext(CTX);
 
-  const onClick = (e: React.MouseEvent) => {
+  const onClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     let [x, y] = [e.clientX - rect.left, e.clientY - rect.top];
 
@@ -166,6 +166,7 @@ export default function Button(props: ButtonConfig): React.ReactElement<ButtonCo
       }}
     >
       <Root
+        {...getBaseAttributes(props)}
         theme={theme}
         prop={props}
         ref={ref}
