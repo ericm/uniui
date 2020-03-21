@@ -26,13 +26,15 @@ const Input = styled.input<{ theme: Theme; change: boolean }>`
   background: transparent;
   position: absolute;
   bottom: 0;
-  ${({ change }) => change && `
+  ${({ change }) =>
+    change &&
+    `
     width: 10em;
     padding-right: 2.3em;
   `}
   font-size: 1em;
   padding-left: 0.2em;
-  float:left;
+  float: left;
   &:focus {
     outline: none;
     background: ${bstyle.inputBack};
@@ -64,11 +66,11 @@ const PasswordView = styled.img`
   height: auto;
   width: 2em;
   position: absolute;
-  top: .9em;
+  top: 0.9em;
   cursor: pointer;
 `;
 
-export interface InputConfig extends Base {
+export interface InputConfig extends Base<HTMLInputElement> {
   /**
    * Value of the input field
    */
@@ -90,7 +92,7 @@ export interface InputConfig extends Base {
    */
   onChangeText?: (s: string) => void;
 }
-export default function (props: InputConfig): JSX.Element {
+export default function(props: InputConfig): JSX.Element {
   const [value, setValue] = React.useState(props.value ?? ""),
     [subState, setSubState] = React.useState(false),
     [type, setType] = React.useState(props.type ?? "text"),
@@ -124,19 +126,20 @@ export default function (props: InputConfig): JSX.Element {
           </Sub>
         ) : null)()}
       <div>
-
         <Input
           change={props.type === "password" && value.length > 0}
           type={type}
           theme={theme}
           onChange={onChange}
-          value={value} />
-        {props.type === "password" && value.length > 0 &&
+          value={value}
+        />
+        {props.type === "password" && value.length > 0 && (
           <PasswordView
             style={{ left: `10em` }}
-            src={(type === "password" && view) || type === "text" && noview}
-            onClick={() => setType(type === "password" ? "text" : "password")} />}
-
+            src={(type === "password" && view) || (type === "text" && noview)}
+            onClick={() => setType(type === "password" ? "text" : "password")}
+          />
+        )}
       </div>
     </Root>
   );
