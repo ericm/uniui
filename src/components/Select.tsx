@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Base } from "./base";
+import { Base, getBaseAttributes } from "./base";
 import { CTX } from "../theme";
 
 import { cloneDeep } from "lodash";
@@ -246,7 +246,7 @@ export interface Option {
   name: string;
   value: string | number;
 }
-export interface SelectConfig extends Base {
+export interface SelectConfig extends Base<HTMLSelectElement> {
   /**
    * Options array
    */
@@ -268,15 +268,11 @@ export interface SelectConfig extends Base {
    */
   subtitle?: string;
   /**
-   * onChange event on the target
-   */
-  onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  /**
    * Called when the value of the input text changes
    */
   onChangeText?: (s: string) => void;
 }
-export default function(props: SelectConfig): JSX.Element {
+export default function (props: SelectConfig): JSX.Element {
   const [value, setValue] = React.useState(props.selectedIndex ?? 0),
     [subState, setSubState] = React.useState(true),
     [clicked, setClicked] = React.useState(false),
@@ -287,7 +283,7 @@ export default function(props: SelectConfig): JSX.Element {
     [options, setOptions] = React.useState<Array<OptionElement>>([]),
     onChangeText = props.onChangeText;
 
-  let setSub = () => {};
+  let setSub = () => { };
   if (options.length > 0 && options[0].props.value === -1) {
     setSub = () => {
       if (value > 0) {
@@ -338,22 +334,22 @@ export default function(props: SelectConfig): JSX.Element {
   const activateEvent = () =>
     !props.native
       ? (
-          e:
-            | React.MouseEvent<HTMLSelectElement>
-            | React.TouchEvent<HTMLSelectElement>
-        ) => {
-          const rect = e.currentTarget.getBoundingClientRect();
-          let [x, y] = [rect.left, rect.top];
-          setCoords({ x, y, width: e.currentTarget.offsetWidth });
-          setClicked(true);
-          try {
-            e.stopPropagation();
-            e.preventDefault();
-          } catch (error) {
-            console.log(error);
-          }
+        e:
+          | React.MouseEvent<HTMLSelectElement>
+          | React.TouchEvent<HTMLSelectElement>
+      ) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        let [x, y] = [rect.left, rect.top];
+        setCoords({ x, y, width: e.currentTarget.offsetWidth });
+        setClicked(true);
+        try {
+          e.stopPropagation();
+          e.preventDefault();
+        } catch (error) {
+          console.log(error);
         }
-      : () => {};
+      }
+      : () => { };
 
   return (
     <Root theme={theme} style={props.style}>
@@ -371,6 +367,7 @@ export default function(props: SelectConfig): JSX.Element {
           onMouseDown={activateEvent()}
           onTouchEnd={activateEvent()}
           value={selectValue}
+          {...getBaseAttributes(props)}
         >
           {options}
         </Input>
