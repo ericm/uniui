@@ -125,13 +125,13 @@ const Select = styled.div<{ theme: Theme; checked: boolean }>`
     margin: 0.05em 0.05em;
     height: 0.2em;
     ${({ checked, theme }) => {
-      return !checked
-        ? `
+    return !checked
+      ? `
       border-color: transparent;
       background-color: ${theme.backgroundColour};
     `
-        : radioAnimCss;
-    }}
+      : radioAnimCss;
+  }}
   }
   &.radio {
     border-radius: 100%;
@@ -148,8 +148,8 @@ const Select = styled.div<{ theme: Theme; checked: boolean }>`
     overflow: hidden;
     transition: all 0.2s ease-in-out;
     ${({ checked, theme }) =>
-      checked &&
-      `
+    checked &&
+    `
     background-color: ${theme.secondaryBackgroundColour};
     border-color: ${theme.borderColour};
     `}
@@ -174,7 +174,7 @@ const Select = styled.div<{ theme: Theme; checked: boolean }>`
       left: 0.4em;
     }`}
 `;
-export interface SelectionConfig extends Base {
+export interface SelectionConfig extends Base<HTMLInputElement> {
   /**
    * Type of the selection.
    * Radio can only be selected one at a time
@@ -197,10 +197,6 @@ export interface SelectionConfig extends Base {
    * Label text next to selection
    */
   label?: string;
-  /**
-   * onChange event to be passed to the target
-   */
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   /**
    * function called when checked state is changed
    */
