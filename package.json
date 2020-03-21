@@ -4,7 +4,7 @@
   "description": "",
   "main": "lib/index.js",
   "scripts": {
-    "start": "parcel demo/index.html",
+    "start": "npm run docz:dev",
     "build": "webpack -p",
     "prepublishOnly": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",
