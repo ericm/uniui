@@ -10,7 +10,9 @@ const Root = styled.div<{ theme: Theme; position: "relative" | "fixed" }>`
   left: 0;
   margin: 0;
   padding: 0.5em 2em;
-  ${({ position }) => position === "fixed" && `
+  ${({ position }) =>
+    position === "fixed" &&
+    `
     z-index: 1000;
     width: calc(100% - 4em);
   `}
@@ -37,7 +39,7 @@ export interface NavBarConfig {
   position: "relative" | "fixed";
   children: Array<React.FunctionComponentElement<Base>>;
 }
-export default function (props: NavBarConfig): JSX.Element {
+export default function(props: NavBarConfig): JSX.Element {
   const flexChildren: Array<React.FunctionComponentElement<Base>> = [];
   const titleChildren: Array<React.FunctionComponentElement<Base>> = [];
   props.children.forEach(element => {
@@ -45,10 +47,13 @@ export default function (props: NavBarConfig): JSX.Element {
     let children = element.props.children;
     // Add to titleChild if item isnt Button or doesnt contian button
     if (element.type !== Button) {
-      if ((Array.isArray(children)
-        && !children.find(value => React.isValidElement(value) && value.type === Button))
-        ||
-        (React.isValidElement(children) && children.type === Button)) {
+      if (
+        (Array.isArray(children) &&
+          !children.find(
+            value => React.isValidElement(value) && value.type === Button
+          )) ||
+        (React.isValidElement(children) && children.type === Button)
+      ) {
         flexChildren.push(cloned);
       } else {
         titleChildren.push(cloned);
@@ -63,8 +68,11 @@ export default function (props: NavBarConfig): JSX.Element {
 
   return (
     <div>
-      {props.position === "fixed" &&
-        <div style={{ width: "calc(100-4em)", height: "3em", padding: ".5em 2em" }} />}
+      {props.position === "fixed" && (
+        <div
+          style={{ width: "calc(100-4em)", height: "3em", padding: ".5em 2em" }}
+        />
+      )}
 
       <Root position={props.position} theme={theme}>
         <Flex>

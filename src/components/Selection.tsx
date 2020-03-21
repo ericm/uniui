@@ -125,13 +125,13 @@ const Select = styled.div<{ theme: Theme; checked: boolean }>`
     margin: 0.05em 0.05em;
     height: 0.2em;
     ${({ checked, theme }) => {
-    return !checked
-      ? `
+      return !checked
+        ? `
       border-color: transparent;
       background-color: ${theme.backgroundColour};
     `
-      : radioAnimCss;
-  }}
+        : radioAnimCss;
+    }}
   }
   &.radio {
     border-radius: 100%;
@@ -148,8 +148,8 @@ const Select = styled.div<{ theme: Theme; checked: boolean }>`
     overflow: hidden;
     transition: all 0.2s ease-in-out;
     ${({ checked, theme }) =>
-    checked &&
-    `
+      checked &&
+      `
     background-color: ${theme.secondaryBackgroundColour};
     border-color: ${theme.borderColour};
     `}

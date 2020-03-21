@@ -13,12 +13,12 @@ const newMap = (): SelectMap => {
         if (i !== curr) handle();
       });
     }
-  }
-  return map
+  };
+  return map;
 };
 const ctx = React.createContext(newMap());
 
-export default function (props: Base) {
+export default function(props: Base) {
   return <ctx.Provider value={newMap()}>{props.children}</ctx.Provider>;
 }
 
