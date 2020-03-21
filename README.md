@@ -1,5 +1,5 @@
 # [![Uniui](./img/uniui.svg?sanitize=true)](http://uniui.moynihan.io)
-![npm](https://img.shields.io/npm/v/react-uniui?style=flat-square)
+[![npm](https://img.shields.io/npm/v/react-uniui?style=flat-square)](https://npmjs.com/package/react-uniui)
 ![Build](https://github.com/ericm/uniui/workflows/Build/badge.svg?branch=master)
 
 [Uniui](http://uniui.moynihan.io) is a React Typescript UI library currently in beta.
