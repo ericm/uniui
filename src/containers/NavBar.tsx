@@ -18,13 +18,13 @@ const Root = styled.div<{ theme: Theme; position: "relative" | "fixed" }>`
     z-index: 1000;
     width: calc(100% - 4em);
   `}
-  min-height: 3em;
+  height: 3em;
   box-shadow: 0px 4px 10px -8px ${({ theme }) => theme.borderColour};
   background-color: ${({ theme }) => theme.backgroundColour};
   & > button {
     padding: 0 1em;
   }
-  & .nav-button {
+  .nav-button {
     display: none !important;
     position: absolute;
     right: 2em;
@@ -33,18 +33,31 @@ const Root = styled.div<{ theme: Theme; position: "relative" | "fixed" }>`
   }
 
   @media (max-width: 768px) {
-    & .nav-button {
+    .nav-button {
       display: block !important;
     }
-    & .title-children-container {
-      flex-direction: column;
-      align-items: end;
-      div {
-        display: none !important;
-      }
-      &.nav-open {
+    :not(.nav-open) {
+      .title-children-container {
         div {
-          display: initial !important;
+          display: none !important;
+        }
+      }
+    }
+
+    &.nav-open {
+      height: auto;
+      z-index: 10;
+      .children-container {
+        height: auto;
+      }
+      .title-children-container {
+        flex-wrap: wrap;
+        h1 {
+          margin-top: 0;
+        }
+        > * {
+          display: block !important;
+          width: 100%;
         }
       }
     }
@@ -53,7 +66,7 @@ const Root = styled.div<{ theme: Theme; position: "relative" | "fixed" }>`
 
 const Flex = styled.div`
   display: flex;
-  min-height: 3em;
+  height: 3em;
   justify-content: flex-end;
   flex-direction: row;
   align-items: center;
@@ -105,12 +118,13 @@ export default function(props: NavBarConfig): JSX.Element {
         />
       )}
 
-      <Root position={props.position} theme={theme}>
+      <Root
+        position={props.position}
+        theme={theme}
+        className={`${navOpen ? "nav-open" : ""}`}
+      >
         <Flex className="children-container">
-          <div
-            className={`title-children-container ${navOpen ? "nav-open" : ""}`}
-            style={{ flexGrow: 1 }}
-          >
+          <div className="title-children-container" style={{ flexGrow: 1 }}>
             {titleChildren}
           </div>
           {flexChildren}

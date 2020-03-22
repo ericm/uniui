@@ -130,7 +130,6 @@ export interface ButtonConfig extends Base<HTMLButtonElement> {
    * Borderless is exclusively a ripple element
    */
   type?: "standard" | "flat" | "borderless";
-  className?: string;
 }
 
 export default function Button(
