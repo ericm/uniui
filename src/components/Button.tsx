@@ -130,6 +130,7 @@ export interface ButtonConfig extends Base<HTMLButtonElement> {
    * Borderless is exclusively a ripple element
    */
   type?: "standard" | "flat" | "borderless";
+  className?: string;
 }
 
 export default function Button(
@@ -166,6 +167,7 @@ export default function Button(
         display:
           !props.type || props.type === "standard" ? "block" : "inline-block"
       }}
+      className={props.className || null}
     >
       <Root
         {...getBaseAttributes(props)}

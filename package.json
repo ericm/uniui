@@ -9,7 +9,7 @@
     "prepublishOnly": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "install:theme": "cp -r docs/gatsby-theme-uniui/ node_modules/",
-    "docz:dev": "npm run install:theme; docz dev",
+    "docz:dev": "npm run install:theme & docz dev",
     "docz:build": "docz build",
     "docz:serve": "cd .docz; gatsby serve --prefixPaths / -H 0.0.0.0"
   },
