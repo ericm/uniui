@@ -7,12 +7,73 @@ menu: 2. Components
 import {  SelectionGroup } from "../../src";
 import Select from "../../src/components/Select";
 import "../global.css";
-import { Playground, Props } from 'docz';
+import { Playground } from 'docz';
+import PropsTable from 'react-docgen-props-table';
 
 
 # Select Component
 
-<Props of={Select} />
+The `Select` Component comes with all of the HTML Attribute props for a `HTMLSelectElement` as well as:
+
+<PropsTable
+    props={
+    {
+    "options": {
+      "type": {
+        "name": `[{name: string; value: string | number}]`
+      },
+      "required": true,
+      "description": `
+Array of Option Objects used to dsplay key value options in element.
+      `
+    },
+    "selectedIndex": {
+      "type": {
+        "name": `number`
+      },
+      "required": false,
+      "description": `
+Index of initially selected option.
+      `
+    },  
+    "emptyEntry": {
+      "type": {
+        "name": `boolean`
+      },
+      "required": false,
+      "description": `
+If there should be an empty entry.
+      `
+    },  
+    "native": {
+      "type": {
+        "name": `boolean`
+      },
+      "required": false,
+      "description": `
+If the select element should be native.
+      `
+    },  
+    "subtitle": {
+      "type": {
+        "name": `string`
+      },
+      "required": false,
+      "description": `
+Subtitle of the field.
+      `
+    },
+    "onChangeText": {
+      "type": {
+        "name": `(s: string) => void`
+      },
+      "required": false,
+      "description": `
+Function called when text is changed in input. Will give text as parameter s.
+      `
+    } }
+} />
+
 
 ## Basic Usage
 

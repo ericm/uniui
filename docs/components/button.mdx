@@ -6,12 +6,30 @@ menu: 2. Components
 
 import "../global.css";
 import { Button } from "../../src/";
-import { Playground, Props } from 'docz';
+import { Playground } from 'docz';
+import PropsTable from 'react-docgen-props-table';
 
 
 # Button Component
 
-<Props of={Button} />
+The `Button` Component comes with all of the HTML Attribute props for a `HTMLButtonElement` as well as:
+
+<PropsTable
+    props={
+    {
+    "type": {
+      "type": {
+        "name": `"standard" | "flat" | "borderless"`
+      },
+      "required": false,
+      "description": `
+Type of the button.
+Standard is a 3d effect block element.
+Flat is a bordered modern button.
+Borderless is exclusively a ripple element
+      `
+    }  }
+} />
 
 ## Basic Usage
 
