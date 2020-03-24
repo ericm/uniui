@@ -84,10 +84,6 @@ export interface InputConfig extends Base<HTMLInputElement> {
    */
   type?: "text" | "search" | "password" | "number";
   /**
-   * onChange event on the target
-   */
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  /**
    * Called when the value of the input text changes
    */
   onChangeText?: (s: string) => void;
