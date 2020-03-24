@@ -7,7 +7,8 @@ menu: 2. Components
 import {  SelectionGroup } from "../../src";
 import Selection from "../../src/components/Selection";
 import "../global.css";
-import { Playground, Props } from 'docz';
+import { Playground } from 'docz';
+import PropsTable from 'react-docgen-props-table';
 
 
 # Selection Component
@@ -27,6 +28,18 @@ Type of the selection.
 Radio can only be selected one at a time
 Checkbox and switch are skinned checkboxes
       `
+    },
+    "name": {
+      "type": {
+        "name": `string`
+      },
+      "required": false
+    },
+    "value": {
+      "type": {
+        "name": `string`
+      },
+      "required": false
     },
     "checked": {
       "type": {

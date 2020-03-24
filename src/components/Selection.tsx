@@ -182,6 +182,14 @@ export interface SelectionConfig extends Base<HTMLInputElement> {
    */
   type: "radio" | "checkbox" | "switch";
   /**
+   * name prop for form usage
+   */
+  name?: string;
+  /**
+   * value prop for form usage
+   */
+  value?: string;
+  /**
    * Initial checked state
    */
   checked?: boolean;
