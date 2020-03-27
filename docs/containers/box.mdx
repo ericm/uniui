@@ -8,11 +8,21 @@ import "../global.css";
 import Box from "../../src/containers/Box";
 import TextField from "../../src/components/TextField";
 import { Button } from "../../src/";
-import { Playground, Props } from "docz";
+import { Playground } from "docz";
+import PropsTable from "react-docgen-props-table";
 
 # Box Component
 
-<Props of={Box} />
+<PropsTable
+  props={{
+    position: {
+      layout: {
+        name: `"horizontal" | "vertical"`
+      },
+      required: true
+    }
+  }}
+/>
 
 ## Basic Usage
 
