@@ -7,12 +7,69 @@ menu: 2. Components
 import {  SelectionGroup } from "../../src";
 import Selection from "../../src/components/Selection";
 import "../global.css";
-import { Playground, Props } from 'docz';
+import { Playground } from 'docz';
+import PropsTable from 'react-docgen-props-table';
 
 
 # Selection Component
 
-<Props of={Selection} />
+The `Selection` Component comes with all of the HTML Attribute props for a `HTMLInputElement` as well as:
+
+<PropsTable
+    props={
+    {
+    "type": {
+      "type": {
+        "name": `"radio" | "checkbox" | "switch"`
+      },
+      "required": true,
+      "description": `
+Type of the selection.
+Radio can only be selected one at a time
+Checkbox and switch are skinned checkboxes
+      `
+    },
+    "name": {
+      "type": {
+        "name": `string`
+      },
+      "required": false
+    },
+    "value": {
+      "type": {
+        "name": `string`
+      },
+      "required": false
+    },
+    "checked": {
+      "type": {
+        "name": `boolean`
+      },
+      "required": false,
+      "description": `
+Default state of the input
+      `
+    },
+    "label": {
+      "type": {
+        "name": `string`
+      },
+      "required": false,
+      "description": `
+Optional label next to input
+      `
+    },
+    "onChangeValue": {
+      "type": {
+        "name": `(state: boolean) => void`
+      },
+      "required": false,
+      "description": `
+Callback function providing changed state
+      `
+    }
+    }
+} />
 
 ## Basic Radio Usage
 

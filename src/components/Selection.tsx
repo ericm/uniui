@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Base } from "./base";
+import { Base, getBaseAttributes } from "./base";
 import { CTX } from "../theme";
 import { SelectionContext } from "./SelectionGroup";
 
@@ -266,6 +266,7 @@ export default function Selection(props: SelectionConfig): React.ReactElement {
           type={type}
           value={props.value}
           onChange={onChange}
+          {...getBaseAttributes(props)}
         />
       </label>
     </Root>

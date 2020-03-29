@@ -8,11 +8,21 @@ import "../global.css";
 import NavBar from "../../src/containers/NavBar";
 import TextField from "../../src/components/TextField";
 import { Button } from "../../src/";
-import { Playground, Props } from "docz";
+import { Playground } from "docz";
+import PropsTable from 'react-docgen-props-table';
 
 # NavBar Component
 
-<Props of={NavBar} />
+<PropsTable
+    props={
+    {
+    "position": {
+      "type": {
+        "name": `"relative" | "fixed"`
+      },
+      "required": true
+    }  }
+} />
 
 ## Basic Usage
 

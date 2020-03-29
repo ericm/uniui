@@ -6,12 +6,49 @@ menu: 2. Components
 
 import "../global.css";
 import  TextField  from "../../src/components/TextField";
-import { Playground, Props } from 'docz';
+import { Playground } from 'docz';
+import PropsTable from 'react-docgen-props-table';
 
 
 # TextField Component
 
-<Props of={TextField} />
+The `TextField` Component comes with all of the HTML Attribute props for a `HTMLInputElement` as well as:
+
+<PropsTable
+    props={
+    {
+    "type": {
+      "type": {
+        "name": `"text" | "search" | "password" | "number"`
+      },
+      "required": false,
+      "description": `
+Type prop passed to input
+      `
+    },
+    "subtitle": {
+      "type": {
+        "name": `string`
+      },
+      "required": false
+    },
+    "value": {
+      "type": {
+        "name": `string`
+      },
+      "required": false
+    },
+    "onChangeText": {
+      "type": {
+        "name": `(s: string) => void`
+      },
+      "required": false,
+      "description": `
+Callback function providing changed state
+      `
+    }
+    }
+} />
 
 ## TextField Usage
 
