@@ -32,34 +32,29 @@ const Root = styled.div<{ theme: Theme; position: "relative" | "fixed" }>`
     transform: translate(0, -50%);
   }
 
+  .title-children-container-mobile {
+    display: none;
+  }
+
   @media (max-width: 768px) {
+    &.nav-open {
+      height: auto;
+      ${({ position }) => position !== "fixed" && `z-index: 1;`}
+    }
+
     .nav-button {
       display: block !important;
     }
-    :not(.nav-open) {
-      .title-children-container {
-        div {
-          display: none !important;
-        }
+
+    .title-children-container {
+      div {
+        display: none !important;
       }
     }
 
-    &.nav-open {
-      height: auto;
-      z-index: 10;
-      .children-container {
-        height: auto;
-      }
-      .title-children-container {
-        flex-wrap: wrap;
-        h1 {
-          margin-top: 0;
-        }
-        > * {
-          display: block !important;
-          width: 100%;
-        }
-      }
+    .title-children-container-mobile {
+      display: flex;
+      flex-direction: column;
     }
   }
 `;
@@ -138,6 +133,13 @@ export default function(props: NavBarConfig): JSX.Element {
             <Menu size={25} />
           </Button>
         </Flex>
+        {navOpen && (
+          <div className="title-children-container-mobile">
+            {titleChildren.filter((child, index) => {
+              return index > 0;
+            })}
+          </div>
+        )}
       </Root>
     </div>
   );
