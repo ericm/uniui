@@ -46,10 +46,8 @@ const Root = styled.div<{ theme: Theme; position: "relative" | "fixed" }>`
       display: block !important;
     }
 
-    .title-children-container {
-      div {
-        display: none !important;
-      }
+    .title-children-container > *:not(:first-child) {
+      display: none !important;
     }
 
     .title-children-container-mobile {
