@@ -166,6 +166,7 @@ export default function Button(
         display:
           !props.type || props.type === "standard" ? "block" : "inline-block"
       }}
+      className={props.className || null}
     >
       <Root
         {...getBaseAttributes(props)}
